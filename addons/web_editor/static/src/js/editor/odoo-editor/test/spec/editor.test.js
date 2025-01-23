@@ -3173,6 +3173,14 @@ X[]
                     contentAfter: '<p>abc[]ef</p>',
                 });
             });
+            it('should delete selected formatted text at line break', async () => {
+                await testEditor(BasicEditor, {
+                    contentBefore: '<p>abc<br><b>[def]</b></p>',
+                    stepFunction: deleteBackward,
+                    contentAfterEdit: '<p>abc<br><b data-oe-zws-empty-inline="">[]\u200B</b></p>',
+                    contentAfter: '<p>abc<br>[]</p>'
+                });
+            });
             it('should delete last character of paragraph, ignoring the selected paragraph break leading to an unbreakable', async () => {
                 await testEditor(BasicEditor, {
                     contentBefore: '<p>ab[c</p><p t="unbreak">]def</p>',
@@ -3955,6 +3963,11 @@ X[]
                         contentAfter: '<div><a>ab</a><br><br>[]</div>',
                     });
                     await testEditor(BasicEditor, {
+                        contentBefore: '<div><a style="display: block;">ab[]</a></div>',
+                        stepFunction: pressEnter,
+                        contentAfter: '<div><a style="display: block;">ab</a>[]<br></div>'
+                    })
+                    await testEditor(BasicEditor, {
                         contentBefore: '<div><a>ab[]</a>cd</div>',
                         stepFunction: pressEnter,
                         contentAfter: '<div><a>ab</a><br>[]cd</div>',
@@ -4241,6 +4254,15 @@ X[]
                     await insertText(editor, 'x');
                 },
                 contentAfter: '<p>abx[]cd</p>',
+            });
+        });
+        it('should insert a char when formatted text is selected at line-break preserving the line-break and format', async () => {
+            await testEditor(BasicEditor, {
+                contentBefore: '<p>abc<br><b>[def]</b></p>',
+                stepFunction: async editor => {
+                    await insertText(editor, 'x');
+                },
+                contentAfter: '<p>abc<br><b>x[]</b></p>',
             });
         });
     });
