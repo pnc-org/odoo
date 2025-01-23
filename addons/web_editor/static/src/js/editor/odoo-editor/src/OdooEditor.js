@@ -2032,8 +2032,30 @@ export class OdooEditor extends EventTarget {
             }
         }
 
-        setSelection(start, nodeSize(start));
         const startLi = closestElement(start, 'li');
+        const endLi = closestElement(end, 'li');
+        let areBlocksAlwaysVisible = true;
+        if (
+            startLi &&
+            endLi &&
+            (!startLi.textContent || isZWS(startLi)) &&
+            getListMode(startLi.parentElement) !== getListMode(endLi.parentElement)
+        ) {
+            const isNested = closestElement(startLi, '.oe-nested')
+            const nodeToRemove = isNested ? isNested : startLi.parentNode;
+            endLi.parentElement.prepend(startLi);
+            isEmptyBlock(nodeToRemove) && nodeToRemove.remove();
+            if (endLi.textContent && start.parentElement) {
+                start = start.parentElement;
+                start.removeChild(start.firstChild);
+                areBlocksAlwaysVisible = false;
+                setSelection(endLi, 0);
+            } else {
+                setSelection(startLi, nodeSize(startLi));
+            }
+        } else {
+            setSelection(start, nodeSize(start));
+        }
         // Uncheck a list item with empty text in multi-list selection.
         if (startLi && startLi.classList.contains('o_checked') &&
             ['\u200B', ''].includes(startLi.textContent) && closestElement(end, 'li') !== startLi) {
@@ -2058,7 +2080,7 @@ export class OdooEditor extends EventTarget {
         // Same with the start container
         while (
             start &&
-            isRemovableInvisible(start) &&
+            isRemovableInvisible(start, areBlocksAlwaysVisible) &&
             !(endIsStart && start.contains(range.startContainer))
         ) {
             const parent = start.parentNode;
@@ -2070,10 +2092,12 @@ export class OdooEditor extends EventTarget {
             fillEmpty(closestBlock(start));
         }
         fillEmpty(closestBlock(range.endContainer));
-        let joinWith = range.endContainer;
-        const rightLeaf = rightLeafOnlyNotBlockPath(joinWith).next().value;
-        if (rightLeaf && rightLeaf.nodeValue === ' ') {
-            joinWith = rightLeaf;
+        let joinWith = areBlocksAlwaysVisible && range.endContainer;
+        if (joinWith) {
+            const rightLeaf = rightLeafOnlyNotBlockPath(joinWith).next().value;
+            if (rightLeaf && rightLeaf.nodeValue === ' ') {
+                joinWith = rightLeaf;
+            }
         }
         // Rejoin blocks that extractContents may have split in two.
         while (
@@ -3125,6 +3149,9 @@ export class OdooEditor extends EventTarget {
         this.toolbar.classList.toggle('d-none', false);
         this.toolbar.style.maxWidth = window.innerWidth - OFFSET * 2 + 'px';
         const sel = this.document.getSelection();
+        if (!sel.rangeCount) {
+            return;
+        }
         const range = sel.getRangeAt(0);
         const isSelForward =
             sel.anchorNode === range.startContainer && sel.anchorOffset === range.startOffset;
@@ -3192,7 +3219,10 @@ export class OdooEditor extends EventTarget {
         // Hide toolbar if it overflows the scroll container.
         const distToScrollContainer = Math.min(toolbarTop - scrollContainerRect.top,
                                                 scrollContainerRect.bottom - toolbarBottom);
-        this.toolbar.classList.toggle('d-none', distToScrollContainer < OFFSET / 2);
+        const isToolbarOverflow = distToScrollContainer < OFFSET / 2;
+        if (isToolbarOverflow) {
+            this.toolbar.style.top = `${(Math.max(selRect.top, scrollContainerRect.top) + OFFSET)}px`
+        }
     }
 
     // PASTING / DROPPING
@@ -4437,6 +4467,16 @@ export class OdooEditor extends EventTarget {
 
         // Ignore any changes that might have happened before this point.
         this.observer.takeRecords();
+
+        // Reset selection when editable is empty.
+        const selection = this.document.getSelection();
+        if (!selection.isCollapsed) {
+            const range = selection.getRangeAt(0);
+            const rangeContentChildNodes = range.cloneContents().childNodes;
+            if (rangeContentChildNodes.length === 1 && rangeContentChildNodes[0].nodeName === 'BR') {
+                setSelection(selection.anchorNode, 0, selection.anchorNode, 0);
+            }
+        }
 
         const node = ev.target;
         // handle checkbox lists
