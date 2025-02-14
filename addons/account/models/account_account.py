@@ -690,6 +690,8 @@ class AccountAccount(models.Model):
                 account.reconcile = False
             elif account.account_type in ('asset_receivable', 'liability_payable'):
                 account.reconcile = True
+            elif account.account_type == 'asset_cash':
+                account.reconcile = False
             # For other asset/liability accounts, don't do any change to account.reconcile.
 
     def _set_opening_debit(self):
@@ -807,10 +809,9 @@ class AccountAccount(models.Model):
             not name
             and (partner := self.env.context.get('partner_id'))
             and (move_type := self._context.get('move_type'))
+            and (ordered_accounts := self._order_accounts_by_frequency_for_partner(self.env.company.id, partner, move_type))
         ):
-            ids = self._order_accounts_by_frequency_for_partner(
-                self.env.company.id, partner, move_type)
-            records = self.sudo().browse(ids)
+            records = self.sudo().browse(ordered_accounts)
             records.fetch(['display_name'])
             return [(record.id, record.display_name) for record in records]
         return super().name_search(name, args, operator, limit)
