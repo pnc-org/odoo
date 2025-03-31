@@ -2055,7 +2055,7 @@ msgstr "Đơn xin việc"
 #. module: hr_recruitment
 #: model:ir.ui.menu,name:hr_recruitment.menu_hr_job_boards
 msgid "Job Boards"
-msgstr "Bảng công việc"
+msgstr "Nền tảng việc làm"
 
 #. module: hr_recruitment
 #: model:utm.campaign,title:hr_recruitment.utm_campaign_job
@@ -3074,7 +3074,7 @@ msgid ""
 "Select the location where the applicant will work. Addresses listed here are"
 " defined on the company's contact information."
 msgstr ""
-"Chọn địa điểm mà ứng viên sẽ làm việc. Địa chỉ được liệt kê ở đây được xác "
+"Chọn vị trí mà ứng viên sẽ làm việc. Địa chỉ được liệt kê ở đây được xác "
 "định trong phần thông tin liên hệ của công ty."
 
 #. module: hr_recruitment
@@ -3508,7 +3508,7 @@ msgstr "Hoạt động hôm nay"
 #. module: hr_recruitment
 #: model_terms:ir.ui.view,arch_db:hr_recruitment.hr_recruitment_stage_form
 msgid "Tooltips"
-msgstr "Chú giải"
+msgstr "Chú thích"
 
 #. module: hr_recruitment
 #: model:ir.actions.act_window,name:hr_recruitment.action_hr_job_sources
