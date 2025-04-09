@@ -18,14 +18,16 @@
 # Martin Trigaux, 2023
 # fardin mardani <fmardani0@gmail.com>, 2023
 # Ali Reza Feizi Derakhshi, 2023
-# Hamed Mohammadi <hamed@dehongi.com>, 2023
 # odooers ir, 2023
 # Hamid Ahmadimoghaddam, 2023
 # Abbas Ebadian, 2024
 # pfp pfp <pfpour@yahoo.com>, 2024
 # Arash Farahmandi <farahmandi.arash@gmail.com>, 2024
 # Hanna Kheradroosta, 2024
-# Mostafa Barmshory <mostafa.barmshory@gmail.com>, 2024
+# Tiffany Chang, 2025
+# Mostafa Barmshory <mostafa.barmshory@gmail.com>, 2025
+# Hamed Mohammadi <hamed@dehongi.com>, 2025
+# Naser mars, 2025
 # 
 msgid ""
 msgstr ""
@@ -33,7 +35,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-02-06 13:31+0000\n"
 "PO-Revision-Date: 2022-09-22 05:53+0000\n"
-"Last-Translator: Mostafa Barmshory <mostafa.barmshory@gmail.com>, 2024\n"
+"Last-Translator: Naser mars, 2025\n"
 "Language-Team: Persian (https://app.transifex.com/odoo/teams/41243/fa/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -84,7 +86,7 @@ msgstr "\"%s\" نیاز به دسترسی میکروفن دارد"
 #: code:addons/mail/static/src/models/channel_member_list_category_view.js:0
 #, python-format
 msgid "%(categoryText)s - %(memberCount)s"
-msgstr ""
+msgstr "%(categoryText)s - %(memberCount)s"
 
 #. module: mail
 #. odoo-python
@@ -102,7 +104,7 @@ msgstr ""
 #: code:addons/mail/static/src/models/notification_request_view.js:0
 #, python-format
 msgid "%(odoobotName)s has a request"
-msgstr ""
+msgstr "%(odoobotName)s درخواستی دارد"
 
 #. module: mail
 #. odoo-python
@@ -6890,6 +6892,8 @@ msgstr ""
 #, python-format
 msgid "Only users belonging to the \"%s\" group can modify dynamic templates."
 msgstr ""
+"فقط کاربرانی که به گروه \"%s\" تعلق دارند می‌توانند قالب‌های پویا را تغییر "
+"دهند."
 
 #. module: mail
 #: model:ir.model.fields.selection,name:mail.selection__mail_channel_member__fold_state__open
@@ -7307,7 +7311,7 @@ msgstr "لطفا تا زمانی که فایل در حال آپلود است ص�
 #: code:addons/mail/static/src/components/messaging_menu_container/messaging_menu_container.xml:0
 #, python-format
 msgid "Please wait..."
-msgstr ""
+msgstr "لطفا صبر کنید ..."
 
 #. module: mail
 #: model:ir.model.fields,help:mail.field_res_users__notification_type

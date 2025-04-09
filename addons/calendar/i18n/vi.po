@@ -245,7 +245,7 @@ msgstr ""
 "            <p><strong>Chi tiết sự kiện</strong></p>\n"
 "            <ul>\n"
 "                <t t-if=\"object.event_id.location\">\n"
-"                    <li>Địa điểm: <t t-out=\"object.event_id.location or ''\">Bruxelles</t>\n"
+"                    <li>Vị trí: <t t-out=\"object.event_id.location or ''\">Bruxelles</t>\n"
 "                        (<a target=\"_blank\" t-attf-href=\"http://maps.google.com/maps?oi=map&amp;q={{ object.event_id.location }}\">Xem bản đồ</a>)\n"
 "                    </li>\n"
 "                </t>\n"
@@ -1575,7 +1575,7 @@ msgstr "Cho sự kiện tự động lặp lại theo khoảng thời gian đó"
 #: model:ir.model.fields,field_description:calendar.field_calendar_event__location
 #: model_terms:ir.ui.view,arch_db:calendar.invitation_page_anonymous
 msgid "Location"
-msgstr "Địa điểm"
+msgstr "Vị trí"
 
 #. module: calendar
 #: model_terms:ir.ui.view,arch_db:calendar.invitation_page_anonymous
@@ -1801,7 +1801,7 @@ msgstr "Số lượng tin gửi đi bị lỗi"
 #: model:ir.model.fields.selection,name:calendar.selection__calendar_event__end_type__count
 #: model:ir.model.fields.selection,name:calendar.selection__calendar_recurrence__end_type__count
 msgid "Number of repetitions"
-msgstr "Số lần tái diễn"
+msgstr "Số lần lặp lại"
 
 #. module: calendar
 #. odoo-javascript
@@ -2215,7 +2215,7 @@ msgstr "Thời lượng không thể mang dấu âm."
 #: code:addons/calendar/models/calendar_recurrence.py:0
 #, python-format
 msgid "The number of repetitions cannot be negative."
-msgstr "Số lượng lặp lại không thể là số âm."
+msgstr "Số lần lặp lại không thể là số âm."
 
 #. module: calendar
 #. odoo-python

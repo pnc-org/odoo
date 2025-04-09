@@ -21,12 +21,12 @@
 # Батболд <batbold.ts@gmail.com>, 2022
 # Onii Onii <onii0223@yahoo.com>, 2022
 # baaska sh <sh.baaskash@gmail.com>, 2022
-# Martin Trigaux, 2022
 # nurbakhit nurka <nurbakhit@bumanit.mn>, 2022
 # Uuganbayar Batbaatar <uuganaaub33@gmail.com>, 2022
 # hish, 2022
 # Torbat Jargalsaikhan, 2023
 # Bayarkhuu Bataa, 2023
+# Martin Trigaux, 2025
 # Baskhuu Lodoikhuu <baskhuujacara@gmail.com>, 2025
 # 
 msgid ""
@@ -196,7 +196,7 @@ msgstr ""
 #: code:addons/mail/static/src/models/messaging_notification_handler.js:0
 #, python-format
 msgid "%s from %s"
-msgstr ""
+msgstr "%s %s-с"
 
 #. module: mail
 #. odoo-javascript
@@ -3947,7 +3947,7 @@ msgstr "Хэлбэржүүлсэн Имэйл"
 #: code:addons/mail/static/src/models_data/emoji_data.js:0
 #, python-format
 msgid "French"
-msgstr ""
+msgstr "Франц хэл"
 
 #. module: mail
 #. odoo-javascript
@@ -4891,7 +4891,7 @@ msgstr "Япон"
 #: code:addons/mail/static/src/models_data/emoji_data.js:0
 #, python-format
 msgid "Japanese"
-msgstr ""
+msgstr "Япон хэл"
 
 #. module: mail
 #. odoo-javascript

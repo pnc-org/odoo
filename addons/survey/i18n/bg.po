@@ -12,7 +12,6 @@
 # aleksandar ivanov, 2023
 # Александра Николова <alexandra1nikolova@gmail.com>, 2023
 # Ivan Goychev <igoychev.projects@gmail.com>, 2023
-# Ивайло Малинов <iv.malinov@gmail.com>, 2023
 # Martin Trigaux, 2023
 # Albena Mincheva <albena_vicheva@abv.bg>, 2023
 # Maria Boyadjieva <marabo2000@gmail.com>, 2023
@@ -21,6 +20,7 @@
 # Venelin Stoykov, 2024
 # Petko Karamotchev, 2024
 # Milena Georgieva, 2024
+# Ивайло Малинов <iv.malinov@gmail.com>, 2025
 # Veselina Slavkova, 2025
 # 
 msgid ""
@@ -88,6 +88,13 @@ msgstr ""
 #, python-format
 msgid "%s (copy)"
 msgstr "%s (копие)"
+
+#. module: survey
+#. odoo-python
+#: code:addons/survey/models/survey_question.py:0
+#, python-format
+msgid "%s Votes"
+msgstr ""
 
 #. module: survey
 #. odoo-python
@@ -865,7 +872,7 @@ msgstr ""
 #. module: survey
 #: model:ir.model.fields.selection,name:survey.selection__survey_survey__access_mode__public
 msgid "Anyone with the link"
-msgstr ""
+msgstr "Всеки с връзката"
 
 #. module: survey
 #: model:ir.model.fields,field_description:survey.field_gamification_challenge__challenge_category
@@ -3114,6 +3121,10 @@ msgid ""
 "a placeholder expression that provides the appropriate language, e.g. {{ "
 "object.partner_id.lang }}."
 msgstr ""
+"Език за незадължителен превод (ISO код), който да се избере при изпращане на"
+" имейл. Ако не е зададен, ще се използва английската версия. Обикновено това"
+" трябва да бъде заместващ израз, който предоставя подходящия език, напр. {{ "
+"object.partner_id.lang }}."
 
 #. module: survey
 #: model_terms:ir.ui.view,arch_db:survey.survey_question_form
@@ -3370,6 +3381,11 @@ msgstr "Печат"
 #: model:survey.question,title:survey.vendor_certification_page_1
 msgid "Products"
 msgstr "Продукти"
+
+#. module: survey
+#: model_terms:ir.ui.view,arch_db:survey.survey_invite_view_form
+msgid "Public share URL"
+msgstr ""
 
 #. module: survey
 #: model:ir.model.fields,field_description:survey.field_survey_question_answer__question_id
@@ -4700,6 +4716,11 @@ msgstr ""
 #, python-format
 msgid "Use humor and make jokes"
 msgstr ""
+
+#. module: survey
+#: model_terms:ir.ui.view,arch_db:survey.survey_invite_view_form
+msgid "Use template"
+msgstr "Използване на шаблон"
 
 #. module: survey
 #. odoo-javascript
