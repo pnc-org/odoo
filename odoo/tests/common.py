@@ -62,7 +62,7 @@ from odoo.http import BadRequest
 from odoo.modules import module
 from odoo.modules.registry import Registry
 from odoo.service import security
-from odoo.sql_db import BaseCursor, Cursor
+from odoo.sql_db import BaseCursor, Cursor, TestCursor
 from odoo.tools import config, float_compare, mute_logger, profiler, SQL, DotDict
 from odoo.tools.mail import single_email_re
 from odoo.tools.misc import find_in_path, lower_logging
@@ -953,6 +953,14 @@ class TransactionCase(BaseCase):
         cls.cr = cls.registry.cursor()
         cls.addClassCleanup(cls.cr.close)
 
+        def check_cursor_stack():
+            for cursor in TestCursor._cursors_stack:
+                _logger.info('One curor was remaining in the TestCursor stack at the end of the test')
+                cursor._closed = True
+            TestCursor._cursors_stack = []
+
+        cls.addClassCleanup(check_cursor_stack)
+
         if cls.freeze_time:
             cls.startClassPatcher(freezegun.freeze_time(cls.freeze_time))
 
@@ -1392,6 +1400,8 @@ class ChromeBrowser:
             except websocket.WebSocketTimeoutException:
                 continue
             except Exception as e:
+                if isinstance(e, ConnectionResetError) and self._result.done():
+                    return
                 # if the socket is still connected something bad happened,
                 # otherwise the client was just shut down
                 if self.ws.connected:
@@ -1485,6 +1495,8 @@ class ChromeBrowser:
 
         log_type = type
         _logger = self._logger.getChild('browser')
+        if self._result.done() and 'failed to fetch' in message.casefold():
+            log_type = 'dir'
         _logger.log(
             self._TO_LEVEL.get(log_type, logging.INFO),
             "%s%s",
@@ -1563,8 +1575,9 @@ which leads to stray network requests and inconsistencies."""
             message += '\n' + stack
 
         if self._result.done():
-            self._logger.getChild('browser').error(
-                "Exception received after termination: %s", message)
+            if 'failed to fetch' not in message.casefold():
+                self._logger.getChild('browser').error(
+                    "Exception received after termination: %s", message)
             return
 
         self.take_screenshot()
