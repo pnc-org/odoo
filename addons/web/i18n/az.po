@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-10 08:27+0000\n"
+"POT-Creation-Date: 2025-05-08 20:35+0000\n"
 "PO-Revision-Date: 2022-09-22 05:55+0000\n"
 "Last-Translator: Nurlan Farajov <coolinuxoid@gmail.com>, 2025\n"
 "Language-Team: Azerbaijani (https://app.transifex.com/odoo/teams/41243/az/)\n"
@@ -35,20 +35,6 @@ msgstr ""
 #, python-format
 msgid "# Code editor"
 msgstr "# Kod redaktoru"
-
-#. module: web
-#. odoo-javascript
-#: code:addons/web/static/src/legacy/xml/base.xml:0
-#, python-format
-msgid "#{i.display_name} is current state"
-msgstr ""
-
-#. module: web
-#. odoo-javascript
-#: code:addons/web/static/src/legacy/xml/base.xml:0
-#, python-format
-msgid "#{i.display_name} is not current state"
-msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -1311,13 +1297,6 @@ msgstr ""
 
 #. module: web
 #. odoo-javascript
-#: code:addons/web/static/src/legacy/xml/base.xml:0
-#, python-format
-msgid "Click to change current state to #{i.display_name}"
-msgstr ""
-
-#. module: web
-#. odoo-javascript
 #: code:addons/web/static/src/core/debug/debug_menu_items.xml:0
 #: code:addons/web/static/src/core/dialog/dialog.xml:0
 #: code:addons/web/static/src/core/dialog/dialog.xml:0
@@ -2265,6 +2244,13 @@ msgstr "Email ünvanını daxil edin"
 #, python-format
 msgid "Enterprise"
 msgstr "Müəssisə"
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/core/debug/profiling/profiling_item.xml:0
+#, python-format
+msgid "Entry Count"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -3621,6 +3607,7 @@ msgstr "Cari əməliyyatda '%s' tipli görünüş tapılmadı."
 
 #. module: web
 #. odoo-javascript
+#: code:addons/web/static/src/core/debug/profiling/profiling_item.xml:0
 #: code:addons/web/static/src/legacy/js/views/kanban/kanban_column.js:0
 #: code:addons/web/static/src/legacy/js/views/kanban/kanban_column.js:0
 #: code:addons/web/static/src/legacy/js/views/kanban/kanban_column.js:0
@@ -3657,13 +3644,6 @@ msgstr "Qeyri-aktiv vəziyyət"
 #, python-format
 msgid "Not active state, click to change it"
 msgstr "Aktiv vəziyyət deyil, onu dəyişmək üçün klikləyin"
-
-#. module: web
-#. odoo-javascript
-#: code:addons/web/static/src/search/filter_menu/custom_filter_item.xml:0
-#, python-format
-msgid "Number using {{ DECIMAL_POINT }} as decimal separator."
-msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -5177,7 +5157,7 @@ msgstr "Status"
 #: code:addons/web/static/src/views/fields/statusbar/statusbar_field.xml:0
 #, python-format
 msgid "Statusbar"
-msgstr ""
+msgstr "Status paneli"
 
 #. module: web
 #. odoo-javascript
@@ -5251,15 +5231,7 @@ msgstr ""
 #: code:addons/web/static/src/webclient/user_menu/user_menu_items.xml:0
 #, python-format
 msgid "TIP"
-msgstr ""
-
-#. module: web
-#. odoo-javascript
-#: code:addons/web/static/src/legacy/xml/base.xml:0
-#: code:addons/web/static/src/legacy/xml/base.xml:0
-#, python-format
-msgid "Tag color: #{colornames[color]}"
-msgstr ""
+msgstr "İPUCU"
 
 #. module: web
 #. odoo-javascript
@@ -5902,14 +5874,14 @@ msgstr ""
 #: code:addons/web/static/src/core/errors/error_dialogs.js:0
 #, python-format
 msgid "Validation Error"
-msgstr ""
+msgstr "Doğrulama Xətası"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/properties/property_definition.xml:0
 #, python-format
 msgid "Values"
-msgstr ""
+msgstr "Dəyərlər"
 
 #. module: web
 #. odoo-javascript
@@ -5917,14 +5889,14 @@ msgstr ""
 #: code:addons/web/static/src/views/form/form_label.js:0
 #, python-format
 msgid "Values set here are company-specific."
-msgstr ""
+msgstr "Burada təyin olunan dəyərlər şirkətə xasdır."
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/views/pivot/pivot_model.js:0
 #, python-format
 msgid "Variation"
-msgstr ""
+msgstr "Variasiya"
 
 #. module: web
 #. odoo-javascript
@@ -5962,7 +5934,7 @@ msgstr ""
 #: code:addons/web/static/src/views/debug_items.js:0
 #, python-format
 msgid "View Metadata"
-msgstr ""
+msgstr "Metadataya baxın"
 
 #. module: web
 #. odoo-javascript
@@ -6036,14 +6008,14 @@ msgstr "Çərşənbə günü"
 #: code:addons/web/static/src/views/calendar/calendar_controller.js:0
 #, python-format
 msgid "Week"
-msgstr ""
+msgstr "Həftə"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/effects/effect_service.js:0
 #, python-format
 msgid "Well Done!"
-msgstr ""
+msgstr "Əhsən!"
 
 #. module: web
 #. odoo-javascript
@@ -6051,14 +6023,14 @@ msgstr ""
 #: code:addons/web/static/src/views/fields/field_tooltip.xml:0
 #, python-format
 msgid "Widget:"
-msgstr ""
+msgstr "Vidcet:"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/webclient/settings_form_view/settings_form_controller.js:0
 #, python-format
 msgid "Would you like to save your changes?"
-msgstr ""
+msgstr "Dəyişikliklərinizi saxlamaq istərdinizmi?"
 
 #. module: web
 #. odoo-javascript
@@ -6066,7 +6038,7 @@ msgstr ""
 #: code:addons/web/static/src/views/fields/iframe_wrapper/iframe_wrapper_field.js:0
 #, python-format
 msgid "Wrap raw html within an iframe"
-msgstr ""
+msgstr "Xam HTML-i iframe daxilində yerləşdirin"
 
 #. module: web
 #. odoo-python
@@ -6080,7 +6052,7 @@ msgstr "Yanlış giriş\\şifrə"
 #: code:addons/web/static/src/core/debug/debug_menu_items.xml:0
 #, python-format
 msgid "XML ID:"
-msgstr ""
+msgstr "XML ID:"
 
 #. module: web
 #. odoo-javascript
@@ -6122,19 +6094,19 @@ msgstr "Bəli"
 #: code:addons/web/static/src/views/fields/remaining_days/remaining_days_field.js:0
 #, python-format
 msgid "Yesterday"
-msgstr ""
+msgstr "Dünən"
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.login_successful
 msgid "You are logged in."
-msgstr ""
+msgstr "Siz daxil olmusunuz."
 
 #. module: web
 #. odoo-python
 #: code:addons/web/controllers/binary.py:0
 #, python-format
 msgid "You are not allowed to upload an attachment here."
-msgstr ""
+msgstr "Buraya qoşma yükləməyə icazəniz yoxdur."
 
 #. module: web
 #. odoo-javascript
@@ -6148,14 +6120,14 @@ msgstr ""
 #: code:addons/web/static/src/views/fields/properties/property_definition.js:0
 #, python-format
 msgid "You do not have access to the model \"%s\"."
-msgstr ""
+msgstr "Sizin \"%s\" modelinə girişiniz yoxdur."
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/ui/block_ui.js:0
 #, python-format
 msgid "You may not believe it,"
-msgstr ""
+msgstr "İnanmaya bilərsən,"
 
 #. module: web
 #. odoo-javascript
@@ -6171,6 +6143,8 @@ msgstr ""
 #, python-format
 msgid "You need to be able to edit parent first to add property tags"
 msgstr ""
+"Property teql əlavə etmək üçün əvvəlcə əsas (parent) qeydi redaktə edə "
+"bilməlisiniz"
 
 #. module: web
 #. odoo-javascript
@@ -6198,6 +6172,8 @@ msgid ""
 "You need to start Odoo with at least two workers to print a pdf version of "
 "the reports."
 msgstr ""
+"Hesabatların pdf versiyasını çap etmək üçün Odoo-nu ən azı iki işçi ilə işə "
+"salmalısınız."
 
 #. module: web
 #. odoo-javascript
@@ -6241,7 +6217,7 @@ msgstr ""
 #: code:addons/web/static/src/legacy/js/core/translation.js:0
 #, python-format
 msgid "a day ago"
-msgstr ""
+msgstr "bir gün əvvəl"
 
 #. module: web
 #. odoo-javascript
@@ -6249,7 +6225,7 @@ msgstr ""
 #: code:addons/web/static/src/legacy/js/core/translation.js:0
 #, python-format
 msgid "about a minute ago"
-msgstr ""
+msgstr "təxminən bir dəqiqə əvvəl"
 
 #. module: web
 #. odoo-javascript
@@ -6257,7 +6233,7 @@ msgstr ""
 #: code:addons/web/static/src/legacy/js/core/translation.js:0
 #, python-format
 msgid "about a month ago"
-msgstr ""
+msgstr "təxminən bir ay əvvəl"
 
 #. module: web
 #. odoo-javascript
@@ -6265,7 +6241,7 @@ msgstr ""
 #: code:addons/web/static/src/legacy/js/core/translation.js:0
 #, python-format
 msgid "about a year ago"
-msgstr ""
+msgstr "təxminən bir il əvvəl"
 
 #. module: web
 #. odoo-javascript
@@ -6273,18 +6249,16 @@ msgstr ""
 #: code:addons/web/static/src/legacy/js/core/translation.js:0
 #, python-format
 msgid "about an hour ago"
-msgstr ""
+msgstr "təxminən bir saat əvvəl"
 
 #. module: web
 #. odoo-javascript
-#: code:addons/web/static/src/core/debug/debug_menu_items.xml:0
 #: code:addons/web/static/src/core/domain_selector/domain_selector_branch_operator.xml:0
 #: code:addons/web/static/src/core/domain_selector/domain_selector_branch_operator.xml:0
 #: code:addons/web/static/src/core/domain_selector/domain_selector_branch_operator.xml:0
-#: code:addons/web/static/src/legacy/xml/base.xml:0
 #, python-format
 msgid "all"
-msgstr ""
+msgstr "hamısı"
 
 #. module: web
 #. odoo-javascript
@@ -6292,7 +6266,7 @@ msgstr ""
 #: code:addons/web/static/src/legacy/xml/base.xml:0
 #, python-format
 msgid "all records"
-msgstr ""
+msgstr "bütün rekordları"
 
 #. module: web
 #. odoo-javascript
@@ -6316,7 +6290,7 @@ msgstr "Hər hansı"
 #: code:addons/web/static/src/views/list/list_confirmation_dialog.xml:0
 #, python-format
 msgid "are valid for this update."
-msgstr ""
+msgstr "bu yeniləmə üçün uyğundur."
 
 #. module: web
 #. odoo-javascript
@@ -6337,14 +6311,14 @@ msgstr ""
 #: code:addons/web/static/src/core/ui/block_ui.js:0
 #, python-format
 msgid "because it's loading..."
-msgstr ""
+msgstr "çünki yüklənir..."
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/ui/block_ui.js:0
 #, python-format
 msgid "but the application is actually loading..."
-msgstr ""
+msgstr "lakin tətbiq həqiqətən yüklənir..."
 
 #. module: web
 #. odoo-javascript
@@ -6352,7 +6326,7 @@ msgstr ""
 #: code:addons/web/static/src/legacy/js/widgets/domain_selector.js:0
 #, python-format
 msgid "child of"
-msgstr ""
+msgstr "alt obyektdir"
 
 #. module: web
 #. odoo-javascript
@@ -6363,7 +6337,7 @@ msgstr ""
 #: code:addons/web/static/src/search/filter_menu/custom_filter_item.js:0
 #, python-format
 msgid "contains"
-msgstr ""
+msgstr "tərkibində var"
 
 #. module: web
 #. odoo-javascript
@@ -6378,7 +6352,7 @@ msgstr "tarix"
 #: code:addons/web/static/src/legacy/js/widgets/domain_selector.js:0
 #, python-format
 msgid "does not contain"
-msgstr ""
+msgstr "tərkibində yoxdur"
 
 #. module: web
 #. odoo-javascript
@@ -6394,7 +6368,7 @@ msgstr ""
 #: code:addons/web/static/src/core/network/download.js:0
 #, python-format
 msgid "downloading..."
-msgstr ""
+msgstr "endirilir..."
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.view_base_document_layout
@@ -6466,7 +6440,7 @@ msgstr "-də"
 #: code:addons/web/static/src/search/filter_menu/custom_filter_item.js:0
 #, python-format
 msgid "is"
-msgstr ""
+msgstr "bərabərdir"
 
 #. module: web
 #. odoo-javascript
@@ -6532,7 +6506,7 @@ msgstr ""
 #: code:addons/web/static/src/search/filter_menu/custom_filter_item.js:0
 #, python-format
 msgid "is between"
-msgstr ""
+msgstr "arasında yerləşir"
 
 #. module: web
 #. odoo-javascript
@@ -6557,7 +6531,7 @@ msgstr ""
 #: code:addons/web/static/src/search/filter_menu/custom_filter_item.js:0
 #, python-format
 msgid "is not"
-msgstr ""
+msgstr "bərabər deyil"
 
 #. module: web
 #. odoo-javascript
@@ -6601,7 +6575,7 @@ msgstr ""
 #: code:addons/web/static/src/search/filter_menu/custom_filter_item.js:0
 #, python-format
 msgid "is not set"
-msgstr ""
+msgstr "təyin olunmayıb"
 
 #. module: web
 #. odoo-javascript
@@ -6622,14 +6596,14 @@ msgstr ""
 #: code:addons/web/static/src/search/filter_menu/custom_filter_item.js:0
 #, python-format
 msgid "is set"
-msgstr ""
+msgstr "təyin olunub"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/ui/block_ui.js:0
 #, python-format
 msgid "it's still loading..."
-msgstr ""
+msgstr "bu hələ yüklənir..."
 
 #. module: web
 #. odoo-javascript
@@ -6653,7 +6627,7 @@ msgstr ""
 #: code:addons/web/static/src/legacy/js/core/translation.js:0
 #, python-format
 msgid "less than a minute ago"
-msgstr ""
+msgstr "bir dəqiqədən az əvvəl"
 
 #. module: web
 #. odoo-javascript
@@ -6669,7 +6643,7 @@ msgstr ""
 #: code:addons/web/static/src/core/domain_selector/domain_selector_operators.js:0
 #, python-format
 msgid "like"
-msgstr ""
+msgstr "oxşardır"
 
 #. module: web
 #. odoo-javascript
@@ -6713,15 +6687,7 @@ msgstr ""
 #: code:addons/web/static/src/core/commands/command_palette.xml:0
 #, python-format
 msgid "new tab"
-msgstr ""
-
-#. module: web
-#. odoo-javascript
-#: code:addons/web/static/src/legacy/xml/base.xml:0
-#: code:addons/web/static/src/views/view_dialogs/export_data_dialog.xml:0
-#, python-format
-msgid "new_template"
-msgstr ""
+msgstr "yeni tab"
 
 #. module: web
 #. odoo-javascript
@@ -6736,7 +6702,7 @@ msgstr ""
 #: code:addons/web/static/src/core/domain_selector/domain_selector_branch_operator.xml:0
 #, python-format
 msgid "none"
-msgstr ""
+msgstr "heç biri"
 
 #. module: web
 #. odoo-javascript
@@ -6759,7 +6725,7 @@ msgstr ""
 #: code:addons/web/static/src/core/domain_selector/domain_selector_operators.js:0
 #, python-format
 msgid "not like"
-msgstr ""
+msgstr "oxşamır"
 
 #. module: web
 #. odoo-javascript
@@ -6775,7 +6741,7 @@ msgstr ""
 #: code:addons/web/static/src/legacy/xml/base.xml:0
 #, python-format
 msgid "of the following rules:"
-msgstr ""
+msgstr "aşağıdakı qaydalardan:"
 
 #. module: web
 #. odoo-javascript
@@ -6783,14 +6749,14 @@ msgstr ""
 #: code:addons/web/static/src/legacy/xml/base.xml:0
 #, python-format
 msgid "of:"
-msgstr ""
+msgstr "-dan/dən:"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/webclient/user_menu/user_menu_items.xml:0
 #, python-format
 msgid "on any screen to show shortcut overlays and"
-msgstr ""
+msgstr "istənilən ekranda qısayol örtüklərini göstərmək üçün və"
 
 #. module: web
 #. odoo-javascript
@@ -6809,7 +6775,7 @@ msgstr "və yaxud"
 #: code:addons/web/static/src/legacy/js/widgets/domain_selector.js:0
 #, python-format
 msgid "parent of"
-msgstr ""
+msgstr "üst obyektdir"
 
 #. module: web
 #. odoo-javascript
@@ -6818,7 +6784,7 @@ msgstr ""
 #: code:addons/web/static/src/core/debug/profiling/profiling_qweb.xml:0
 #, python-format
 msgid "query"
-msgstr ""
+msgstr "sorğu"
 
 #. module: web
 #. odoo-javascript
@@ -6827,7 +6793,7 @@ msgstr ""
 #: code:addons/web/static/src/views/fields/properties/property_definition.xml:0
 #, python-format
 msgid "record(s)"
-msgstr ""
+msgstr "rekord(lar)"
 
 #. module: web
 #. odoo-javascript
@@ -6862,7 +6828,7 @@ msgstr ""
 #: code:addons/web/static/src/views/list/list_controller.xml:0
 #, python-format
 msgid "selected"
-msgstr ""
+msgstr "seçilmişdir"
 
 #. module: web
 #. odoo-javascript
@@ -6870,15 +6836,7 @@ msgstr ""
 #: code:addons/web/static/src/views/list/list_confirmation_dialog.xml:0
 #, python-format
 msgid "selected records,"
-msgstr ""
-
-#. module: web
-#. odoo-javascript
-#: code:addons/web/static/src/core/debug/debug_menu_items.xml:0
-#: code:addons/web/static/src/legacy/xml/base.xml:0
-#, python-format
-msgid "self"
-msgstr ""
+msgstr "rekordlar arasında,"
 
 #. module: web
 #. odoo-javascript
@@ -6886,7 +6844,7 @@ msgstr ""
 #: code:addons/web/static/src/legacy/xml/base.xml:0
 #, python-format
 msgid "set"
-msgstr ""
+msgstr "təyin edin"
 
 #. module: web
 #. odoo-javascript
@@ -6901,7 +6859,7 @@ msgstr ""
 #: code:addons/web/static/src/webclient/user_menu/user_menu_items.xml:0
 #, python-format
 msgid "to trigger a shortcut."
-msgstr ""
+msgstr "kombinasiyası ilə qısayolu işə salın."
 
 #. module: web
 #. odoo-javascript
@@ -6912,35 +6870,14 @@ msgstr ""
 
 #. module: web
 #. odoo-javascript
-#: code:addons/web/static/src/views/kanban/kanban_renderer.xml:0
-#, python-format
-msgid "{{ progressBar.count }} {{ progressBar.string }}"
-msgstr ""
-
-#. module: web
-#. odoo-javascript
-#: code:addons/web/static/src/views/kanban/kanban_column_quick_create.xml:0
-#, python-format
-msgid "{{ relatedFieldName }}..."
-msgstr ""
-
-#. module: web
-#. odoo-javascript
-#: code:addons/web/static/src/legacy/xml/kanban.xml:0
-#, python-format
-msgid "{{ widget.groupByFieldString }}..."
-msgstr ""
-
-#. module: web
-#. odoo-javascript
 #: code:addons/web/static/src/webclient/user_menu/user_menu_items.xml:0
 #, python-format
 msgid "— press"
-msgstr ""
+msgstr "- bu düyməyə basın"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/commands/command_items.xml:0
 #, python-format
 msgid "— search for"
-msgstr ""
+msgstr "— axtarın"
