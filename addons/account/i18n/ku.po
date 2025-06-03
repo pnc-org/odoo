@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-23 18:38+0000\n"
+"POT-Creation-Date: 2025-05-30 18:36+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
 "Last-Translator: Raz Omer Hussein, 2025\n"
 "Language-Team: Kurdish (https://app.transifex.com/odoo/teams/41243/ku/)\n"
@@ -181,6 +181,15 @@ msgstr "(%(currency_amount)s)%(ref)s"
 #: code:addons/account/models/account_account_tag.py:0
 msgid "%(tag)s (%(country_code)s)"
 msgstr "(%(country_code)s)%(tag)s"
+
+#. module: account
+#. odoo-python
+#: code:addons/account/models/account_tax.py:0
+msgid ""
+"%(tax_account)s (%(account_name)s) should be an account of type "
+"\"%(receivable)s\" or \"%(payable)s\" with both options "
+"\"%(allow_reconciliation)s\" and \"%(non_trade)s\" enabled."
+msgstr ""
 
 #. module: account
 #. odoo-python
@@ -14123,6 +14132,8 @@ msgid ""
 "Tags assigned to this line by the tax creating it, if any. It determines its"
 " impact on financial reports."
 msgstr ""
+"تاگەکان کە لەلایەن ئەو باجەی کە دروستی دەکات بۆ ئەم هێڵە دیاری کراون، ئەگەر "
+"هەبێت. کاریگەرییەکانی لەسەر ڕاپۆرتە داراییەکان دیاری دەکات."
 
 #. module: account
 #: model:ir.model.fields,help:account.field_product_product__account_tag_ids
@@ -14134,7 +14145,7 @@ msgstr ""
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_report_external_value__target_report_expression_id
 msgid "Target Expression"
-msgstr ""
+msgstr "دەربڕینی ئامانج"
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_report_external_value__target_report_expression_label
@@ -14144,7 +14155,7 @@ msgstr ""
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_report_external_value__target_report_line_id
 msgid "Target Line"
-msgstr ""
+msgstr "هێڵی ئامانج"
 
 #. module: account
 #: model:account.report.column,name:account.generic_tax_report_account_tax_column_tax
@@ -14161,7 +14172,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:account.view_invoice_tree
 #: model_terms:ir.ui.view,arch_db:account.view_move_line_tax_audit_tree
 msgid "Tax"
-msgstr ""
+msgstr "باج"
 
 #. module: account
 #: model:account.tax.group,name:account.1_tax_group_15
@@ -14169,12 +14180,12 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:account.document_tax_totals_template
 #: model_terms:ir.ui.view,arch_db:account.report_invoice_document
 msgid "Tax 15%"
-msgstr ""
+msgstr "باج ٪15"
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_tax_group__advance_tax_payment_account_id
 msgid "Tax Advance Account"
-msgstr ""
+msgstr "حسابی پێشوەختەی باج"
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_res_company__tax_calculation_rounding_method
@@ -14200,31 +14211,31 @@ msgstr ""
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_tax__amount_type
 msgid "Tax Computation"
-msgstr ""
+msgstr "حیسابکردنی باج"
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_bank_statement_line__tax_country_id
 #: model:ir.model.fields,field_description:account.field_account_move__tax_country_id
 msgid "Tax Country"
-msgstr ""
+msgstr " باجی وڵات"
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_bank_statement_line__tax_country_code
 #: model:ir.model.fields,field_description:account.field_account_move__tax_country_code
 msgid "Tax Country Code"
-msgstr ""
+msgstr "کۆدی باجی  وڵات"
 
 #. module: account
 #: model:ir.model.fields.selection,name:account.selection__account_tax__price_include_override__tax_excluded
 #: model:ir.model.fields.selection,name:account.selection__res_company__account_price_include__tax_excluded
 #: model_terms:ir.ui.view,arch_db:account.view_invoice_tree
 msgid "Tax Excluded"
-msgstr ""
+msgstr "بەبێ باج"
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_tax__tax_exigibility
 msgid "Tax Exigibility"
-msgstr ""
+msgstr "شایستەیی باج"
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.view_account_move_line_filter
@@ -14244,13 +14255,13 @@ msgstr ""
 #: model:ir.model,name:account.model_account_tax_group
 #: model:ir.model.fields,field_description:account.field_account_tax__tax_group_id
 msgid "Tax Group"
-msgstr ""
+msgstr "گروپی باج"
 
 #. module: account
 #: model:ir.actions.act_window,name:account.action_tax_group
 #: model:ir.ui.menu,name:account.menu_action_tax_group
 msgid "Tax Groups"
-msgstr ""
+msgstr "گروپی باج"
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_base_document_layout__vat
@@ -14262,12 +14273,12 @@ msgstr ""
 #: model:ir.model.fields.selection,name:account.selection__account_tax__price_include_override__tax_included
 #: model:ir.model.fields.selection,name:account.selection__res_company__account_price_include__tax_included
 msgid "Tax Included"
-msgstr ""
+msgstr "باجی لەگەڵدایە"
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_reconcile_model_line__force_tax_included
 msgid "Tax Included in Price"
-msgstr ""
+msgstr "باج لەگەڵ نرخدایە"
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_bank_statement_line__tax_lock_date_message
@@ -14294,12 +14305,12 @@ msgstr ""
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_tax__name
 msgid "Tax Name"
-msgstr ""
+msgstr "ناوی باج"
 
 #. module: account
 #: model:account.account,name:account.1_tax_paid
 msgid "Tax Paid"
-msgstr ""
+msgstr "باجی دراوە"
 
 #. module: account
 #: model:account.account,name:account.1_tax_payable
@@ -14314,52 +14325,52 @@ msgstr ""
 #. module: account
 #: model:account.account,name:account.1_tax_receivable
 msgid "Tax Receivable"
-msgstr ""
+msgstr "باجی وەرگیراو"
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_tax_group__tax_receivable_account_id
 msgid "Tax Receivable Account"
-msgstr ""
+msgstr "حسابی وەرگرتنی باج"
 
 #. module: account
 #: model:account.account,name:account.1_tax_received
 msgid "Tax Received"
-msgstr ""
+msgstr "باجی وەرگیراو"
 
 #. module: account
 #: model:ir.model,name:account.model_account_tax_repartition_line
 msgid "Tax Repartition Line"
-msgstr ""
+msgstr "هێڵی دابەشکردنەوەی باج"
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_lock_exception__tax_lock_date
 #: model:ir.model.fields,field_description:account.field_res_company__tax_lock_date
 #: model:ir.model.fields.selection,name:account.selection__account_lock_exception__lock_date_field__tax_lock_date
 msgid "Tax Return Lock Date"
-msgstr ""
+msgstr "بەرواری قفڵکردنی گەڕانەوەی باج"
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_tax__tax_scope
 #: model_terms:ir.ui.view,arch_db:account.view_account_tax_search
 msgid "Tax Scope"
-msgstr ""
+msgstr "مەودای باج"
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_bank_statement_line__amount_tax_signed
 #: model:ir.model.fields,field_description:account.field_account_move__amount_tax_signed
 msgid "Tax Signed"
-msgstr ""
+msgstr "باج واژۆ کراوە"
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_product_product__tax_string
 #: model:ir.model.fields,field_description:account.field_product_template__tax_string
 msgid "Tax String"
-msgstr ""
+msgstr "ڕیزبەندی باج"
 
 #. module: account
 #: model:ir.model.fields.selection,name:account.selection__account_report_expression__engine__tax_tags
 msgid "Tax Tags"
-msgstr ""
+msgstr "تاگەکانی باج"
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_report_line__tax_tags_formula
@@ -14370,7 +14381,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account.field_account_tax__type_tax_use
 #: model_terms:ir.ui.view,arch_db:account.view_account_tax_search
 msgid "Tax Type"
-msgstr ""
+msgstr "جۆری باج"
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_bank_statement_line__tax_calculation_rounding_method
@@ -14404,12 +14415,12 @@ msgstr ""
 #. odoo-python
 #: code:addons/account/models/account_tax.py:0
 msgid "Tax names must be unique!"
-msgstr ""
+msgstr "ناوی باج دەبێت تایبەت بێت!"
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_fiscal_position_tax__tax_src_id
 msgid "Tax on Product"
-msgstr ""
+msgstr "باج لەسەر بەرهەم"
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_fiscal_position_tax__tax_dest_id
@@ -14419,7 +14430,7 @@ msgstr ""
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_tax__is_used
 msgid "Tax used"
-msgstr ""
+msgstr "باجی بەکارهێنراو"
 
 #. module: account
 #. odoo-python
@@ -14436,7 +14447,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:account.view_message_tree_audit_log_search
 #: model_terms:ir.ui.view,arch_db:account.view_move_line_form
 msgid "Taxes"
-msgstr ""
+msgstr "باجەکان"
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.view_move_form
@@ -14447,12 +14458,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:account.field_account_bank_statement_line__taxes_legal_notes
 #: model:ir.model.fields,field_description:account.field_account_move__taxes_legal_notes
 msgid "Taxes Legal Notes"
-msgstr ""
+msgstr "باج تێبینی یاسایی"
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.res_config_settings_view_form
 msgid "Taxes are also displayed in local currency on invoices"
-msgstr ""
+msgstr " باجەکان بە دراوی ناوخۆیی لەسەر فاکتورەکان پیشان دەدرێن"
 
 #. module: account
 #. odoo-python
@@ -14466,14 +14477,14 @@ msgstr ""
 #: model:ir.model.fields,field_description:account.field_res_company__display_invoice_tax_company_currency
 #: model:ir.model.fields,field_description:account.field_res_config_settings__display_invoice_tax_company_currency
 msgid "Taxes in company currency"
-msgstr ""
+msgstr "باج بە دراوی کۆمپانیا"
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.res_config_settings_view_form
 msgid ""
 "Taxes, fiscal positions, chart of accounts & legal statements for your "
 "country"
-msgstr ""
+msgstr "باج، پێگەی دارایی، چارتی ژمێریاری و بەیاننامەی یاسایی بۆ وڵاتەکەت"
 
 #. module: account
 #: model:ir.model.fields,help:account.field_res_company__account_enabled_tax_country_ids
@@ -14482,6 +14493,9 @@ msgid ""
 "tax-related features(hence the ones for which l10n modules need to show tax-"
 "related fields)."
 msgstr ""
+"بوارێکی تەکنیکی کە ئەو وڵاتانە لەخۆدەگرێت کە ئەم کۆمپانیایە تایبەتمەندییە "
+"پەیوەندیدارەکانی باجیان بۆ بەکاردەهێنێت(هەربۆیە ئەوانەی کە مۆدێلەکانی l10n "
+"پێویستە بوارەکانی پەیوەست بە باج پیشان بدەن)."
 
 #. module: account
 #: model:ir.model.fields,help:account.field_account_lock_exception__company_lock_date
@@ -14521,6 +14535,8 @@ msgid ""
 "Technical field used to display a warning if the account is a transfer "
 "service account."
 msgstr ""
+"مەیدانی تەکنیکی بەکاردێت بۆ پیشاندانی ئاگادارکردنەوە ئەگەر ئەکاونتەکە "
+"ئەژمێری خزمەتگوزاری گواستنەوە بێت."
 
 #. module: account
 #: model:ir.model.fields,help:account.field_account_journal__sequence_override_regex
@@ -14549,12 +14565,12 @@ msgstr ""
 #. module: account
 #: model:ir.model.fields,field_description:account.field_res_config_settings__invoice_terms
 msgid "Terms & Conditions"
-msgstr ""
+msgstr "مەرج و ڕێساکان"
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_res_config_settings__invoice_terms_html
 msgid "Terms & Conditions as a Web page"
-msgstr ""
+msgstr "مەرج و ڕێساکان وەک لاپەڕەیەکی وێب"
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_res_company__terms_type
@@ -14566,25 +14582,25 @@ msgstr ""
 #. odoo-python
 #: code:addons/account/models/account_move.py:0
 msgid "Terms & Conditions: %s"
-msgstr ""
+msgstr "مەرج و ڕێساکان: %s"
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_bank_statement_line__narration
 #: model:ir.model.fields,field_description:account.field_account_move__narration
 #: model_terms:ir.ui.view,arch_db:account.view_move_form
 msgid "Terms and Conditions"
-msgstr ""
+msgstr "مەرج و ڕێساکان"
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_report_external_value__text_value
 msgid "Text Value"
-msgstr ""
+msgstr "بەهای دەق"
 
 #. module: account
 #. odoo-javascript
 #: code:addons/account/static/src/components/document_state/document_state_field.js:0
 msgid "Text copied"
-msgstr ""
+msgstr "دەق کۆپی کراوە"
 
 #. module: account
 #: model:ir.model.fields,help:account.field_res_company__account_opening_date
@@ -14619,7 +14635,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/account/models/account_move.py:0
 msgid "The Bill/Refund date is required to validate this document."
-msgstr ""
+msgstr "بەرواری پسووڵە/گەڕانەوەی پارە پێویستە بۆ چەسپاندنی ئەم بەڵگەنامەیە."
 
 #. module: account
 #. odoo-python
@@ -14634,6 +14650,8 @@ msgid ""
 "The Early Payment Discount functionality can only be used with payment terms"
 " using a single 100% line. "
 msgstr ""
+"کارایی داشکاندنی پارەی پێشوەختە تەنها دەتوانرێت لەگەڵ مەرجەکانی پارەدان "
+"بەکاربهێنرێت بە بەکارهێنانی یەک هێڵی 100%."
 
 #. module: account
 #. odoo-python
@@ -14680,6 +14698,8 @@ msgid ""
 "The Payment Term must have at least one percent line and the sum of the "
 "percent must be 100%."
 msgstr ""
+"مەرجی پارەدان دەبێت لانیکەم هێڵی لەسەدا یەک هەبێت و کۆی لەسەدەکە دەبێت 100% "
+"بێت."
 
 #. module: account
 #: model:ir.model.fields,help:account.field_base_document_layout__vat
@@ -14688,6 +14708,9 @@ msgid ""
 "country format. You can use '/' to indicate that the partner is not subject "
 "to tax."
 msgstr ""
+"ژمارەی ناسنامەی باج. بەهاکان لێرەدا بە پشتبەستن بە فۆرماتەکەی وڵات پشتڕاست "
+"دەکرێنەوە. دەتوانیت '/' بەکاربهێنیت بۆ ئەوەی ئاماژە بەوە بکەیت کە هاوبەشەکە "
+"باج نادات."
 
 #. module: account
 #. odoo-python
@@ -14701,13 +14724,14 @@ msgstr ""
 #. odoo-python
 #: code:addons/account/models/account_move_line.py:0
 msgid "The account %(name)s (%(code)s) is deprecated."
-msgstr ""
+msgstr "ئەکاونتەکە%(name)s(%(code)s) بەکارنەهاتووە."
 
 #. module: account
 #. odoo-python
 #: code:addons/account/models/account_account.py:0
 msgid "The account code can only contain alphanumeric characters and dots."
 msgstr ""
+"کۆدی ئەکاونتەکە تەنها دەتوانێت پیتی ئەلفوبێی ژمارەیی و خاڵەکانی تێدابێت."
 
 #. module: account
 #. odoo-python
@@ -14762,12 +14786,14 @@ msgid ""
 "The amount for %(partner_name)s appears unusual. Based on your historical data, the expected amount is %(mean)s (± %(wiggle)s).\n"
 "Please verify if this amount is accurate."
 msgstr ""
+"ئەو بڕە پارەیەی بۆ %(partner_name)s نائاسایی دەردەکەوێت. بە پشتبەستن بە زانیارییە مێژووییەکانتان، بڕی چاوەڕوانکراو بریتییە لە%(mean)s (±%(wiggle)s).\n"
+"تکایە دڵنیابن لەوەی ئەم بڕە پارەیە ڕاستە یان نا."
 
 #. module: account
 #. odoo-python
 #: code:addons/account/models/account_reconcile_model.py:0
 msgid "The amount is not a number"
-msgstr ""
+msgstr "بڕە پارەکە ژمارە نییە"
 
 #. module: account
 #. odoo-python
@@ -14813,12 +14839,17 @@ msgid ""
 "order to be valid, any derogation must be expressly agreed to in advance in "
 "writing."
 msgstr ""
+"کڕیار بە ڕوونی دەستبەرداری مەرج و ڕێسا ستانداردەکانی خۆی دەبێت، تەنانەت "
+"ئەگەر ئەمانە دوای ئەم مەرج و ڕێسایە ستانداردانەی فرۆشتن داڕێژرابن. بۆ ئەوەی "
+"هەر لێکدانەوەیەک ڕەوا بێت، دەبێت پێشوەختە بە نووسراو بە ڕوونی ڕەزامەندی "
+"لەسەر بدرێت."
 
 #. module: account
 #. odoo-python
 #: code:addons/account/models/account_account.py:0
 msgid "The code must be set for every company to which this account belongs."
 msgstr ""
+"دەبێت کۆدەکە بۆ هەر کۆمپانیایەک دابنرێت کە ئەم ئەکاونتە سەر بەو کۆمپانیایە."
 
 #. module: account
 #: model:ir.model.constraint,message:account.constraint_account_payment_method_name_code_unique
@@ -14831,6 +14862,13 @@ msgstr ""
 msgid ""
 "The combination of reference model and reference type on the journal is not "
 "implemented"
+msgstr ""
+
+#. module: account
+#. odoo-python
+#: code:addons/account/models/partner.py:0
+msgid ""
+"The commercial partner has been updated for all related accounting entries."
 msgstr ""
 
 #. module: account
@@ -14849,12 +14887,12 @@ msgstr ""
 #. module: account
 #: model:ir.model.fields,help:account.field_account_tax_group__country_id
 msgid "The country for which this tax group is applicable."
-msgstr ""
+msgstr "ئەو وڵاتەی کە ئەم گروپە باجە بۆی کارپێکراوە."
 
 #. module: account
 #: model:ir.model.fields,help:account.field_account_tax__country_id
 msgid "The country for which this tax is applicable."
-msgstr ""
+msgstr "ئەو وڵاتەی کە ئەم باجە بۆی جێبەجێ دەکرێت."
 
 #. module: account
 #. odoo-python
@@ -14874,12 +14912,12 @@ msgstr ""
 #. module: account
 #: model:ir.model.fields,help:account.field_account_journal__currency_id
 msgid "The currency used to enter statement"
-msgstr ""
+msgstr "ئەو دراوەی کە بۆ داخڵکردنی بەیاننامە بەکاردێت"
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.view_move_form
 msgid "The current highest number is"
-msgstr ""
+msgstr "زۆرترین ژمارەی ئێستا بریتییە لە"
 
 #. module: account
 #. odoo-python
@@ -14889,6 +14927,9 @@ msgid ""
 "%(expected_total)s. In order to post the invoice/bill, you can adjust its "
 "lines or the expected Total (tax inc.)."
 msgstr ""
+"کۆی گشتی بریتییە لە %(current_total)s بەڵام کۆی گشتی چاوەڕوانکراو ئەوەیە "
+"%(expected_total)s . بۆ ئەوەی فاکتورە/پسووڵەکە پۆست بکەیت، دەتوانیت هێڵەکانی"
+" یان کۆی گشتی چاوەڕوانکراو (بە باجەوە) ڕێکبخەیت."
 
 #. module: account
 #. odoo-python
@@ -14903,6 +14944,7 @@ msgstr ""
 #: code:addons/account/wizard/account_automatic_entry_wizard.py:0
 msgid "The date selected is protected by: %(lock_date_info)s."
 msgstr ""
+"ئەو بەروارەی کە هەڵدەبژێردرێت بەم شێوەیە پارێزراوە: %(lock_date_info)s. "
 
 #. module: account
 #: model:ir.model.fields,help:account.field_account_lock_exception__fiscalyear_lock_date
@@ -14937,25 +14979,26 @@ msgstr ""
 #: code:addons/account/models/account_payment_term.py:0
 msgid "The days added must be a number and has to be between 0 and 31."
 msgstr ""
+"ئەو ڕۆژانەی زیاد دەکرێن دەبێت ژمارەیەک بن و دەبێت لە نێوان 0 بۆ 31 بن."
 
 #. module: account
 #. odoo-python
 #: code:addons/account/models/account_payment_term.py:0
 msgid "The days added must be between 0 and 31."
-msgstr ""
+msgstr "ڕۆژانی زیادکراو دەبێت لە نێوان 0 بۆ 31 بێت."
 
 #. module: account
 #: model:ir.model.fields,help:account.field_account_bank_statement_line__partner_shipping_id
 #: model:ir.model.fields,help:account.field_account_move__partner_shipping_id
 msgid ""
 "The delivery address will be used in the computation of the fiscal position."
-msgstr ""
+msgstr "ناونیشانی گەیاندن لە حیسابکردنی پێگەی داراییدا بەکاردەهێنرێت."
 
 #. module: account
 #: model:ir.model.fields,help:account.field_account_bank_statement_line__invoice_origin
 #: model:ir.model.fields,help:account.field_account_move__invoice_origin
 msgid "The document(s) that generated the invoice."
-msgstr ""
+msgstr "ئەو بەڵگەنامە(ەکان)ی کە فاکتورەکەی دروست کردووە."
 
 #. module: account
 #. odoo-python
@@ -14981,7 +15024,7 @@ msgstr ""
 #. module: account
 #: model:ir.model.constraint,message:account.constraint_account_report_expression_line_label_uniq
 msgid "The expression label must be unique per report line."
-msgstr ""
+msgstr "ناوی دەربڕینەکە دەبێت بۆ هەر دێڕێکی ڕاپۆرت تایبەت بێت."
 
 #. module: account
 #. odoo-python
@@ -15011,6 +15054,8 @@ msgstr ""
 msgid ""
 "The fiscal position determines the taxes/accounts used for this contact."
 msgstr ""
+"پێگەی دارایی ئەو باج/ژمێریارانە دیاری دەکات کە بۆ ئەم پەیوەندییە "
+"بەکاردەهێنرێن."
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.account_automatic_entry_wizard_form
@@ -15021,7 +15066,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/account/models/account_account.py:0
 msgid "The following accounts must be assigned to at least one company:"
-msgstr ""
+msgstr "ئەم ئەکاونتانەی خوارەوە دەبێت لانیکەم بۆ یەک کۆمپانیا دیاری بکرێت:"
 
 #. module: account
 #. odoo-python
@@ -15037,6 +15082,7 @@ msgstr ""
 msgid ""
 "The following regular expression is invalid to create a partner mapping: %s"
 msgstr ""
+"ئەم دەربڕینە ئاساییەی خوارەوە بۆ دروستکردنی نەخشەسازی هاوبەش نادروستە:%s"
 
 #. module: account
 #. odoo-python
@@ -15055,7 +15101,7 @@ msgstr ""
 #. module: account
 #: model:ir.model.fields,help:account.field_account_report_external_value__foreign_vat_fiscal_position_id
 msgid "The foreign fiscal position for which this external value is made."
-msgstr ""
+msgstr "ئەو پێگە داراییە دەرەکییەی کە ئەم بەها دەرەکییە بۆی دروستکراوە."
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.report_hash_integrity
@@ -15087,7 +15133,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/account/models/account_move.py:0
 msgid "The invoice is not a draft, it was not updated from the attachment."
-msgstr ""
+msgstr "فاکتورەکە ڕەشنووس نییە، لە هاوپێچەکەوە نوێ نەکراوەتەوە."
 
 #. module: account
 #. odoo-python
@@ -15129,12 +15175,12 @@ msgstr ""
 #: model:ir.model.fields,help:account.field_account_financial_year_op__fiscalyear_last_month
 msgid ""
 "The last day of the month will be used if the chosen day doesn't exist."
-msgstr ""
+msgstr "کۆتا ڕۆژی مانگ بەکاردەهێنرێت ئەگەر ڕۆژی هەڵبژێردراو بوونی نەبێت."
 
 #. module: account
 #: model:ir.model.constraint,message:account.constraint_account_group_check_length_prefix
 msgid "The length of the starting and the ending code prefix must be the same"
-msgstr ""
+msgstr "درێژی پێشگرەکەی کۆدی دەستپێک و کۆتایی دەبێت وەک یەک بێت"
 
 #. module: account
 #: model:ir.model.fields,help:account.field_account_reconcile_model__partner_mapping_line_ids
@@ -15192,7 +15238,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/account/models/partner.py:0
 msgid "The partner cannot be deleted because it is used in Accounting"
-msgstr ""
+msgstr "هاوبەشەکە ناتوانرێت بسڕدرێتەوە چونکە لە ژمێریاریدا بەکاردێت"
 
 #. module: account
 #. odoo-python
@@ -15221,7 +15267,7 @@ msgstr ""
 #: model:ir.model.fields,help:account.field_account_payment__currency_id
 #: model:ir.model.fields,help:account.field_account_payment_register__currency_id
 msgid "The payment's currency."
-msgstr ""
+msgstr "دراوی پارەدانەکە."
 
 #. module: account
 #. odoo-python
@@ -15230,6 +15276,8 @@ msgid ""
 "The recipient bank account linked to this invoice is archived.\n"
 "So you cannot confirm the invoice."
 msgstr ""
+"ئەژمێری بانکی وەرگر کە بەستراوەتەوە بەم فاکتورەیە ئەرشیف دەکرێت\n"
+"بۆیە ناتوانیت فاکتورەکە پشتڕاست بکەیتەوە."
 
 #. module: account
 #: model:ir.model.fields,help:account.field_account_reconcile_model__match_partner_category_ids
@@ -15303,7 +15351,7 @@ msgstr ""
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.view_move_form
 msgid "The recurrence will end on"
-msgstr ""
+msgstr "دووبارەبوونەوەی کۆتایی دێت لەسەر"
 
 #. module: account
 #. odoo-python
@@ -15328,7 +15376,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/account/controllers/terms.py:0
 msgid "The requested page is invalid, or doesn't exist anymore."
-msgstr ""
+msgstr "لاپەڕەی داواکراو نادروستە، یان ئیتر بوونی نییە."
 
 #. module: account
 #: model:ir.model.fields,help:account.field_account_move_line__amount_residual_currency
@@ -15358,7 +15406,7 @@ msgstr ""
 #. module: account
 #: model:ir.model.fields,help:account.field_account_secure_entries_wizard__hash_date
 msgid "The selected Date"
-msgstr ""
+msgstr "بەرواری هەڵبژێردراو"
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.account_automatic_entry_wizard_form
@@ -15374,6 +15422,8 @@ msgid ""
 "The selected payment method is not available for this payment, please select"
 " the payment method again."
 msgstr ""
+"شێوازی پارەدانی هەڵبژێردراو بۆ ئەم پارەدانە بەردەست نییە، تکایە دووبارە "
+"شێوازی پارەدان هەڵبژێرە."
 
 #. module: account
 #. odoo-python
@@ -15382,6 +15432,8 @@ msgid ""
 "The sending of invoices is not set up properly, make sure the report used is"
 " set for invoices."
 msgstr ""
+"ناردنی فاکتورەکان بە باشی ڕێکنەخراوە، دڵنیابە لەوەی کە ڕاپۆرتی بەکارهێنراو "
+"بۆ فاکتورەکان دانراوە."
 
 #. module: account
 #: model:ir.model.fields,help:account.field_account_tax__sequence
@@ -15394,7 +15446,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/account/models/account_move.py:0
 msgid "The sequence format has changed."
-msgstr ""
+msgstr "فۆرماتەکەی زنجیرەکە گۆڕاوە."
 
 #. module: account
 #. odoo-python
@@ -15411,6 +15463,8 @@ msgid ""
 "The sequence will never restart.\n"
 "The incrementing number in this case is '%(formatted_seq)s'."
 msgstr ""
+"زنجیرەکە هەرگیز دووبارە دەستپێناکاتەوە\n"
+"ژمارەی زیادبوون لەم حاڵەتەدا بریتییە لە '%(formatted_seq)s'."
 
 #. module: account
 #. odoo-python
@@ -15441,6 +15495,9 @@ msgid ""
 "The year detected here is '%(year)s' and the month is '%(month)s'.\n"
 "The incrementing number in this case is '%(formatted_seq)s'."
 msgstr ""
+"زنجیرەکە لە کاتژمێر 1 لە سەرەتای هەموو مانگێکدا دەست پێدەکاتەوە.\n"
+"ئەو ساڵەی کە دەستنیشان کراوە '%(year)s' و مانگەکەش '%(month)s'.\n"
+"ژمارەی زیادبوون لەم حاڵەتەدا بریتییە لە '%(formatted_seq)s'."
 
 #. module: account
 #. odoo-python
@@ -15450,6 +15507,9 @@ msgid ""
 "The year detected here is '%(year)s'.\n"
 "The incrementing number in this case is '%(formatted_seq)s'."
 msgstr ""
+"زنجیرەکە لە سەرەتای هەموو ساڵێکدا لە کاتژمێر 1 دەست پێدەکاتەوە.\n"
+"ئەو ساڵەی لێرەدا دەستنیشان کراوە '%(year)s'/\n"
+"ژمارەی زیادبوون لەم حاڵەتەدا بریتییە لە '%(formatted_seq)s'."
 
 #. module: account
 #. odoo-python
@@ -15474,11 +15534,13 @@ msgid ""
 "The starting balance doesn't match the ending balance of the previous "
 "statement, or an earlier statement is missing."
 msgstr ""
+"باڵانسی دەستپێک لەگەڵ باڵانسی کۆتایی بەیاننامەی پێشوودا ناگونجێت، یان "
+"بەیاننامەیەکی پێشووتر نەماوە."
 
 #. module: account
 #: model:ir.model.fields,help:account.field_account_move_line__statement_line_id
 msgid "The statement line that created this entry"
-msgstr ""
+msgstr "ئەو دێڕە بەیاننامەیەی کە ئەم نووسینەی دروست کردووە"
 
 #. module: account
 #: model:ir.model.fields,help:account.field_account_reconcile_model__payment_tolerance_type
@@ -15530,7 +15592,7 @@ msgstr ""
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.portal_my_invoices
 msgid "There are currently no invoices and payments for your account."
-msgstr ""
+msgstr "لە ئێستادا هیچ فاکتورە و پارەدانێک بۆ ئەکاونتەکەت نییە."
 
 #. module: account
 #. odoo-python
@@ -15550,13 +15612,13 @@ msgstr ""
 #. odoo-python
 #: code:addons/account/wizard/account_payment_register.py:0
 msgid "There are payments in progress. Make sure you don't pay twice."
-msgstr ""
+msgstr "پارەدان لە قۆناغی جێبەجێکردندایە. دڵنیابە دوو جار پارە نادەیت."
 
 #. module: account
 #. odoo-python
 #: code:addons/account/wizard/account_secure_entries_wizard.py:0
 msgid "There are still draft entries before the selected date."
-msgstr ""
+msgstr "هێشتا ڕەشنووسی نووسینەکان پێش بەرواری هەڵبژێردراو هەیە."
 
 #. module: account
 #. odoo-python
@@ -15608,7 +15670,7 @@ msgstr ""
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.portal_invoice_error
 msgid "There was an error processing this page."
-msgstr ""
+msgstr "هەڵەیەک لە پرۆسێسکردنی ئەم لاپەڕەیە هەیە."
 
 #. module: account
 #. odoo-python
@@ -15621,33 +15683,33 @@ msgstr ""
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.report_invoice_document
 msgid "Thirty one dollar and Five cents"
-msgstr ""
+msgstr "سی و یەک دۆلار و پێنج سەنت"
 
 #. module: account
 #: model:ir.model.fields.selection,name:account.selection__account_report__default_opening_date_filter__this_month
 msgid "This Month"
-msgstr ""
+msgstr "ئەم مانگە"
 
 #. module: account
 #: model:ir.model.fields.selection,name:account.selection__account_report__default_opening_date_filter__this_quarter
 msgid "This Quarter"
-msgstr ""
+msgstr "ئەم چارەکە"
 
 #. module: account
 #: model:ir.model.fields.selection,name:account.selection__account_report__default_opening_date_filter__this_tax_period
 msgid "This Tax Period"
-msgstr ""
+msgstr "ئەم ماوەی باجە"
 
 #. module: account
 #. odoo-python
 #: code:addons/account/models/account_journal_dashboard.py:0
 msgid "This Week"
-msgstr ""
+msgstr "ئەم هەفتەیە"
 
 #. module: account
 #: model:ir.model.fields.selection,name:account.selection__account_report__default_opening_date_filter__this_year
 msgid "This Year"
-msgstr ""
+msgstr "ئەم ساڵ"
 
 #. module: account
 #. odoo-python
@@ -15671,6 +15733,8 @@ msgid ""
 "This account will be used instead of the default one as the payable account "
 "for the current partner"
 msgstr ""
+"ئەم ئەژمێرە لەبری ئەو ئەژمێرەی پێشوەختە وەک ئەژمێری خەرجکراو بۆ هاوبەشی "
+"ئێستا بەکاردەهێنرێت"
 
 #. module: account
 #: model:ir.model.fields,help:account.field_res_partner__property_account_receivable_id
@@ -15679,17 +15743,19 @@ msgid ""
 "This account will be used instead of the default one as the receivable "
 "account for the current partner"
 msgstr ""
+"ئەم ئەژمێرە لەبری ئەو ئەکاونتە پێشوەختە وەک ئەژمێری وەرگیراو بۆ هاوبەشی "
+"ئێستا بەکاردەهێنرێت"
 
 #. module: account
 #: model:ir.model.fields,help:account.field_product_category__property_account_income_categ_id
 msgid "This account will be used when validating a customer invoice."
-msgstr ""
+msgstr "ئەم ئەکاونتە لە کاتی چەسپاندنی فاکتورەی کڕیاردا بەکاردەهێنرێت."
 
 #. module: account
 #. odoo-python
 #: code:addons/account/models/account_move.py:0
 msgid "This action isn't available for this document."
-msgstr ""
+msgstr "ئەم کردارە بۆ ئەم بەڵگەنامەیە بەردەست نییە."
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.res_config_settings_view_form
@@ -15717,7 +15783,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/account/wizard/account_merge_wizard.py:0
 msgid "This can only be used on accounts."
-msgstr ""
+msgstr "ئەمە تەنها لەسەر ئەکاونتەکان دەتوانرێت بەکاربهێنرێت."
 
 #. module: account
 #. odoo-python
@@ -15798,12 +15864,12 @@ msgstr ""
 #. module: account
 #: model_terms:ir.actions.act_window,help:account.action_account_audit_trail_report
 msgid "This is the Audit Trail Report"
-msgstr ""
+msgstr "ئەمە ڕاپۆرتی ڕێڕەوی وردبینییە"
 
 #. module: account
 #: model_terms:ir.actions.act_window,help:account.open_account_journal_dashboard_kanban
 msgid "This is the accounting dashboard"
-msgstr ""
+msgstr "ئەمە داشبۆردی ژمێریارییە"
 
 #. module: account
 #: model:ir.model.fields,help:account.field_res_config_settings__account_default_credit_limit
@@ -15811,12 +15877,14 @@ msgid ""
 "This is the default credit limit that will be used on partners that do not "
 "have a specific limit on them."
 msgstr ""
+"ئەمە سنووری قەرزی پێشوەختەیە کە لەسەر ئەو هاوبەشانە بەکاردەهێنرێت کە "
+"سنوورێکی دیاریکراویان لەسەر نییە."
 
 #. module: account
 #. odoo-python
 #: code:addons/account/wizard/account_payment_register.py:0
 msgid "This is the full amount."
-msgstr ""
+msgstr "ئەمە بڕە پارەی تەواوەتییە."
 
 #. module: account
 #. odoo-python
@@ -15828,7 +15896,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/account/wizard/account_payment_register.py:0
 msgid "This is the overdue amount."
-msgstr ""
+msgstr "ئەمەش ئەو بڕە پارەیەی کە دواکەوتووە."
 
 #. module: account
 #. odoo-python
@@ -15848,6 +15916,8 @@ msgid ""
 "This matching rule is used when the user is not certain of all the "
 "information of the counterpart."
 msgstr ""
+"ئەم یاسای هاوتاکردنە کاتێک بەکاردەهێنرێت کە بەکارهێنەر دڵنیا نەبێت لە هەموو "
+"زانیارییەکانی هاوتاکە."
 
 #. module: account
 #. odoo-python
@@ -15856,30 +15926,35 @@ msgid ""
 "This move could not be locked either because some move with the same "
 "sequence prefix has a higher number. You may need to resequence it."
 msgstr ""
+"ئەم جوڵەش نەتوانرا قفڵ بکرێت چونکە هەندێک جوڵە بە هەمان پێشگرەکانی ڕێزبەندی "
+"ژمارەیەکی زیاتریان هەیە. لەوانەیە پێویستت بە ڕێکخستنەوەی دووبارە بێت."
 
 #. module: account
 #. odoo-python
 #: code:addons/account/models/account_move.py:0
 msgid "This move is configured to be auto-posted on %(date)s"
 msgstr ""
+"ئەم جوڵەیە ڕێکخراوە بۆ ئەوەی بە شێوەیەکی ئۆتۆماتیکی پۆست بکرێت %(date)s"
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.view_move_form
 msgid ""
 "This move is configured to be posted automatically at the accounting date:"
 msgstr ""
+"ئەم جوڵەیە ڕێکخراوە بۆ ئەوەی بە شێوەیەکی ئۆتۆماتیکی لە بەرواری ژمێریاریدا "
+"پۆست بکرێت:"
 
 #. module: account
 #. odoo-python
 #: code:addons/account/models/account_move.py:0
 msgid "This move will be posted at the accounting date: %(date)s"
-msgstr ""
+msgstr "ئەم جوڵەیە لە بەرواری ژمێریاریدا بڵاودەکرێتەوە: %(date)s"
 
 #. module: account
 #. odoo-javascript
 #: code:addons/account/static/src/services/account_move_service.js:0
 msgid "This operation will create a gap in the sequence."
-msgstr ""
+msgstr "ئەم ئۆپەراسیۆنە بۆشایی لە زنجیرەکەدا دروست دەکات."
 
 #. module: account
 #: model:ir.model.fields,help:account.field_res_partner__property_supplier_payment_term_id
@@ -15888,6 +15963,8 @@ msgid ""
 "This payment term will be used instead of the default one for purchase "
 "orders and vendor bills"
 msgstr ""
+"ئەم مەرجەی پارەدان لەبری مەرجی پێشوەختە بۆ فەرمانی کڕین و پسووڵەی فرۆشیار "
+"بەکاردەهێنرێت"
 
 #. module: account
 #: model:ir.model.fields,help:account.field_res_partner__property_payment_term_id
@@ -15896,6 +15973,8 @@ msgid ""
 "This payment term will be used instead of the default one for sales orders "
 "and customer invoices"
 msgstr ""
+"ئەم مەرجەی پارەدان لەبری مەرجی پێشوەختە بۆ داواکاری فرۆشتن و فاکتورەی کڕیار "
+"بەکاردەهێنرێت"
 
 #. module: account
 #. odoo-python
@@ -15922,17 +16001,18 @@ msgstr ""
 #: model:ir.model.fields,help:account.field_account_move__auto_post_until
 msgid "This recurring move will be posted up to and including this date."
 msgstr ""
+"ئەم هەنگاوە دووبارەبووەوە تا ئەم بەروارە و بەم بەروارەشەوە بڵاودەکرێتەوە."
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.res_config_settings_view_form
 msgid "This setting cannot be changed after an invoice is created."
-msgstr ""
+msgstr "ئەم ڕێکخستنە ناتوانرێت بگۆڕدرێت دوای دروستکردنی فاکتورە."
 
 #. module: account
 #. odoo-python
 #: code:addons/account/models/account_move.py:0
 msgid "This specific error occurred during the import:"
-msgstr ""
+msgstr "ئەم هەڵە تایبەتە لە کاتی هاوردەکردندا ڕوویدا:"
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.view_move_form
@@ -15940,6 +16020,8 @@ msgid ""
 "This will update all taxes and accounts based on the currently selected "
 "fiscal position."
 msgstr ""
+"بەم شێوەیە هەموو باج و حیسابەکان نوێ دەکاتەوە بە پشتبەستن بەو پێگەی داراییەی"
+" ئێستا هەڵبژێردراوە."
 
 #. module: account
 #: model_terms:ir.actions.act_window,help:account.action_validate_account_move
@@ -15960,6 +16042,8 @@ msgstr ""
 msgid ""
 "Tick this checkbox if you want accounts to be grouped by name for merging."
 msgstr ""
+"ئەگەر دەتەوێت ئەکاونتەکان بەپێی ناو گروپ بکرێن بۆ یەکگرتنەوە، ئەم بۆکسە "
+"هەڵبژێرە."
 
 #. module: account
 #: model:digest.tip,name:account.digest_tip_account_0
@@ -15978,7 +16062,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account.field_account_move_send_wizard__mail_partner_ids
 #: model_terms:ir.ui.view,arch_db:account.account_move_send_wizard_form
 msgid "To"
-msgstr ""
+msgstr "بۆ"
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_reconcile_model__to_check
@@ -15986,22 +16070,22 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:account.view_account_invoice_filter
 #: model_terms:ir.ui.view,arch_db:account.view_account_move_filter
 msgid "To Check"
-msgstr ""
+msgstr "بۆ پشکنین"
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.view_account_invoice_report_search
 msgid "To Invoice"
-msgstr ""
+msgstr "بۆ فاکتورەکردن"
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.account_journal_dashboard_kanban_view
 msgid "To Pay"
-msgstr ""
+msgstr "بۆ پارەدان"
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.account_journal_dashboard_kanban_view
 msgid "To Validate"
-msgstr ""
+msgstr "بۆ چەسپاندن"
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.email_template_mail_gateway_failed
@@ -16009,11 +16093,13 @@ msgid ""
 "To add information to a previously sent invoice, reply to your \"sent\" "
 "email"
 msgstr ""
+"بۆ زیادکردنی زانیاری بۆ فاکتورەیەکی پێشتر نێردراو، وەڵامی ئیمەیڵی "
+"\"نێردراو\"ی خۆت بدەرەوە"
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.view_account_move_line_filter
 msgid "To check"
-msgstr ""
+msgstr "بۆ پشکنین"
 
 #. module: account
 #. odoo-python
@@ -16026,7 +16112,7 @@ msgstr ""
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.view_account_invoice_filter
 msgid "To pay"
-msgstr ""
+msgstr "بۆ پارەدان"
 
 #. module: account
 #. odoo-python
@@ -16036,6 +16122,9 @@ msgid ""
 "manually validated. You should go on the partner bank account of %(partner)s"
 " in order to validate it."
 msgstr ""
+"بۆ تۆمارکردنی پارەدان لەگەڵ %(method_name)s. ئەژمێری بانکی وەرگر دەبێت بە "
+"دەستی پشتڕاست بکرێتەوە. پێویستە بچیتە سەر حسابی بانکی هاوبەش %(partner)s بە "
+"مەبەستی چەسپاندنی."
 
 #. module: account
 #. odoo-python
@@ -16045,23 +16134,26 @@ msgid ""
 "be manually validated. You should go on the partner bank account in order to"
 " validate it."
 msgstr ""
+"بۆ تۆمارکردنی پارەدان لەگەڵ %(payment_method)s، ئەژمێری بانکی وەرگر دەبێت بە"
+" دەستی پشتڕاست بکرێتەوە. پێویستە بچیتە سەر ئەژمێری بانکی هاوبەش بۆ ئەوەی "
+"پشتڕاستی بکەیتەوە."
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.view_partner_bank_search_inherit
 msgid "To validate"
-msgstr ""
+msgstr "بۆ چەسپاندن"
 
 #. module: account
 #: model:ir.model.fields.selection,name:account.selection__account_report__default_opening_date_filter__today
 #: model_terms:ir.ui.view,arch_db:account.view_move_form
 msgid "Today"
-msgstr ""
+msgstr "ئەمڕۆ"
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.view_account_invoice_filter
 #: model_terms:ir.ui.view,arch_db:account.view_account_payment_search
 msgid "Today Activities"
-msgstr ""
+msgstr "چالاکییەکانی ئەمڕۆ"
 
 #. module: account
 #. odoo-javascript
@@ -16074,7 +16166,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:account.view_invoice_tree
 #: model_terms:ir.ui.view,arch_db:account.view_move_tree
 msgid "Total"
-msgstr ""
+msgstr "کۆ"
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_bank_statement_line__quick_edit_total_amount
@@ -16086,17 +16178,17 @@ msgstr ""
 #: model:ir.model.fields,field_description:account.field_account_automatic_entry_wizard__total_amount
 #: model_terms:ir.ui.view,arch_db:account.view_move_tree
 msgid "Total Amount"
-msgstr ""
+msgstr "بڕی کۆی گشتی "
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.view_move_line_tree
 msgid "Total Balance"
-msgstr ""
+msgstr "کۆی گشتی باڵانس"
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.view_move_line_tax_audit_tree
 msgid "Total Base Amount"
-msgstr ""
+msgstr "کۆی گشتی بڕی بنەڕەتی"
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.view_move_form
@@ -16108,13 +16200,13 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:account.view_move_form
 #: model_terms:ir.ui.view,arch_db:account.view_move_line_tree
 msgid "Total Debit"
-msgstr ""
+msgstr "کۆی گشتی قەرز"
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_res_partner__total_invoiced
 #: model:ir.model.fields,field_description:account.field_res_users__total_invoiced
 msgid "Total Invoiced"
-msgstr ""
+msgstr "کۆی گشتی فاکتورەکراو"
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_res_partner__debit
@@ -16125,13 +16217,13 @@ msgstr ""
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_payment_register__total_payments_amount
 msgid "Total Payments Amount"
-msgstr ""
+msgstr "کۆی گشتی بڕی پارەدانەکان"
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_res_partner__credit
 #: model:ir.model.fields,field_description:account.field_res_users__credit
 msgid "Total Receivable"
-msgstr ""
+msgstr "کۆی گشتی وەرگیراو"
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.view_move_line_payment_tree
@@ -16148,7 +16240,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account.field_account_bank_statement_line__amount_total_signed
 #: model:ir.model.fields,field_description:account.field_account_move__amount_total_signed
 msgid "Total Signed"
-msgstr ""
+msgstr "کۆی گشتی واژۆ کراوە"
 
 #. module: account
 #. odoo-python
@@ -16157,24 +16249,30 @@ msgid ""
 "Total amount due (including sales orders and this document): "
 "%(total_credit)s"
 msgstr ""
+"کۆی گشتی ئەو بڕە پارەیەی کە دەبێ بدرێت (بە داواکاری فرۆشتن و ئەم "
+"بەڵگەنامەیەوە): %(total_credit)s"
 
 #. module: account
 #. odoo-python
 #: code:addons/account/models/account_move.py:0
 msgid "Total amount due (including sales orders): %(total_credit)s"
 msgstr ""
+"کۆی گشتی ئەو بڕە پارەیەی کە دەبێ بدرێت (بە داواکاری فرۆشتنەوە): "
+"%(total_credit)s"
 
 #. module: account
 #. odoo-python
 #: code:addons/account/models/account_move.py:0
 msgid "Total amount due (including this document): %(total_credit)s"
 msgstr ""
+"کۆی گشتی ئەو بڕە پارەیەی کە دەبێ بدرێت (بە ئەم بەڵگەنامەیەشەوە): "
+"%(total_credit)s"
 
 #. module: account
 #. odoo-python
 #: code:addons/account/models/account_move.py:0
 msgid "Total amount due: %(total_credit)s"
-msgstr ""
+msgstr "کۆی گشتی ئەو بڕە پارەیەی کە دەبێ بدرێت: %(total_credit)s"
 
 #. module: account
 #: model:ir.model.fields,help:account.field_account_automatic_entry_wizard__total_amount
@@ -16184,7 +16282,7 @@ msgstr ""
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.report_invoice_document
 msgid "Total amount in words: <br/>"
-msgstr ""
+msgstr "کۆی گشتی بڕی بە وشە: <br/>"
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_res_company__display_invoice_amount_total_words
@@ -16196,30 +16294,30 @@ msgstr ""
 #: model:ir.model.fields,help:account.field_res_partner__credit
 #: model:ir.model.fields,help:account.field_res_users__credit
 msgid "Total amount this customer owes you."
-msgstr ""
+msgstr "کۆی گشتی ئەو بڕە پارەیەی کە ئەم کڕیارە قەرزاری تۆیە."
 
 #. module: account
 #: model:ir.model.fields,help:account.field_res_partner__debit
 #: model:ir.model.fields,help:account.field_res_users__debit
 msgid "Total amount you have to pay to this vendor."
-msgstr ""
+msgstr "کۆی گشتی ئەو بڕە پارەیەی کە دەبێت بیدەیت بەم فرۆشیارە."
 
 #. module: account
 #. odoo-python
 #: code:addons/account/wizard/account_payment_register.py:0
 msgid "Total for the installments before %(date)s."
-msgstr ""
+msgstr "کۆی گشتی بۆ قیستەکانی پێشوو %(date)s."
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_invoice_report__price_total
 msgid "Total in Currency"
-msgstr ""
+msgstr "کۆی گشتی بە دراو"
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_bank_statement_line__amount_total_in_currency_signed
 #: model:ir.model.fields,field_description:account.field_account_move__amount_total_in_currency_signed
 msgid "Total in Currency Signed"
-msgstr ""
+msgstr "کۆی گشتی بە دراوی واژۆکراو"
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.res_config_settings_view_form
@@ -16235,7 +16333,7 @@ msgstr ""
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_bank_statement_line__transaction_details
 msgid "Transaction Details"
-msgstr ""
+msgstr "وردەکاری مامەڵەکان"
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.view_account_journal_form
@@ -16246,7 +16344,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account.field_account_bank_statement_line__transaction_type
 #: model:ir.model.fields,field_description:account.field_account_reconcile_model__match_transaction_type
 msgid "Transaction Type"
-msgstr ""
+msgstr "جۆری مامەڵە"
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_reconcile_model__match_transaction_type_param
@@ -16256,18 +16354,18 @@ msgstr ""
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.account_journal_dashboard_kanban_view
 msgid "Transactions"
-msgstr ""
+msgstr "مامەڵەکان"
 
 #. module: account
 #. odoo-python
 #: code:addons/account/wizard/account_automatic_entry_wizard.py:0
 msgid "Transfer"
-msgstr ""
+msgstr "گواستنەوە"
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.account_automatic_entry_wizard_form
 msgid "Transfer Date"
-msgstr ""
+msgstr "بەرواری گواستنەوە"
 
 #. module: account
 #: model:ir.actions.act_window,name:account.account_automatic_entry_wizard_action
@@ -16290,13 +16388,13 @@ msgstr ""
 #. odoo-python
 #: code:addons/account/wizard/account_automatic_entry_wizard.py:0
 msgid "Transfer from %s"
-msgstr ""
+msgstr "گواستنەوە لە %s"
 
 #. module: account
 #. odoo-python
 #: code:addons/account/wizard/account_automatic_entry_wizard.py:0
 msgid "Transfer to %s"
-msgstr ""
+msgstr "گواستنەوە بۆ %s"
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.res_config_settings_view_form
@@ -16306,17 +16404,20 @@ msgid ""
 "                                      Set a value greater than 0.0 to "
 "activate a credit limit check"
 msgstr ""
+"ئاگادارکردنەوەکان دەستپێبکە لە کاتی دروستکردنی فاکتورە و فەرمانی فرۆشتن بۆ "
+"هاوبەشەکان کە کۆی گشتی بڕی وەرگیراو لە سنوورێک زیاترە. بەهایەکی زیاتر لە 0.0"
+" دابنێ بۆ چالاککردنی پشکنینی سنووری قەرز"
 
 #. module: account
 #. odoo-python
 #: code:addons/account/models/account_tax.py:0
 msgid "True"
-msgstr ""
+msgstr "ڕاست"
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.view_partner_bank_search_inherit
 msgid "Trusted"
-msgstr ""
+msgstr "متمانەپێکراو"
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_account__account_type
@@ -16329,18 +16430,18 @@ msgstr ""
 #: model:ir.model.fields,field_description:account.field_account_setup_bank_manual_config__acc_type
 #: model_terms:ir.ui.view,arch_db:account.view_account_reconcile_model_search
 msgid "Type"
-msgstr ""
+msgstr "جۆر"
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_bank_statement_line__type_name
 #: model:ir.model.fields,field_description:account.field_account_move__type_name
 msgid "Type Name"
-msgstr ""
+msgstr "جۆری ناو"
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.partner_view_buttons
 msgid "Type a message..."
-msgstr ""
+msgstr "نامەیەک بنووسە..."
 
 #. module: account
 #: model:ir.model.fields,help:account.field_account_bank_statement_line__qr_code_method
@@ -16368,12 +16469,14 @@ msgid ""
 "Unable to create a statement due to missing transactions. You may want to "
 "reorder the transactions before proceeding."
 msgstr ""
+"بەهۆی نەبوونی مامەڵەکانەوە ناتوانرێت بەیاننامەیەک دروست بکرێت. لەوانەیە "
+"بتەوێت پێش ئەوەی بەردەوام بیت مامەڵەکان ڕێکبخەیتەوە."
 
 #. module: account
 #. odoo-python
 #: code:addons/account/models/account_journal.py:0
 msgid "Undefined Yet"
-msgstr ""
+msgstr "پێناسە نەکراوە هێشتا"
 
 #. module: account
 #. odoo-python
@@ -17731,6 +17834,14 @@ msgstr ""
 
 #. module: account
 #. odoo-python
+#: code:addons/account/models/partner.py:0
+msgid ""
+"You cannot set a partner as an invoicing address of another if they have a "
+"different %(vat_label)s."
+msgstr ""
+
+#. module: account
+#. odoo-python
 #: code:addons/account/models/account_account.py:0
 msgid ""
 "You cannot switch an account to prevent the reconciliation if some partial "
@@ -17800,6 +17911,14 @@ msgid ""
 "You cannot validate an invoice with a negative total amount. You should "
 "create a credit note instead. Use the action menu to transform it into a "
 "credit note or refund."
+msgstr ""
+
+#. module: account
+#. odoo-python
+#: code:addons/account/models/partner.py:0
+msgid ""
+"You do not have permission to mark this partner as the main commercial "
+"partner."
 msgstr ""
 
 #. module: account
