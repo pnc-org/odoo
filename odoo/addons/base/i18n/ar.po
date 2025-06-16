@@ -4756,6 +4756,8 @@ msgid ""
 "\n"
 "E-invoice implementation for Saudi Arabia; Integration with ZATCA\n"
 msgstr ""
+"\n"
+"تطبيق نظام الفواتير الإلكترونية في المملكة العربية السعودية؛ التكامل مع هيئة الزكاة والضريبة والجمارك\n"
 
 #. module: base
 #: model:ir.module.module,description:base.module_l10n_sa_edi_pos
@@ -12386,6 +12388,8 @@ msgid ""
 "\n"
 "This module provides the point of sale function of the Odoo Mobile App.\n"
 msgstr ""
+"\n"
+"يوفر هذا التطبيق خاصية نقطة البيع لتطبيق أودو على الهاتف المحمول.\n"
 
 #. module: base
 #: model:ir.module.module,description:base.module_l10n_es_edi_tbai
@@ -13979,6 +13983,8 @@ msgid ""
 "<span invisible=\"evaluation_type != 'value' or update_field_type in "
 "['one2many', 'many2many']\">to</span>"
 msgstr ""
+"<span invisible=\"evaluation_type != 'value' or update_field_type in "
+"['one2many', 'many2many']\">إلى</span>"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_server_action_form
@@ -13986,6 +13992,8 @@ msgid ""
 "<span invisible=\"evaluation_type != 'value' or update_field_type not in "
 "['one2many', 'many2many']\">by</span>"
 msgstr ""
+"<span invisible=\"evaluation_type != 'value' or update_field_type not in "
+"['one2many', 'many2many']\">بواسطة</span> "
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_partner_form
@@ -14582,7 +14590,7 @@ msgstr "A payment provider covering India."
 #. module: base
 #: model:ir.module.module,summary:base.module_payment_nuvei
 msgid "A payment provider covering Latin America."
-msgstr ""
+msgstr "A payment provider covering Latin America."
 
 #. module: base
 #: model:ir.module.module,summary:base.module_payment_mercado_pago
@@ -15448,7 +15456,7 @@ msgstr "مكون إضافي لتطبيق الطلب الذاتي يتيح للع
 #. module: base
 #: model:ir.module.module,description:base.module_tests
 msgid "Addons to test Odoo industries code."
-msgstr ""
+msgstr "مكونات إضافية لاختبار الكود الخاص بقطاعات الأعمال في أودو. "
 
 #. module: base
 #. odoo-python
@@ -28616,7 +28624,7 @@ msgstr ""
 #. module: base
 #: model:ir.module.module,summary:base.module_pos_pine_labs
 msgid "Integrate your POS with Pine Labs payment terminals"
-msgstr ""
+msgstr "قم بدمج نقاط البيع الخاصة بك مع أجهزة دفع Pine Labs "
 
 #. module: base
 #: model:ir.module.module,summary:base.module_pos_paytm
@@ -30281,7 +30289,7 @@ msgstr "تطبيق يربط بين pos_sale و l10n_be "
 #. module: base
 #: model:ir.module.module,summary:base.module_pos_event_sale
 msgid "Link module between pos_sale and pos_event"
-msgstr ""
+msgstr "تطبيق يربط بين pos_sale و pos_event "
 
 #. module: base
 #: model:ir.module.module,summary:base.module_pos_sale_loyalty
@@ -31355,7 +31363,7 @@ msgstr "المراسلات الجماعية عن طريق الرسائل الن�
 #: model:ir.module.module,description:base.module_hr_recruitment_sms
 #: model:ir.module.module,summary:base.module_hr_recruitment_sms
 msgid "Mass mailing sms to job applicants"
-msgstr ""
+msgstr "المراسلات الجماعية عن طريق الرسائل النصية القصيرة للمتقدمين للوظائف "
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_mrp_mps
@@ -33827,7 +33835,7 @@ msgstr "التطبيق الأساسي لأودو على الهاتف المحم�
 #. module: base
 #: model:ir.module.module,summary:base.module_pos_mobile
 msgid "Odoo Mobile Point of Sale module"
-msgstr ""
+msgstr "تطبيق نقطة بيع أودو على الهاتف المحمول "
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_odoo_partner
@@ -39945,6 +39953,9 @@ msgid ""
 " Please install the new \"DHL Express Shipping\" module and uninstall this "
 "one as soon as possible."
 msgstr ""
+"هذا هو التكامل القديم مع DHL Express الذي لم يعد مدعوماً بعد الآن. يرجى "
+"تثبيت تطبيق \"DHL Express Shipping\" الجديد وإلغاء تثبيت هذا التطبيق في أقرب"
+" وقت ممكن. "
 
 #. module: base
 #: model:ir.module.module,description:base.module_delivery_fedex_rest
@@ -43199,6 +43210,8 @@ msgid ""
 "This module allows connection to CodaBox\n"
 "and automatically imports CODA and SODA statements in Odoo.\n"
 msgstr ""
+"يتيح لك هذا التطبيق الاتصال بـ CodaBox \n"
+"واستيراد بيانات CODA و SODA تلقائياً في أودو. \n"
 
 #. module: base
 #: model:ir.module.module,description:base.module_account_online_payment
@@ -43837,7 +43850,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/image.py:0
 msgid "Too large image (above %sMpx), reduce the image size."
-msgstr ""
+msgstr "الصورة كبيرة جداً (أعلى من %sميغابكسل)، قم بتصغير حجم الصورة. "
 
 #. module: base
 #. odoo-python

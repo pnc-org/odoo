@@ -31,6 +31,7 @@
 # Hed Shefer <hed@laylinetech.com>, 2025
 # Martin Trigaux, 2025
 # Ha Ketem <haketem@gmail.com>, 2025
+# Eyal arkush, 2025
 # or balmas, 2025
 # 
 msgid ""
@@ -3300,7 +3301,7 @@ msgstr "תאריך יעד "
 #. odoo-javascript
 #: code:addons/mail/static/src/core/web/activity.xml:0
 msgid "Due in"
-msgstr ""
+msgstr "מתוזמן ל"
 
 #. module: mail
 #. odoo-javascript
@@ -11466,7 +11467,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/mail/static/src/discuss/gif_picker/common/gif_picker.xml:0
 msgid "list"
-msgstr ""
+msgstr "רשימה"
 
 #. module: mail
 #. odoo-javascript
