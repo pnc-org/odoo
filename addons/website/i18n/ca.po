@@ -30,9 +30,9 @@
 # marcescu, 2024
 # Josep Anton Belchi, 2024
 # Wil Odoo, 2025
-# EstudiTIC - estuditic.com <odoo@estuditic.com>, 2025
 # Santiago Payà <santiagopim@gmail.com>, 2025
 # Noemi Pla, 2025
+# EstudiTIC - estuditic.com <odoo@estuditic.com>, 2025
 # 
 msgid ""
 msgstr ""
@@ -40,7 +40,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-06-13 18:36+0000\n"
 "PO-Revision-Date: 2024-09-25 09:42+0000\n"
-"Last-Translator: Noemi Pla, 2025\n"
+"Last-Translator: EstudiTIC - estuditic.com <odoo@estuditic.com>, 2025\n"
 "Language-Team: Catalan (https://app.transifex.com/odoo/teams/41243/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -388,22 +388,22 @@ msgstr "/contacte"
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_key_images
 msgid "01"
-msgstr ""
+msgstr "01"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_key_images
 msgid "02"
-msgstr ""
+msgstr "02"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_key_images
 msgid "03"
-msgstr ""
+msgstr "03"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_key_images
 msgid "04"
-msgstr ""
+msgstr "4"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_map_options
@@ -10511,7 +10511,7 @@ msgstr "Els nostres menús"
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.new_page_template_about_s_three_columns
 msgid "Our Mission"
-msgstr ""
+msgstr "La nostra missió"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.new_page_template_landing_3_s_text_block_h2
@@ -10527,7 +10527,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:website.new_page_template_landing_2_s_text_block_h2
 #: model_terms:ir.ui.view,arch_db:website.new_page_template_services_s_text_block_h1
 msgid "Our Services"
-msgstr ""
+msgstr "Els nostres serveis"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.new_page_template_about_full_s_image_text
@@ -11105,12 +11105,12 @@ msgstr "Pla"
 #. module: website
 #: model:ir.model.fields,field_description:website.field_res_config_settings__has_plausible_shared_key
 msgid "Plausible Analytics"
-msgstr "Analítica plasible"
+msgstr "Analítica Plausible"
 
 #. module: website
 #: model:ir.model.fields,field_description:website.field_website__plausible_shared_key
 msgid "Plausible Shared Key"
-msgstr "Clau compartida plasible"
+msgstr "Clau compartida Plausible"
 
 #. module: website
 #: model:ir.model.fields,field_description:website.field_website__plausible_site
@@ -11125,7 +11125,7 @@ msgstr "Lloc pla (p. ex. domini.com)"
 #. module: website
 #: model:ir.model.fields,field_description:website.field_res_config_settings__plausible_shared_key
 msgid "Plausible auth Key"
-msgstr "Clau d'autenticació plasible"
+msgstr "Clau d'autenticació Plausible"
 
 #. module: website
 #. odoo-javascript
@@ -15956,6 +15956,8 @@ msgid ""
 "Your Dynamic Snippet will be displayed here... This message is displayed "
 "because you did not provide both a filter and a template to use.<br/>"
 msgstr ""
+"El teu fragment dinàmic apareixerà aquí... Aquest missatge es mostra perquè "
+"no has proporcionat un filtre ni una plantilla a utilitzar.<br/>"
 
 #. module: website
 #. odoo-javascript

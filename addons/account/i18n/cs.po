@@ -17,16 +17,16 @@
 # Wil Odoo, 2025
 # Stanislav Kurinec, 2025
 # Thomas Becquevort, 2025
-# Marta Wacławek, 2025
 # Jan Mandík, 2025
+# Marta Wacławek, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-13 18:36+0000\n"
+"POT-Creation-Date: 2025-06-20 18:39+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Jan Mandík, 2025\n"
+"Last-Translator: Marta Wacławek, 2025\n"
 "Language-Team: Czech (https://app.transifex.com/odoo/teams/41243/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -4732,7 +4732,7 @@ msgstr "Fiskální kód země společnosti"
 #. module: account
 #: model:ir.model.fields,field_description:account.field_res_company__company_registry_placeholder
 msgid "Company Registry Placeholder"
-msgstr ""
+msgstr "Zástupný znak firemního rejstříku"
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_move_line__is_storno
@@ -7700,6 +7700,9 @@ msgid ""
 "target of the carryover for this expression (on a _carryover_*-labeled "
 "expression), in case it is different from the parent line."
 msgstr ""
+"Vzorec ve tvaru line_code.expression_label. Umožňuje nastavit cíl přesunu "
+"zůstatku pro danou rovnici (jako _carryover_* - pojmenovaný výraz), v "
+"případě, že je rozdílný od nadřazeného řádku."
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.view_account_group_form
@@ -15453,6 +15456,8 @@ msgid ""
 "The date the Global Lock Date is set to by this exception. If the lock date "
 "is not changed it is set to the maximal date."
 msgstr ""
+"Datum, na které je globální datum uzamčení nastaveno touto výjimkou. Pokud "
+"datum uzamčení není změněno, je nastaveno na maximální datum."
 
 #. module: account
 #: model:ir.model.fields,help:account.field_account_lock_exception__purchase_lock_date
@@ -15460,6 +15465,8 @@ msgid ""
 "The date the Purchase Lock Date is set to by this exception. If the lock "
 "date is not changed it is set to the maximal date."
 msgstr ""
+"Datum, na které je podle této výjimky nastaveno datum blokování nákupu. "
+"Pokud datum blokování není změněno, je nastaveno na maximální datum."
 
 #. module: account
 #: model:ir.model.fields,help:account.field_account_lock_exception__sale_lock_date
@@ -15467,6 +15474,8 @@ msgid ""
 "The date the Sale Lock Date is set to by this exception. If the lock date is"
 " not changed it is set to the maximal date."
 msgstr ""
+"Datum, na které je podle této výjimky nastaveno datum blokování prodeje. "
+"Pokud datum blokování není změněno, je nastaveno na maximální datum."
 
 #. module: account
 #: model:ir.model.fields,help:account.field_account_lock_exception__tax_lock_date
@@ -15737,6 +15746,9 @@ msgid ""
 " Please change the journal entry date or the following lock dates to "
 "proceed: %(lock_date_info)s."
 msgstr ""
+"Operace je odmítnuta, protože by měla dopad na již vydané daňové přiznání. "
+"Změňte prosím datum účetního záznamu nebo následující datum uzamčení daní v "
+"nastavení %(lock_date_info)s, abyste mohli pokračovat."
 
 #. module: account
 #: model:ir.model.fields,help:account.field_account_bank_statement_line__foreign_currency_id
@@ -16735,6 +16747,9 @@ msgid ""
 "manually validated. You should go on the partner bank account of %(partner)s"
 " in order to validate it."
 msgstr ""
+"Pro vytvoření plateb s %(method_name)s musí být bankovní účet příjemce "
+"manuálně potvrzen. Měli byste jít na bankovní účet partnera %(partner)s a "
+"potvrdit jej."
 
 #. module: account
 #. odoo-python
@@ -18116,7 +18131,9 @@ msgstr ""
 #. module: account
 #. odoo-python
 #: code:addons/account/wizard/account_payment_register.py:0
-msgid "You can't create payments for entries belonging to different branches."
+msgid ""
+"You can't create payments for entries belonging to different branches "
+"without access to parent company."
 msgstr ""
 
 #. module: account
@@ -18390,6 +18407,9 @@ msgid ""
 "unless the name is removed or set to \"/\". This might create a gap in the "
 "sequence."
 msgstr ""
+"Deník pohybu účtu nelze upravit, pokud již byl jednou zaúčtován, ledaže by "
+"bylo jméno odstraněno nebo nastaveno na „/“. Tím by však mohlo dojít k "
+"vytvoření mezery v sekvenci."
 
 #. module: account
 #. odoo-python
@@ -18399,6 +18419,9 @@ msgid ""
 "assigned, unless the name is removed or set to \"/\". This might create a "
 "gap in the sequence."
 msgstr ""
+"Deník pohybu účtu s přiděleným pořadovým číslem nelze upravit, ledaže by "
+"bylo jméno odstraněno nebo nastaveno na „/“. Tím by však mohlo dojít k "
+"vytvoření mezery v sekvenci."
 
 #. module: account
 #. odoo-python

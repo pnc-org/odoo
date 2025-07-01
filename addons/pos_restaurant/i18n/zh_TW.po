@@ -3,7 +3,7 @@
 # 	* pos_restaurant
 # 
 # Translators:
-# Wil Odoo, 2024
+# Wil Odoo, 2025
 # Tony Ng, 2025
 # 
 msgid ""
@@ -636,7 +636,7 @@ msgstr "午餐壽司卷 18 件"
 #. module: pos_restaurant
 #: model:product.template,name:pos_restaurant.pos_food_salmon_product_template
 msgid "Lunch Salmon 20pc"
-msgstr "午餐鮭魚 20pc"
+msgstr "午餐鮭魚 20 件"
 
 #. module: pos_restaurant
 #: model:product.template,name:pos_restaurant.pos_food_temaki_product_template
@@ -862,7 +862,7 @@ msgstr "POS付款"
 #. module: pos_restaurant
 #: model:ir.model,name:pos_restaurant.model_pos_session
 msgid "Point of Sale Session"
-msgstr "POS營業點"
+msgstr "POS 操作時段"
 
 #. module: pos_restaurant
 #: model:ir.model.fields,field_description:pos_restaurant.field_restaurant_floor__pos_config_ids
@@ -1142,7 +1142,7 @@ msgstr "表格"
 #. odoo-javascript
 #: code:addons/pos_restaurant/static/src/overrides/components/receipt_header_patch.js:0
 msgid "Table %(number)s"
-msgstr ""
+msgstr "%(number)s 號桌"
 
 #. module: pos_restaurant
 #. odoo-javascript
