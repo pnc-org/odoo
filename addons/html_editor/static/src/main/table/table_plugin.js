@@ -1,7 +1,7 @@
 import { Plugin } from "@html_editor/plugin";
 import { baseContainerGlobalSelector } from "@html_editor/utils/base_container";
 import { isBlock } from "@html_editor/utils/blocks";
-import { fillShrunkPhrasingParent, removeClass, splitTextNode } from "@html_editor/utils/dom";
+import { fillShrunkPhrasingParent, removeClass } from "@html_editor/utils/dom";
 import {
     getDeepestPosition,
     isProtected,
@@ -10,7 +10,7 @@ import {
 } from "@html_editor/utils/dom_info";
 import { ancestors, closestElement, descendants, lastLeaf } from "@html_editor/utils/dom_traversal";
 import { parseHTML } from "@html_editor/utils/html";
-import { DIRECTIONS, leftPos, rightPos, nodeSize } from "@html_editor/utils/position";
+import { leftPos, rightPos, nodeSize } from "@html_editor/utils/position";
 import { withSequence } from "@html_editor/utils/resource";
 import { findInSelection } from "@html_editor/utils/selection";
 import { getColumnIndex, getRowIndex } from "@html_editor/utils/table";
@@ -164,22 +164,6 @@ export class TablePlugin extends Plugin {
 
     _insertTable({ rows = 2, cols = 2 } = {}) {
         const newTable = this.createTable({ rows, cols });
-        let sel = this.dependencies.selection.getEditableSelection();
-        if (!sel.isCollapsed) {
-            this.dependencies.delete.deleteSelection();
-        }
-        while (!isBlock(sel.anchorNode)) {
-            const anchorNode = sel.anchorNode;
-            const isTextNode = anchorNode.nodeType === Node.TEXT_NODE;
-            const newAnchorNode = isTextNode
-                ? splitTextNode(anchorNode, sel.anchorOffset, DIRECTIONS.LEFT) + 1 && anchorNode
-                : this.dependencies.split.splitElement(anchorNode, sel.anchorOffset).shift();
-            const newPosition = rightPos(newAnchorNode);
-            sel = this.dependencies.selection.setSelection(
-                { anchorNode: newPosition[0], anchorOffset: newPosition[1] },
-                { normalize: false }
-            );
-        }
         const [table] = this.dependencies.dom.insert(newTable);
         return table;
     }
@@ -529,14 +513,18 @@ export class TablePlugin extends Plugin {
                 // This behavior can cause the original selection (where the selection started) to be lost.
                 // To solve the issue we merge the ranges of the selection together the first time we find
                 // selection.rangeCount > 1.
-                const [anchorNode, anchorOffset] = getDeepestPosition(
+                let [anchorNode, anchorOffset] = getDeepestPosition(
                     selection.getRangeAt(0).startContainer,
                     selection.getRangeAt(0).startOffset
                 );
-                const [focusNode, focusOffset] = getDeepestPosition(
+                let [focusNode, focusOffset] = getDeepestPosition(
                     selection.getRangeAt(selection.rangeCount - 1).startContainer,
                     selection.getRangeAt(selection.rangeCount - 1).startOffset
                 );
+                if (this.selectionDirection === "backward") {
+                    [anchorNode, focusNode] = [focusNode, anchorNode];
+                    [anchorOffset, focusOffset] = [focusOffset, anchorOffset];
+                }
                 this.dependencies.selection.setSelection({
                     anchorNode,
                     anchorOffset,
@@ -559,6 +547,7 @@ export class TablePlugin extends Plugin {
                     focusNode: ev.target,
                     focusOffset: 0,
                 });
+                this.selectionDirection = selection.direction;
                 return true;
             }
         }
@@ -616,12 +605,14 @@ export class TablePlugin extends Plugin {
     onMousedown(ev) {
         this._currentMouseState = ev.type;
         this._lastMousedownPosition = [ev.x, ev.y];
-        this.deselectTable();
         if (this.isPointerInsideCell(ev)) {
             this.editable.addEventListener("mousemove", this.onMousemove);
             const currentSelection = this.dependencies.selection.getEditableSelection();
             // disable dragging on table
-            this.dependencies.selection.setCursorStart(currentSelection.anchorNode);
+            if (closestElement(ev.target, "td.o_selected_td")) {
+                this.dependencies.selection.setCursorStart(currentSelection.anchorNode);
+            }
+            this.deselectTable();
         }
     }
 

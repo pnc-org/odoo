@@ -236,7 +236,7 @@ class PosConfig(models.Model):
             delete_record_ids[model] = browsed.filtered(lambda r: not r.exists()).ids
             # Cancelled orders must be forced deleted from the user interface.
             if model == "pos.order":
-                delete_record_ids[model] += browsed.filtered(lambda r: r.state == "cancel").ids
+                delete_record_ids[model] += browsed.exists().filtered(lambda r: r.state == "cancel").ids
 
         pos_order_data = dynamic_records.get('pos.order') or self.env['pos.order']
         data = pos_order_data.read_pos_data([], self.id)
@@ -841,7 +841,7 @@ class PosConfig(models.Model):
         id_to_index = {pid: index for index, pid in enumerate(product_ids)}
         products = products.sorted(key=lambda p: id_to_index[p.id])
         product_combo = products.filtered(lambda p: p['type'] == 'combo')
-        product_in_combo = product_combo.combo_ids.combo_item_ids.product_id
+        product_in_combo = product_combo.combo_ids.combo_item_ids.product_id.filtered(lambda p: p.active)
         products_available = products | product_in_combo
         return products_available.read(fields, load=False)
 

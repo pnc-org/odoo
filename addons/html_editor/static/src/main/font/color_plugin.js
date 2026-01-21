@@ -7,10 +7,12 @@ import {
     TEXT_CLASSES_REGEX,
     BG_CLASSES_REGEX,
     RGBA_REGEX,
+    hasTextColorClass,
 } from "@html_editor/utils/color";
 import { fillEmpty, unwrapContents } from "@html_editor/utils/dom";
 import {
     isEmptyBlock,
+    isEmptyTextNode,
     isRedundantElement,
     isTextNode,
     isWhitespace,
@@ -225,8 +227,8 @@ export class ColorPlugin extends Plugin {
         if (selection.isCollapsed) {
             let zws;
             if (
-                selection.anchorNode.nodeType !== Node.TEXT_NODE &&
-                selection.anchorNode.textContent !== "\u200b"
+                selection.anchorNode.nodeType === Node.TEXT_NODE &&
+                selection.anchorNode.textContent === "\u200b"
             ) {
                 zws = selection.anchorNode;
             } else {
@@ -275,7 +277,8 @@ export class ColorPlugin extends Plugin {
                         node,
                         '[style*="color"], [style*="background-color"], [style*="background-image"]'
                     ) ||
-                    closestElement(node, "span");
+                    closestElement(node, "span") ||
+                    closestElement(node, (node) => hasTextColorClass(node, mode));
 
                 const faNodes = font?.querySelectorAll(".fa");
                 if (faNodes && Array.from(faNodes).some((faNode) => faNode.contains(node))) {
@@ -294,7 +297,10 @@ export class ColorPlugin extends Plugin {
                 if (
                     font &&
                     font.nodeName !== "T" &&
-                    (font.nodeName !== "SPAN" || font.style[mode] || font.style.backgroundImage) &&
+                    (font.nodeName !== "SPAN" ||
+                        font.style[mode] ||
+                        font.style.backgroundImage ||
+                        hasTextColorClass(font, mode)) &&
                     (isColorGradient(color) ||
                         color === "" ||
                         !hasInlineGradient ||
@@ -330,6 +336,18 @@ export class ColorPlugin extends Plugin {
                             selectedChildren,
                             splitnode
                         );
+                        // After splitting we need to clear the new nodes created by
+                        // `splitElement` that contains only empty text nodes.
+                        // We also need to update the outer cursor.
+                        for (const child of font.parentElement.children) {
+                            if (
+                                child.childNodes.length &&
+                                [...child.childNodes].every((node) => isEmptyTextNode(node))
+                            ) {
+                                cursors.update(callbacksForCursorUpdate.remove(child));
+                                child.remove();
+                            }
+                        }
                         if (isGradientBeingUpdated) {
                             const classRegex =
                                 mode === "color" ? TEXT_CLASSES_REGEX : BG_CLASSES_REGEX;

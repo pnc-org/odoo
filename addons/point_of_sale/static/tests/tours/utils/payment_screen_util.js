@@ -344,7 +344,7 @@ export function clickPartnerButton() {
         },
         {
             content: "partner screen is shown",
-            trigger: `.modal ${PartnerList.clickPartner().trigger}`,
+            trigger: `${PartnerList.clickPartner().trigger}`,
         },
     ];
 }
@@ -358,4 +358,13 @@ export function shippingLaterHighlighted() {
         content: "Shipping later button is highlighted",
         trigger: ".button:contains('Ship Later').highlight",
     };
+}
+
+export function isInvoiceButtonUnchecked() {
+    return [
+        {
+            content: "check invoice button is not highlighted",
+            trigger: ".js_invoice:not(.highlight)",
+        },
+    ];
 }
