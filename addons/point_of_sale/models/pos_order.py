@@ -681,14 +681,27 @@ class PosOrder(models.Model):
         return currency.round(amount) if currency else amount
 
     def _get_partner_bank_id(self):
-        bank_partner_id = False
+        self.ensure_one()
+        partner_bank_id = False
+
+        def _first_allowed(bank_ids):
+            return bank_ids.filtered(lambda b: b.allow_out_payment)[:1]
+
+        # Case 1: refund / negative amount → customer bank
         if self.amount_total <= 0 and self.partner_id.bank_ids:
-            bank_partner_id = self.partner_id.bank_ids[0].id
-        elif self.amount_total >= 0 and self.payment_ids and self.payment_ids[0].payment_method_id.journal_id.bank_account_id:
-            bank_partner_id = self.payment_ids[0].payment_method_id.journal_id.bank_account_id.id
-        elif self.amount_total >= 0 and self.company_id.partner_id.bank_ids:
-            bank_partner_id = self.company_id.partner_id.bank_ids[0].id
-        return bank_partner_id
+            partner_bank_id = _first_allowed(self.partner_id.bank_ids)
+
+        # Case 2: positive amount → payment journal bank
+        elif self.amount_total >= 0 and self.payment_ids:
+            journal_bank = self.payment_ids[0].payment_method_id.journal_id.bank_account_id
+            if journal_bank and journal_bank.allow_out_payment:
+                partner_bank_id = journal_bank
+
+        # Case 3: fallback → company bank
+        if not partner_bank_id and self.amount_total >= 0 and self.company_id.partner_id.bank_ids:
+            partner_bank_id = _first_allowed(self.company_id.partner_id.bank_ids)
+
+        return partner_bank_id.id if partner_bank_id else False
 
     def _create_invoice(self, move_vals):
         self.ensure_one()
@@ -697,7 +710,7 @@ class PosOrder(models.Model):
             .with_context(default_move_type=move_vals['move_type'], linked_to_pos=True)\
             .create(move_vals)
 
-        if self.config_id.cash_rounding:
+        if self.config_id.cash_rounding and invoice.invoice_cash_rounding_id:
             line_ids_commands = []
             rate = invoice.invoice_currency_rate
             sign = invoice.direction_sign
@@ -780,7 +793,7 @@ class PosOrder(models.Model):
             'pos_refunded_invoice_ids': pos_refunded_invoice_ids,
             'pos_order_ids': self.ids,
             'journal_id': self.session_id.config_id.invoice_journal_id.id,
-            'move_type': 'out_invoice' if self.amount_total >= 0 else 'out_refund',
+            'move_type': 'out_invoice' if float_compare(self.amount_total, 0, precision_rounding=self.currency_id.rounding) >= 0 else 'out_refund',
             'ref': self.name,
             'partner_id': self.partner_id.address_get(['invoice'])['invoice'],
             'partner_shipping_id': self.partner_id.address_get(['delivery'])['delivery'],
@@ -791,11 +804,14 @@ class PosOrder(models.Model):
             'fiscal_position_id': self.fiscal_position_id.id,
             'invoice_line_ids': self._prepare_invoice_lines(),
             'invoice_payment_term_id': False,
-            'invoice_cash_rounding_id': self.config_id.rounding_method.id,
         }
         if self.refunded_order_id.account_move:
             vals['ref'] = _('Reversal of: %s', self.refunded_order_id.account_move.name)
             vals['reversed_entry_id'] = self.refunded_order_id.account_move.id
+
+        if self.config_id.cash_rounding and (not self.config_id.only_round_cash_method or any(p.payment_method_id.is_cash_count for p in self.payment_ids)):
+            vals['invoice_cash_rounding_id'] = self.config_id.rounding_method.id
+
         if self.floating_order_name:
             vals.update({'narration': self.floating_order_name})
         return vals
@@ -1168,6 +1184,8 @@ class PosOrder(models.Model):
 
     def _create_order_picking(self):
         self.ensure_one()
+        if self.picking_ids:
+            return
         if self.shipping_date:
             self.sudo().lines._launch_stock_rule_from_pos_order_lines()
         else:
@@ -1181,7 +1199,8 @@ class PosOrder(models.Model):
                     destination_id = picking_type.default_location_dest_id.id
 
                 pickings = self.env['stock.picking']._create_picking_from_pos_order_lines(destination_id, self.lines, picking_type, self.partner_id)
-                pickings.write({'pos_session_id': self.session_id.id, 'pos_order_id': self.id, 'origin': self.name})
+                all_pickings = pickings | pickings.backorder_ids
+                all_pickings.write({'pos_session_id': self.session_id.id, 'pos_order_id': self.id, 'origin': self.name})
 
     def add_payment(self, data):
         """Create a new payment for the order"""
@@ -1723,7 +1742,7 @@ class PosOrderLine(models.Model):
         if fiscal_position:
             account = fiscal_position.map_account(account)
 
-        is_refund_order = line.order_id.amount_total < 0.0
+        is_refund_order = float_compare(line.order_id.amount_total, 0, precision_rounding=self.order_id.currency_id.rounding) < 0.0
         is_refund_line = line.qty * line.price_unit < 0
 
         product_name = line.product_id \

@@ -5189,6 +5189,12 @@ class TestMrpOrder(TestMrpCommon):
         child_production_2, parent_production_2 = self.env['mrp.production'].search([('product_id', 'in', (parent + child).ids), ('id', 'not in', [parent_production.id, child_production.id])], order='id desc', limit=2)
         self.assertEqual(grandparent_production._get_children(), (parent_production | parent_production_2))
         self.assertEqual(parent_production_2._get_children(), child_production_2)
+        # Cancel the grandparent production, this should log a cancellation activity on the parent productions.
+        grandparent_production.action_cancel()
+        self.assertRegex(
+            parent_production.activity_ids[-1].note,
+            fr"Exception\(s\) occurred on the manufacturing order\(s\):[\s\S]*{grandparent_production.name}"
+        )
 
     def test_mo_modify_date_with_manuf_lead_time(self):
         """ A direct write on MrpProduction.date_start should result in that exact date value being
@@ -5374,6 +5380,46 @@ class TestMrpOrder(TestMrpCommon):
         mo_form.product_qty = 10
         mo = mo_form.save()
         self.assertEqual(len(mo.workorder_ids), 1)
+
+    def test_workorder_update_based_on_bom_and_qty_onchanges(self):
+        """Test that work orders are updated rather than duplicated when
+        switching BoMs and then modifying the quantity in the draft form.
+        """
+        product = self.env['product.product'].create({
+            'name': 'Test Finished Product',
+            'is_storable': True,
+        })
+        workcenter = self.env['mrp.workcenter'].create({'name': 'Assembly Line'})
+        operation_vals = [Command.create({
+            'name': 'Manual Assembly',
+            'workcenter_id': workcenter.id,
+            'time_cycle': 60,
+            'sequence': 1,
+        })]
+        bom_empty, bom_with_ops = self.env['mrp.bom'].create([{
+            'product_tmpl_id': product.product_tmpl_id.id,
+            'product_qty': 1.0,
+            'operation_ids': vals,
+        } for vals in ([], operation_vals)])
+
+        mo = self.env["mrp.production"].create({
+            "product_id": product.id,
+            "bom_id": bom_empty.id,
+            "product_uom_id": product.uom_id.id,
+            "product_qty": 1.0,
+        })
+
+        with Form(mo) as mo_form:
+            mo_form.bom_id = bom_with_ops
+            self.assertEqual(len(mo_form.workorder_ids), 1)
+            mo_form.product_qty = 10.0
+            self.assertEqual(len(mo_form.workorder_ids), 1)
+            mo_form.bom_id = bom_empty
+            self.assertEqual(len(mo_form.workorder_ids), 0)
+            mo_form.bom_id = bom_with_ops
+            self.assertEqual(len(mo_form.workorder_ids), 1)
+            mo_form.bom_id = self.env['mrp.bom']
+            self.assertEqual(len(mo_form.workorder_ids), 0)
 
 
 @tagged('-at_install', 'post_install')

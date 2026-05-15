@@ -251,7 +251,7 @@ export class PosOrder extends Base {
         const taxTotals = this.taxTotals;
 
         const order_rounding = taxTotals.order_rounding;
-        const order_change = this.get_change();
+        const order_change = -this.get_change();
 
         return {
             orderlines: this.getSortedOrderlines().map((l) =>
@@ -719,7 +719,10 @@ export class PosOrder extends Base {
     }
 
     get_total_with_tax() {
-        return this.taxTotals.order_sign * this.taxTotals.order_total;
+        return roundPrecision(
+            this.taxTotals.order_sign * this.taxTotals.order_total,
+            this.currency.rounding
+        );
     }
 
     get_total_without_tax() {
@@ -893,7 +896,7 @@ export class PosOrder extends Base {
         if (this.config.cash_rounding) {
             remaining = this.getRoundedRemaining(this.config.rounding_method, remaining);
         }
-        return -order_sign * remaining;
+        return roundPrecision(-order_sign * remaining, this.currency.rounding);
     }
 
     get_due() {
@@ -1092,7 +1095,7 @@ export class PosOrder extends Base {
                 name: pl.payment_method_id.name,
                 amount: formatCurrency(pl.get_amount(), this.currency),
             })),
-            change: this.get_change() && formatCurrency(this.get_change(), this.currency),
+            change: this.get_change() && formatCurrency(-this.get_change(), this.currency),
             generalNote: this.general_note || "",
             qrPaymentData: toRaw(this.get_selected_paymentline()?.qrPaymentData),
         };

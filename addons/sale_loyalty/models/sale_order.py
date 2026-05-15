@@ -250,6 +250,7 @@ class SaleOrder(models.Model):
                 continue
             tax_data = line.tax_id.compute_all(
                 line.price_unit,
+                currency=line.currency_id,
                 quantity=line.product_uom_qty,
                 product=line.product_id,
                 partner=line.order_partner_id,
@@ -1392,7 +1393,10 @@ class SaleOrder(models.Model):
         coupon = False
         check_date = self._get_confirmed_tx_create_date()
 
-        if rule in self.code_enabled_rule_ids:
+        if (
+            rule in self.code_enabled_rule_ids
+            and program in self.order_line.filtered("is_reward_line").reward_id.program_id
+        ):
             return {'error': _('This promo code is already applied.')}
 
         # No trigger was found from the code, try to find a coupon

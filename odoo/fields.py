@@ -1986,7 +1986,7 @@ class _String(Field[str | typing.Literal[False]]):
 
         # not dirty fields
         if not dirty:
-            if self.compute and self.inverse:
+            if self.compute and self.inverse and any(records._ids):
                 # invalidate the values in other languages to force their recomputation
                 values = [{lang: cache_value} for _id in records._ids]
                 cache.update_raw(records, self, values, dirty=False)
@@ -2778,7 +2778,7 @@ class Image(Binary):
         if self.readonly and (
             (not self.max_width and not self.max_height)
             or (
-                self.related_field
+                isinstance(self.related_field, Image)
                 and self.max_width == self.related_field.max_width
                 and self.max_height == self.related_field.max_height
             )
