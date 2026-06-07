@@ -215,6 +215,10 @@ class AccountMove(models.Model):
         fields_list.append('l10n_it_edi_attachment_file')
         return fields_list
 
+    def _should_detach_attachments(self):
+        # EXTENDS account
+        return self.l10n_it_edi_is_self_invoice or super()._should_detach_attachments()
+
     # -------------------------------------------------------------------------
     # Business actions
     # -------------------------------------------------------------------------
@@ -1492,7 +1496,10 @@ class AccountMove(models.Model):
         elif amount := get_float(element, './/Importo'):
             percentage = get_float(element, './/Aliquota')
             if not percentage and (tax_amount := get_float(element, './/Imposta')):
-                percentage = round(tax_amount / (amount - tax_amount) * 100)
+                if amount == tax_amount:
+                    percentage = 0.0
+                else:
+                    percentage = round(tax_amount / (amount - tax_amount) * 100)
             move_line.price_unit = amount / (1 + percentage / 100)
 
         move_line.tax_ids = [Command.clear()]

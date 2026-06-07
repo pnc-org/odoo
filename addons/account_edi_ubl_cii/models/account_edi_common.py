@@ -1,3 +1,4 @@
+from datetime import datetime
 from markupsafe import Markup
 
 from odoo import _, api, models
@@ -8,7 +9,6 @@ from odoo.tools.float_utils import float_round
 from odoo.tools.translate import _lt
 from odoo.tools.misc import clean_context, formatLang, html_escape
 from odoo.tools.xml_utils import find_xml_value
-from datetime import datetime
 
 # -------------------------------------------------------------------------
 # UNIT OF MEASURE
@@ -64,7 +64,7 @@ EAS_MAPPING = {
     'EE': {'9931': 'vat'},
     'ES': {'9920': 'vat'},
     'FI': {'0216': None, '0213': 'vat'},
-    'FR': {'0009': 'siret', '9957': 'vat', '0002': None},
+    'FR': {'0225': 'peppol_endpoint', '0009': 'siret', '9957': 'vat', '0002': None},  # `peppol_endpoint` used as place holder for custom logic via `_get_peppol_endpoint_value`
     'SG': {'0195': 'l10n_sg_unique_entity_number'},
     'GB': {'9932': 'vat'},
     'GR': {'9933': 'vat'},
@@ -137,18 +137,6 @@ COCONTRACTANT_DEFAULT_NOTE = _lt('Reverse charge: In the absence of a written ob
                               'If this condition is not met, the customer will be liable for the payment of the tax, interest, '
                               'and penalties due in relation to this condition.')
 
-# -------------------------------------------------------------------------
-# SUPPORTED FILE TYPES FOR IMPORT
-# -------------------------------------------------------------------------
-SUPPORTED_FILE_TYPES = {
-    'application/pdf': '.pdf',
-    'application/vnd.oasis.opendocument.spreadsheet': '.ods',
-    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': '.xlsx',
-    'image/jpeg': '.jpeg',
-    'image/png': '.png',
-    'text/csv': '.csv',
-}
-
 
 class FloatFmt(float):
     """ A float with a given precision.
@@ -164,29 +152,29 @@ class FloatFmt(float):
     def __str__(self):
         if not isinstance(self.min_dp, int) or (self.max_dp is not None and not isinstance(self.max_dp, int)):
             return "<FloatFmt()>"
-        self_float = float(self)
-        min_dp_int = int(self.min_dp)
+        # why do we round ?
+        # imagine we have: 0.499 and max_dp = 2.
+        # The best representation for 0.499 with max_dp = 2 is 0.50 not 0.49
+        # rounding with max_dp precision ensure we have the best representation with max_dp decimal places.
+        self_float = float_round(float(self), self.min_dp if self.max_dp is None else self.max_dp)
         if self.max_dp is None:
-            return float_repr(self_float, min_dp_int)
+            return float_repr(self_float, self.min_dp)
         else:
             # Format the float to between self.min_dp and self.max_dp decimal places.
             # We start by formatting to self.max_dp, and then remove trailing zeros,
             # but always keep at least self.min_dp decimal places.
-            max_dp_int = int(self.max_dp)
-            amount_max_dp = float_repr(self_float, max_dp_int)
+            amount_max_dp = float_repr(self_float, self.max_dp)
             num_trailing_zeros = len(amount_max_dp) - len(amount_max_dp.rstrip('0'))
-            return float_repr(self_float, max(max_dp_int - num_trailing_zeros, min_dp_int))
+            return float_repr(self_float, max(self.max_dp - num_trailing_zeros, self.min_dp))
 
     def __repr__(self):
         if not isinstance(self.min_dp, int) or (self.max_dp is not None and not isinstance(self.max_dp, int)):
             return "<FloatFmt()>"
         self_float = float(self)
-        min_dp_int = int(self.min_dp)
         if self.max_dp is None:
-            return f"FloatFmt({self_float!r}, {min_dp_int!r})"
+            return f"FloatFmt({self_float!r}, {self.min_dp!r})"
         else:
-            max_dp_int = int(self.max_dp)
-            return f"FloatFmt({self_float!r}, {min_dp_int!r}, {max_dp_int!r})"
+            return f"FloatFmt({self_float!r}, {self.min_dp!r}, {self.max_dp!r})"
 
 
 class AccountEdiCommon(models.AbstractModel):
@@ -285,7 +273,13 @@ class AccountEdiCommon(models.AbstractModel):
 
         cocontractant_note = self._get_belgian_cocontractant_note(customer, supplier)
         if cocontractant_note:
-            return create_dict(tax_category_code='AE', tax_exemption_reason_code='VATEX-EU-AE', tax_exemption_reason=cocontractant_note)
+            if not tax.amount:
+                return create_dict(
+                    tax_category_code='AE',
+                    tax_exemption_reason_code='VATEX-EU-AE',
+                    tax_exemption_reason=cocontractant_note
+                )
+            raise UserError(_("Invalid Tax Setup for Co-Contractor. Please apply the standard co-contractor tax, or ensure your custom tax uses a tax amount of 0"))
 
         if supplier.country_id == customer.country_id:
             if not tax or tax.amount == 0:
@@ -473,48 +467,26 @@ class AccountEdiCommon(models.AbstractModel):
                 'res_id': invoice.id,
             })
 
-        attachments = self._import_attachments(invoice, tree)
-        if attachments:
-            invoice.with_context(no_new_invoice=True).message_post(attachment_ids=attachments.ids)
-
         return True
 
     def _import_attachments(self, invoice, tree):
+        # Unused method, kept to avoid breaking stable
         # Import the embedded documents in the xml if some are found
         attachments = self.env['ir.attachment']
         if invoice.message_main_attachment_id:
             # Invoice look like it was already imported, don't import attachments again
             return attachments
-        additional_docs = tree.findall('./{*}AdditionalDocumentReference')
-        for document in additional_docs:
-            attachment_name = document.find('{*}ID')
-            attachment_data = document.find('{*}Attachment/{*}EmbeddedDocumentBinaryObject')
-            if attachment_name is not None and attachment_data is not None:
-                mimetype = attachment_data.attrib.get('mimeCode')
-                if not (extension := SUPPORTED_FILE_TYPES.get(mimetype)):
-                    continue
-                text = attachment_data.text
-                # Normalize the name of the file : some e-fff emitters put the full path of the file
-                # (Windows or Linux style) and/or the name of the xml instead of the pdf.
-                # Get only the filename with the right extension.
-                name = (attachment_name.text or 'invoice').split('\\')[-1].split('/')[-1].split('.')[0] + extension
-                attachment = self.env['ir.attachment'].create({
-                    'name': name,
-                    'res_id': invoice.id,
-                    'res_model': 'account.move',
-                    'datas': text + '=' * (len(text) % 3),  # Fix incorrect padding
-                    'type': 'binary',
-                    'mimetype': mimetype,
-                })
-                # Upon receiving an email (containing an xml) with a configured alias to create invoice, the xml is
-                # set as the main_attachment. To be rendered in the form view, the pdf should be the main_attachment.
-                if invoice.message_main_attachment_id and \
-                        invoice.message_main_attachment_id.name.endswith('.xml') and \
-                        'pdf' not in invoice.message_main_attachment_id.mimetype and \
-                        mimetype == 'application/pdf':
-                    invoice._message_set_main_attachment_id(attachment, force=True, filter_xml=False)
-                attachments |= attachment
 
+        attachments_data = attachments._extract_additional_documents(tree)
+        attachments = self.env['ir.attachment'].create(attachments_data)
+        # Upon receiving an email (containing an xml) with a configured alias to create invoice, the xml is
+        # set as the main_attachment. To be rendered in the form view, the pdf should be the main_attachment.
+        for attachment in attachments:
+            if invoice.message_main_attachment_id and \
+                    invoice.message_main_attachment_id.name.endswith('.xml') and \
+                    'pdf' not in invoice.message_main_attachment_id.mimetype and \
+                    attachment.mimetype == 'application/pdf':
+                invoice._message_set_main_attachment_id(attachment, force=True, filter_xml=False)
         return attachments
 
     def _import_partner(self, company_id, name, phone, email, vat, country_code=False, peppol_eas=False, peppol_endpoint=False, street=False, street2=False, city=False, zip_code=False):
