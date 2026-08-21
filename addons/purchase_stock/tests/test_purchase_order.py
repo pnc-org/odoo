@@ -516,6 +516,10 @@ class TestPurchaseOrder(ValuationReconciliationTestCommon):
         self.assertEqual(pol.name, "[C02] Name02")
 
     def test_packaging_and_qty_decrease(self):
+        """ Test that changing a PO line's quantity with packaging updates the related picking.
+            Additionally check that the purchase order's received quantity is not modified by a duplicated picking
+            whose picking type has been changed.
+        """
         packaging = self.env['product.packaging'].create({
             'name': "Super Packaging",
             'product_id': self.product_a.id,
@@ -537,6 +541,14 @@ class TestPurchaseOrder(ValuationReconciliationTestCommon):
                 line.product_qty = 8
 
         self.assertEqual(po.picking_ids.move_ids.product_uom_qty, 8)
+
+        po.picking_ids.button_validate()
+        self.assertEqual(po.order_line.qty_received, 8.0)
+        outgoing_picking_type = self.env['stock.picking.type'].search([('code', '=', 'outgoing')])
+        duplicated_picking = po.picking_ids.copy()
+        duplicated_picking.picking_type_id = outgoing_picking_type[0]
+        duplicated_picking.button_validate()
+        self.assertEqual(po.order_line.qty_received, 8.0)
 
     def test_packaging_propagation(self):
         """ Editing the packaging on an purchase.order.line
@@ -637,6 +649,8 @@ class TestPurchaseOrder(ValuationReconciliationTestCommon):
         self.assertEqual(quant.quantity, 5)
 
     def test_po_edit_after_receive(self):
+        # Picking types can be detached from any warehouse; ensure PO confirmation still works.
+        self.company_data['default_warehouse'].in_type_id.warehouse_id = False
         self.po = self.env['purchase.order'].create(self.po_vals)
         self.po.button_confirm()
         self.po.picking_ids.move_ids.quantity = 5

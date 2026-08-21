@@ -111,7 +111,11 @@ class PosOrder(models.Model):
                 if order.get(field):
                     existing_record_ids = self.env[pos_order[field]._name].browse([r[1] for r in order[field] if r[1] != 0]).exists().ids
                     existing_records_vals = [r for r in order[field] if r[0] not in [1, 2, 3, 4] or r[1] in existing_record_ids]
+                    existing_ids = set(pos_order[field].ids)
                     pos_order.write({field: existing_records_vals})
+                    added_ids = set(pos_order[field].ids) - existing_ids
+                    if added_ids:
+                        _logger.info("Added %s %s to pos.order #%s", field, list(added_ids), pos_order.id)
                     order[field] = []
 
             del order['uuid']
@@ -1106,6 +1110,9 @@ class PosOrder(models.Model):
     def _get_order_log_representation(order):
         return dict((k, order.get(k)) for k in ("name", "uuid"))
 
+    def _should_log_order_data(self):
+        return self.env['ir.config_parameter'].sudo().get_param('point_of_sale.log_order_data', default='False') == 'True'
+
     @api.model
     def sync_from_ui(self, orders):
         """ Create and update Orders from the frontend PoS application.
@@ -1125,7 +1132,8 @@ class PosOrder(models.Model):
         order_ids = []
         for order in orders:
             order_log_name = self._get_order_log_representation(order)
-            _logger.debug("PoS synchronisation #%d processing order %s order full data: %s", sync_token, order_log_name, pformat(order))
+            if self._should_log_order_data():
+                _logger.info("PoS synchronisation #%d processing order %s order full data:\n%s", sync_token, order_log_name, pformat(order))
 
             if len(self._get_refunded_orders(order)) > 1:
                 raise ValidationError(_('You can only refund products from the same order.'))
@@ -1263,7 +1271,9 @@ class PosOrder(models.Model):
                 PosOrderLineLot = self.env['pos.pack.operation.lot']
                 for pack_lot in line.pack_lot_ids:
                     PosOrderLineLot += pack_lot.copy()
-                line.copy(line._prepare_refund_data(refund_order, PosOrderLineLot))
+                line_copy = line.copy(line._prepare_refund_data(refund_order, PosOrderLineLot))
+                line_copy._onchange_amount_line_all()
+            refund_order._onchange_amount_all()
             refund_orders |= refund_order
         refund_orders._compute_prices()
         return refund_orders
@@ -1487,6 +1497,7 @@ class PosOrderLine(models.Model):
             'pack_lot_ids': PosOrderLineLot,
             'is_total_cost_computed': False,
             'refunded_orderline_id': self.id,
+            'uuid': str(uuid4()),
         }
 
     @api.model_create_multi
@@ -1595,7 +1606,7 @@ class PosOrderLine(models.Model):
             price = self.price_unit * (1 - (self.discount or 0.0) / 100.0)
             self.price_subtotal = self.price_subtotal_incl = price * self.qty
             if (self.tax_ids):
-                taxes = self.tax_ids.compute_all(price, self.order_id.currency_id, self.qty, product=self.product_id, partner=False)
+                taxes = self.tax_ids_after_fiscal_position.compute_all(price, self.order_id.currency_id, self.qty, product=self.product_id, partner=False)
                 self.price_subtotal = taxes['total_excluded']
                 self.price_subtotal_incl = taxes['total_included']
 
@@ -1743,7 +1754,7 @@ class PosOrderLine(models.Model):
             account = fiscal_position.map_account(account)
 
         is_refund_order = float_compare(line.order_id.amount_total, 0, precision_rounding=self.order_id.currency_id.rounding) < 0.0
-        is_refund_line = line.qty * line.price_unit < 0
+        is_refund_line = line.isRefund()
 
         product_name = line.product_id \
             .with_context(lang=line.order_id.partner_id.lang or self.env.user.lang) \
@@ -1790,6 +1801,8 @@ class PosOrderLine(models.Model):
         original_price = self.tax_ids_after_fiscal_position.compute_all(self.price_unit, self.currency_id, self.qty, product=self.product_id, partner=self.order_id.partner_id)['total_included']
         return original_price - self.price_subtotal_incl
 
+    def isRefund(self):
+        return self.qty * self.price_unit < 0
 
 class PosOrderLineLot(models.Model):
     _name = "pos.pack.operation.lot"

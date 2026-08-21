@@ -741,3 +741,33 @@ registry.category("web_tour.tours").add("test_loyalty_in_trusted_pos", {
             ReceiptScreen.isShown(),
         ].flat(),
 });
+
+registry.category("web_tour.tours").add("test_reward_line_tax_grouping_key", {
+    steps: () =>
+        [
+            Chrome.startPoS(),
+            Dialog.confirm("Open Register"),
+            ProductScreen.addOrderline("Test Product 1", "1.00"),
+            ProductScreen.totalAmountIs("82.78"),
+            ProductScreen.checkTaxAmount("14.37"),
+            ProductScreen.clickPayButton(),
+            PaymentScreen.clickPaymentMethod("Cash"),
+            PaymentScreen.clickValidate(),
+            ReceiptScreen.isShown(),
+        ].flat(),
+});
+
+registry.category("web_tour.tours").add("PosLoyaltySpecificDiscountPriceUnitRounding", {
+    steps: () =>
+        [
+            Chrome.startPoS(),
+            Dialog.confirm("Open Register"),
+            ProductScreen.addOrderline("Product A", "1"),
+            ProductScreen.addOrderline("Product B", "1"),
+            // 20.4% of 85.22 = 17.38488 -> 17.385 (3-digit price) -> -20.00 incl.
+            PosLoyalty.hasRewardLine("20.4% on specific products", "-20.00"),
+            PosLoyalty.orderTotalIs("78.00"),
+            // Overpay: the change makes the backend recompute the amounts.
+            PosLoyalty.finalizeOrder("Cash", "100"),
+        ].flat(),
+});
