@@ -12,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-10 18:38+0000\n"
-"PO-Revision-Date: 2026-07-29 16:03+0000\n"
-"Last-Translator: \"Fernanda Alvarez (mfar)\" <mfar@odoo.com>\n"
+"POT-Creation-Date: 2026-10-30 17:40+0000\n"
+"PO-Revision-Date: 2026-10-20 10:42+0000\n"
+"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
 "Language-Team: Spanish (Latin America) <https://translate.odoo.com/projects/"
 "odoo-18/loyalty/es_419/>\n"
 "Language: es_419\n"
@@ -23,7 +23,7 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=3; plural=(n == 1) ? 0 : ((n != 0 && n % 1000000 == "
 "0) ? 1 : 2);\n"
-"X-Generator: Weblate 2026.6.1\n"
+"X-Generator: Weblate 2026.8.1\n"
 
 #. module: loyalty
 #: model:ir.model.fields,help:loyalty.field_loyalty_program__trigger
@@ -1109,7 +1109,7 @@ msgstr "Plantilla de correo"
 #. module: loyalty
 #: model:ir.model.fields,field_description:loyalty.field_loyalty_program__date_to
 msgid "End date"
-msgstr "Fecha final "
+msgstr "Fecha de finalización"
 
 #. module: loyalty
 #: model_terms:ir.ui.view,arch_db:loyalty.loyalty_card_update_balance_form
@@ -1184,6 +1184,12 @@ msgstr "Producto gratis - %s"
 #: model:loyalty.reward,description:loyalty.3_cabinets_plus_1_free_reward
 msgid "Free Product - Large Cabinet"
 msgstr "Producto gratis - Gabinete grande"
+
+#. module: loyalty
+#. odoo-python
+#: code:addons/loyalty/models/loyalty_reward.py:0
+msgid "Free Product - [%(products)s, and %(count)s more]"
+msgstr ""
 
 #. module: loyalty
 #. odoo-python
@@ -1311,7 +1317,7 @@ msgstr "Regalo para el cliente"
 #. module: loyalty
 #: model:ir.actions.act_window,name:loyalty.loyalty_program_gift_ewallet_action
 msgid "Gift cards & eWallet"
-msgstr "Tarjetas de regalo y monedero electrónico"
+msgstr "Tarjetas de regalo y monederos electrónicos"
 
 #. module: loyalty
 #. odoo-python
@@ -1363,7 +1369,7 @@ msgstr "Lineas del historial"
 #. module: loyalty
 #: model:ir.model,name:loyalty.model_loyalty_history
 msgid "History for Loyalty cards and Ewallets"
-msgstr "Historial de las tarjetas de lealtad y billetera electrónica"
+msgstr "Historial de las tarjetas de lealtad y monederos electrónicos"
 
 #. module: loyalty
 #: model:ir.model.fields,field_description:loyalty.field_loyalty_card__id
@@ -1447,7 +1453,7 @@ msgstr "Artículos"
 #. module: loyalty
 #: model_terms:ir.ui.view,arch_db:loyalty.loyalty_report
 msgid "John Doe"
-msgstr "John Doe"
+msgstr "Juan Pérez"
 
 #. module: loyalty
 #. odoo-javascript

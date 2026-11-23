@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-31 17:39+0000\n"
-"PO-Revision-Date: 2026-08-11 19:56+0000\n"
+"PO-Revision-Date: 2026-11-11 18:33+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
 "Language-Team: Hindi <https://translate.odoo.com/projects/odoo-18/website/"
 "hi/>\n"
@@ -28,7 +28,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Weblate 2026.6.1\n"
+"X-Generator: Weblate 2026.8.1\n"
 
 #. module: website
 #. odoo-javascript
@@ -324,7 +324,7 @@ msgstr "24 घंटे ग्राहक सहायता"
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_key_benefits
 msgid "24/7 Support"
-msgstr ""
+msgstr "24/7 सहायता"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.template_footer_links
@@ -539,6 +539,8 @@ msgid ""
 "<b>My Company</b><br/>250 Executive Park Blvd, Suite 3400 <br/> San "
 "Francisco CA 94134 <br/>United States"
 msgstr ""
+"<b>My Company</b><br/>250 Executive Park Blvd, Suite 3400 <br/> San "
+"Francisco CA 94134 <br/>United States"
 
 #. module: website
 #. odoo-javascript
@@ -1638,6 +1640,9 @@ msgid ""
 "<span class=\"s_website_form_label_content\">Subject</span>\n"
 "                                <span class=\"s_website_form_mark\"> *</span>"
 msgstr ""
+"<span class=\"s_website_form_label_content\">विषय</span>\n"
+"                                  <span class=\"s_website_form_mark\"> *</"
+"span>"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_website_form
@@ -4056,7 +4061,7 @@ msgstr "कॉम्पोनेंट"
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_cards_soft
 msgid "Comprehensive Support"
-msgstr ""
+msgstr "हर तरह की और पूरी मदद उपलब्ध"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_comparisons
@@ -4920,7 +4925,7 @@ msgstr ""
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_mega_menu_cards
 msgid "Deliveries"
-msgstr ""
+msgstr "डिलीवरी"
 
 #. module: website
 #: model:ir.model.fields,field_description:website.field_website_controller_page__url_demo
@@ -6028,7 +6033,8 @@ msgstr "एक्सप्लोर करें"
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_numbers_showcase
 msgid "Explore a vast array of practical and beneficial choices."
-msgstr "व्यावहारिक और फ़ायदेमंद विकल्पों की एक बड़ी कैटगरी को जानें और उन पर विचार करें।"
+msgstr ""
+"व्यावहारिक और फ़ायदेमंद विकल्पों की एक बड़ी कैटगरी को जानें और उन पर विचार करें।"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_quadrant
@@ -6713,7 +6719,7 @@ msgstr "गैलरी"
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_mega_menu_thumbnails
 msgid "Gaming"
-msgstr ""
+msgstr "गेमिंग"
 
 #. module: website
 #. odoo-javascript
@@ -7174,7 +7180,7 @@ msgstr ""
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_mega_menu_images_subtitles
 msgid "Help center"
-msgstr ""
+msgstr "हेल्प सेंटर"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_pricelist_cafe
@@ -7199,7 +7205,8 @@ msgstr ""
 msgid ""
 "Here is an overview of the cookies that may be stored on your device when "
 "you visit our website:"
-msgstr "जब आप हमारी वेबसाइट पर आते हैं, तो आपके डिवाइस ये कुकी स्टोर की जा सकती हैं:"
+msgstr ""
+"जब आप हमारी वेबसाइट पर आते हैं, तो आपके डिवाइस ये कुकी स्टोर की जा सकती हैं:"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_image_gallery_options
@@ -8472,7 +8479,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:website.s_mega_menu_odoo_menu
 #: model_terms:ir.ui.view,arch_db:website.s_mega_menu_thumbnails
 msgid "Laptops"
-msgstr ""
+msgstr "लैपटॉप"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.bs_debug_view
@@ -9276,7 +9283,7 @@ msgstr "संदेश"
 #. odoo-python
 #: code:addons/website/controllers/form.py:0
 msgid "Metadata"
-msgstr ""
+msgstr "मेटाडेटा"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_company_team
@@ -9578,7 +9585,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:website.field_res_config_settings__group_multi_website
 #: model:res.groups,name:website.group_multi_website
 msgid "Multi-website"
-msgstr ""
+msgstr "मल्टी-वेबसाइट"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_website_form_options
@@ -9765,7 +9772,7 @@ msgstr ""
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.step_wizard
 msgid "Next:"
-msgstr ""
+msgstr "अगला"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_tabs_options
@@ -10188,7 +10195,7 @@ msgstr "खुलने का समय"
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_company_team_detail
 msgid "Operations Manager"
-msgstr ""
+msgstr "ऑपरेशन मैनेजर"
 
 #. module: website
 #. odoo-javascript
@@ -10277,7 +10284,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:website.s_pricelist_boxed
 #: model_terms:ir.ui.view,arch_db:website.s_product_catalog
 msgid "Our Menu"
-msgstr ""
+msgstr "हमारा मेन्यू"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.new_page_template_pricing_5_s_text_block_h1
@@ -10478,7 +10485,7 @@ msgstr ""
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_mega_menu_cards
 msgid "Our team"
-msgstr ""
+msgstr "हमारी टीम"
 
 #. module: website
 #. odoo-javascript
@@ -10911,7 +10918,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/website/static/src/snippets/s_website_form/000.js:0
 msgid "Please fill in the form correctly."
-msgstr ""
+msgstr "कृपया फ़ॉर्म को सही तरीके से भरें।"
 
 #. module: website
 #. odoo-javascript
@@ -11547,7 +11554,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:website.s_features
 #: model_terms:ir.ui.view,arch_db:website.s_features_wave
 msgid "Reliability"
-msgstr ""
+msgstr "विश्वसनीयता"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.cookie_policy
@@ -11906,7 +11913,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:website.s_features
 #: model_terms:ir.ui.view,arch_db:website.s_features_wave
 msgid "Scalability"
-msgstr ""
+msgstr "स्केबिलिटी"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_rating_options
@@ -12736,7 +12743,7 @@ msgstr ""
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.snippet_options_shadow_widgets
 msgid "Spread"
-msgstr ""
+msgstr "प्रसार करें"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_mega_menu_menus_logos
@@ -13015,7 +13022,7 @@ msgstr "टी-शर्ट"
 #. odoo-javascript
 #: code:addons/website/static/src/components/website_loader/website_loader.xml:0
 msgid "TIP"
-msgstr ""
+msgstr "सलाह"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.snippets
@@ -13643,6 +13650,8 @@ msgid ""
 "This is a simple hero unit, a simple jumbotron-style component for calling "
 "extra attention to featured content or information."
 msgstr ""
+"यह एक सिंपल हीरो यूनिट है, जो ख़ास कॉन्टेंट या जानकारी पर विशेष ध्यान खींचने वाला एक "
+"सिंपल जुंबोट्रॉन-स्टाइल कंपोनेंट है।"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_key_images
@@ -14273,7 +14282,7 @@ msgstr ""
 #: code:addons/website/static/src/components/fields/publish_button.xml:0
 #: code:addons/website/static/src/components/views/page_list.js:0
 msgid "Unpublish"
-msgstr ""
+msgstr "अप्रकाशित करें"
 
 #. module: website
 #. odoo-javascript
@@ -15626,8 +15635,8 @@ msgid ""
 "chat on our website. Our dedicated team is available 24/7 to assist with any "
 "inquiries or issues."
 msgstr ""
-"आप हमारी ग्राहक सहायता टीम तक info@yourcompany.example.com पर ईमेल करके, +1 "
-"555-555-5556 पर कॉल करके, या हमारी वेबसाइट पर लाइव चैट का उपयोग करके पहुंच सकते हैं. "
+"आप हमारी ग्राहक सहायता टीम तक info@yourcompany.example.com पर ईमेल करके, +1 555-"
+"555-5556 पर कॉल करके, या हमारी वेबसाइट पर लाइव चैट का उपयोग करके पहुंच सकते हैं. "
 "हमारी समर्पित टीम किसी भी पूछताछ या समस्या में सहायता के लिए 24/7 उपलब्ध है।"
 
 #. module: website
@@ -16322,7 +16331,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:website.template_footer_contact
 #: model_terms:ir.ui.view,arch_db:website.template_footer_descriptive
 msgid "hello@mycompany.com"
-msgstr ""
+msgstr "hello@mycompany.com"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.snippets

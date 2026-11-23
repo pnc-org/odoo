@@ -18,7 +18,7 @@ class TestUblImportBis3InvoiceBEDecodeInvoiceLine(TestUblImportBis3InvoiceBE):
         self.assertRecordValues(invoice.invoice_line_ids, [{
             'price_unit': 1050.00,
             'quantity': 1.0,
-            'discount': 9.52380952380953,
+            'discount': 9.523809523809524,
         }])
 
     def test_partial_import_invoice_line_line_extension_amount_price_allowance_base_amount(self):
@@ -26,7 +26,7 @@ class TestUblImportBis3InvoiceBEDecodeInvoiceLine(TestUblImportBis3InvoiceBE):
         self.assertRecordValues(invoice.invoice_line_ids, [{
             'price_unit': 210.00,
             'quantity': 5.0,
-            'discount': 9.52380952380953,
+            'discount': 9.523809523809524,
         }])
 
     def test_partial_import_invoice_line_line_extension_amount_price_allowance_base_amount_and_amount(self):
@@ -35,7 +35,7 @@ class TestUblImportBis3InvoiceBEDecodeInvoiceLine(TestUblImportBis3InvoiceBE):
             {
                 'price_unit': 260.00,
                 'quantity': 5.0,
-                'discount': 26.92307692307695,
+                'discount': 26.923076923076923,
             },
         ])
 
@@ -45,7 +45,7 @@ class TestUblImportBis3InvoiceBEDecodeInvoiceLine(TestUblImportBis3InvoiceBE):
             {
                 'price_unit': 260.00,
                 'quantity': 5.0,
-                'discount': 26.92307692307695,
+                'discount': 26.923076923076923,
             },
         ])
 
@@ -74,7 +74,7 @@ class TestUblImportBis3InvoiceBEDecodeInvoiceLine(TestUblImportBis3InvoiceBE):
         self.assertRecordValues(invoice.invoice_line_ids, [{
             'price_unit': 210.00,
             'quantity': 5.0,
-            'discount': 9.52380952380953,
+            'discount': 9.523809523809524,
         }])
 
     def test_partial_import_invoice_line_line_extension_amount_price_amount(self):
@@ -82,7 +82,7 @@ class TestUblImportBis3InvoiceBEDecodeInvoiceLine(TestUblImportBis3InvoiceBE):
         self.assertRecordValues(invoice.invoice_line_ids, [{
             'price_unit': 210.00,
             'quantity': 5.0,
-            'discount': 9.52380952380953,
+            'discount': 9.523809523809524,
         }])
 
     def test_partial_import_invoice_line_line_extension_amount_zero_quantity(self):
@@ -90,7 +90,7 @@ class TestUblImportBis3InvoiceBEDecodeInvoiceLine(TestUblImportBis3InvoiceBE):
         self.assertRecordValues(invoice.invoice_line_ids, [{
             'price_unit': 1050.00,
             'quantity': 1.0,
-            'discount': 9.52380952380953,
+            'discount': 9.523809523809524,
         }])
 
     def test_partial_import_invoice_line_line_extension_amount_zero_quantity_zero_price_amount(self):
@@ -98,7 +98,7 @@ class TestUblImportBis3InvoiceBEDecodeInvoiceLine(TestUblImportBis3InvoiceBE):
         self.assertRecordValues(invoice.invoice_line_ids, [{
             'price_unit': 1050.00,
             'quantity': 1.0,
-            'discount': 9.52380952380953,
+            'discount': 9.523809523809524,
         }])
 
     def test_partial_import_invoice_line_price_amount_base_quantity(self):
@@ -106,7 +106,7 @@ class TestUblImportBis3InvoiceBEDecodeInvoiceLine(TestUblImportBis3InvoiceBE):
         self.assertRecordValues(invoice.invoice_line_ids, [{
             'price_unit': 210.00,
             'quantity': 5.0,
-            'discount': 9.52380952380953,
+            'discount': 9.523809523809524,
         }])
 
     def test_partial_import_invoice_line_negative_lines_and_total(self):
@@ -131,14 +131,23 @@ class TestUblImportBis3InvoiceBEDecodeInvoiceLine(TestUblImportBis3InvoiceBE):
         self.assertFalse(invoice.invoice_line_ids)
 
     def test_partial_import_invoice_line_zero_line_extension_amount_with_quantity_allowance_charge(self):
+        def assert_invoice(invoice):
+            self.assertRecordValues(invoice, [{'amount_total': 0.0}])
+            self.assertRecordValues(invoice.invoice_line_ids, [{
+                'price_unit': 0.25,
+                'quantity': 2.0,
+                'discount': 100.0,
+                'tax_ids': [],
+                'price_subtotal': 0.0,
+            }])
+
         invoice = self._import_invoice_as_attachment_on(test_name='test_partial_import_invoice_line_zero_line_extension_amount_with_quantity_allowance_charge')
-        self.assertRecordValues(invoice, [{'amount_total': 0.0}])
-        self.assertRecordValues(invoice.invoice_line_ids, [{
-            'price_unit': 0.25,
-            'quantity': 2.0,
-            'discount': 100.0,
-            'price_subtotal': 0.0,
-        }])
+        assert_invoice(invoice)
+
+        # Same test but the fixed tax will be retrieved.
+        self.fixed_tax(0.25, type_tax_use='purchase')
+        invoice = self._import_invoice_as_attachment_on(test_name='test_partial_import_invoice_line_zero_line_extension_amount_with_quantity_allowance_charge')
+        assert_invoice(invoice)
 
     def test_partial_import_invoice_line_zero_line_extension_amount_zero_quantity_with_price_amount(self):
         """

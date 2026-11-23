@@ -267,8 +267,10 @@ class StockMove(models.Model):
                 move.picked = False
 
     def _inverse_picked(self):
-        for move in self:
-            move.move_line_ids.picked = move.picked
+        picked_moves = self.filtered('picked')
+        not_picked_moves = self - picked_moves
+        picked_moves.move_line_ids.picked = True
+        not_picked_moves.move_line_ids.picked = False
 
     @api.depends('picking_id.priority')
     def _compute_priority(self):
@@ -644,7 +646,8 @@ Please change the quantity done or the rounding precision of your unit of measur
     def _compute_show_info(self):
         for move in self:
             move.show_quant = move.picking_code != 'incoming'\
-                           and move.product_id.is_storable
+                           and move.product_id.is_storable\
+                           and not (move.has_tracking != 'none' and move.picking_type_id.use_create_lots and not move.picking_type_id.use_existing_lots)
             move.show_lots_text = move.has_tracking != 'none'\
                 and move.picking_type_id.use_create_lots\
                 and not move.picking_type_id.use_existing_lots\
@@ -1011,13 +1014,13 @@ Please change the quantity done or the rounding precision of your unit of measur
         assert mode in ('generate', 'import')
         default_vals = {}
 
-        def generate_lot_qty(quantity, qty_per_lot):
+        def generate_lot_qty(quantity, qty_per_lot, rounding):
             if qty_per_lot <= 0:
                 raise UserError(_("The quantity per lot should always be a positive value."))
             line_count = int(quantity // qty_per_lot)
             leftover = quantity % qty_per_lot
             qty_array = [qty_per_lot] * line_count
-            if leftover:
+            if not float_is_zero(leftover, precision_rounding=rounding):
                 qty_array.append(leftover)
             return qty_array
 
@@ -1031,7 +1034,8 @@ Please change the quantity done or the rounding precision of your unit of measur
                 default_vals[remove_prefix(key, 'default_')] = context[key]
 
         if default_vals['tracking'] == 'lot' and mode == 'generate':
-            lot_qties = generate_lot_qty(default_vals['quantity'], count)
+            product = self.env['product.product'].browse(default_vals['product_id'])
+            lot_qties = generate_lot_qty(default_vals['quantity'], count, product.uom_id.rounding)
         else:
             lot_qties = [1] * count
 
@@ -1862,8 +1866,15 @@ Please change the quantity done or the rounding precision of your unit of measur
         grouped_move_lines_in = self._get_available_move_lines_in()
         grouped_move_lines_out = self._get_available_move_lines_out(assigned_moves_ids, partially_available_moves_ids)
         available_move_lines = {key: grouped_move_lines_in[key] - grouped_move_lines_out.get(key, 0) for key in grouped_move_lines_in}
-        # pop key if the quantity available amount to 0
         rounding = self.product_id.uom_id.rounding
+        # remove what this move already reserved
+        for move_line in self.move_line_ids:
+            if float_is_zero(move_line.quantity_product_uom, precision_rounding=rounding):
+                continue
+            key = (move_line.location_id, move_line.lot_id, move_line.package_id, move_line.owner_id)
+            if key in available_move_lines:
+                available_move_lines[key] -= move_line.quantity_product_uom
+        # pop key if the quantity available amount to 0
         return dict((k, v) for k, v in available_move_lines.items() if float_compare(v, 0, precision_rounding=rounding) > 0)
 
     def _action_assign(self, force_qty=False):
@@ -1971,10 +1982,6 @@ Please change the quantity done or the rounding precision of your unit of measur
                     available_move_lines = move._get_available_move_lines(assigned_moves_ids, partially_available_moves_ids)
                     if not available_move_lines:
                         continue
-                    for move_line in move.move_line_ids.filtered(lambda m: m.quantity_product_uom):
-                        if available_move_lines.get((move_line.location_id, move_line.lot_id, move_line.package_id, move_line.owner_id)):
-                            available_move_lines[(move_line.location_id, move_line.lot_id, move_line.package_id, move_line.owner_id)] -= move_line.quantity_product_uom
-
                     taken_quantities = {}
                     all_move_line_vals = []
                     for (location_id, lot_id, package_id, owner_id), quantity in available_move_lines.items():
@@ -2510,7 +2517,12 @@ Please change the quantity done or the rounding precision of your unit of measur
         :rtype: defaultdict
         """
         wh_location_query = self.env['stock.location']._search([('id', 'child_of', warehouse.view_location_id.id)])
-        forecast_lines = self.env['stock.forecasted_product_product']._get_report_lines(False, self.product_id.ids, wh_location_query, location_id or warehouse.lot_stock_id, read=False)
+        # Only the lines of the moves in `self` are read back below, so let the
+        # report skip building the lines of the other outgoing moves.
+        report = self.env['stock.forecasted_product_product'].with_context(
+            forecast_availability_move_ids=frozenset(self._ids),
+        )
+        forecast_lines = report._get_report_lines(False, self.product_id.ids, wh_location_query, location_id or warehouse.lot_stock_id, read=False)
         result = defaultdict(lambda: (0.0, False))
         for line in forecast_lines:
             move_out = line.get('move_out')
@@ -2612,7 +2624,7 @@ Please change the quantity done or the rounding precision of your unit of measur
                     ),
                 ),
             ),
-            'readOnly': False,
+            'readOnly': len(self) > 1,
         }
 
     def _is_incoming(self):

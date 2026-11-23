@@ -11,6 +11,21 @@ NEW_STATUSES = MappingProxyType({
     'made_available': _lt('Made Available'),  # required by Peppol
     'refused': _lt('Refused'),  # required by Peppol and PPF; used for PPF messages
     'cancelled': _lt('Cancelled'),
+    # Added for Chorus Pro:
+    'sent': _lt('Sent'),
+    'suspended': _lt('Suspended'),
+    'completed': _lt('Completed'),
+    'in_hand': _lt('In Hand'),
+    'partially_approved': _lt('Partially Approved'),
+    'contested': _lt('Contested'),
+    'payment_sent': _lt('Payment Sent'),
+    'endorsed': _lt('Endorsed'),
+    'routing_error': _lt('Routing Error'),
+    'direct_payment_requested': _lt('Direct Payment Requested'),
+    'factored': _lt('Factored'),
+    'factored_confidential': _lt('Factored Confidentially'),
+    'payee_account_changed': _lt('Payee Account Changed'),
+    'not_factored': _lt('Not Factored'),
 })
 
 PDP_STATUSES = MappingProxyType({
@@ -63,6 +78,13 @@ class AccountPeppolResponse(models.Model):
         string='PPF Status',
         store=True,
     )
+
+    # TODO: remove in master
+    @api.model
+    def fields_get(self, allfields=None, attributes=None):
+        for field_name in ['response_code', 'pdp_ref_response_code']:
+            self.env['res.config.settings']._pdp_ensure_selection_value('account.peppol.response', field_name, 'endorsed')
+        return super().fields_get(allfields, attributes)
 
     @api.depends('move_id.peppol_response_ids')
     def _compute_pdp_ppf_state(self):

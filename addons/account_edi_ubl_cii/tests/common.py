@@ -1,10 +1,13 @@
 import base64
+import io
 import textwrap
 import uuid
+from unittest.mock import patch
 
 from odoo import Command
 from odoo.addons.account.tests.common import AccountTestInvoicingCommon
 from odoo.tools import config, file_open
+from odoo.tools.pdf import OdooPdfFileWriter
 
 
 class TestUblCiiCommon(AccountTestInvoicingCommon):
@@ -16,6 +19,19 @@ class TestUblCiiCommon(AccountTestInvoicingCommon):
         cls.partner_lu_dig = cls._create_partner_lu_dig()
         cls.partner_nl = cls._create_partner_nl()
         cls.partner_au = cls._create_partner_au()
+        cls.partner_fr = cls._create_partner_fr()
+
+        # No wkhtmltopdf in tests: the invoice report is rendered as HTML, store a real PDF instead.
+        IrActionsReport = cls.env.registry['ir.actions.report']
+        get_splitted_report = IrActionsReport._get_splitted_report
+
+        def _get_splitted_report(self, report_ref, content, report_type):
+            content_by_id = get_splitted_report(self, report_ref, content, report_type)
+            if report_type == 'html':
+                return {res_id: cls._get_pdf_bytes() for res_id in content_by_id}
+            return content_by_id
+
+        cls.startClassPatcher(patch.object(IrActionsReport, '_get_splitted_report', _get_splitted_report))
 
     @classmethod
     def _create_company(cls, **create_values):
@@ -96,6 +112,23 @@ class TestUblCiiCommon(AccountTestInvoicingCommon):
         })
 
     @classmethod
+    def _create_partner_fr(cls, **kwargs):
+        return cls.env['res.partner'].create({
+            **cls._create_partner_default_values(),
+            'name': 'partner_fr',
+            'street': "Rue Jean Jaurès, 42",
+            'zip': "75000",
+            'city': "Paris",
+            'vat': 'FR05677404089',
+            'company_registry': None,
+            'bank_ids': [Command.create({'acc_number': 'FR15001559627230', 'allow_out_payment': True})],
+            'country_id': cls.env.ref('base.fr').id,
+            'peppol_eas': '9957',
+            'peppol_endpoint': 'FR05677404089',
+            **kwargs,
+        })
+
+    @classmethod
     def _create_mixed_early_payment_term(cls, **kwargs):
         return cls.env['account.payment.term'].create({
             'name': "2/7 Net 30",
@@ -104,6 +137,19 @@ class TestUblCiiCommon(AccountTestInvoicingCommon):
             'discount_percentage': 2,
             'discount_days': 7,
             'early_pay_discount_computation': 'mixed',
+            'line_ids': [Command.create({'value': 'percent', 'value_amount': 100.0, 'nb_days': 30})],
+            **kwargs,
+        })
+
+    @classmethod
+    def _create_early_payment_term(cls, **kwargs):
+        return cls.env['account.payment.term'].create({
+            'name': "2/7 Net 30",
+            'note': "Payment terms: 30 Days, 2% Early Payment Discount under 7 days",
+            'early_discount': True,
+            'discount_percentage': 2,
+            'discount_days': 7,
+            'early_pay_discount_computation': 'included',
             'line_ids': [Command.create({'value': 'percent', 'value_amount': 100.0, 'nb_days': 30})],
             **kwargs,
         })
@@ -133,6 +179,18 @@ class TestUblCiiCommon(AccountTestInvoicingCommon):
     @classmethod
     def subfolders(cls):
         return None, None, None
+
+    @classmethod
+    def _get_pdf_bytes(cls, xml_content=None, filename='factur-x.xml'):
+        """ Small A4 PDF, with `xml_content` embedded as `filename` if given. """
+        a4_width_pt, a4_height_pt = 595, 842
+        writer = OdooPdfFileWriter()
+        writer.addBlankPage(a4_width_pt, a4_height_pt)
+        if xml_content:
+            writer.addAttachment(filename, xml_content, subtype='text/xml', afrelationship='/Alternative')
+        buffer = io.BytesIO()
+        writer.write(buffer)
+        return buffer.getvalue()
 
     # -------------------------------------------------------------------------
     # EXPORT HELPERS
@@ -275,6 +333,8 @@ class TestUblCiiFRCommon(TestUblCiiCommon):
             'city': "Saint-Malo",
             'vat': 'FR23334175221',
             'country_id': cls.env.ref('base.fr').id,
+            'peppol_eas': '9957',
+            'peppol_endpoint': 'FR23334175221',
         })
         return company
 
@@ -300,3 +360,21 @@ class TestUblBis3Common(TestUblCiiCommon):
     def subfolders(cls):
         _subfolder_format, subfolder_document, subfolder_country = super().subfolders()
         return 'bis3', subfolder_document, subfolder_country
+
+
+class TestCiiFacturXCommon(TestUblCiiCommon):
+
+    @classmethod
+    def _create_partner_default_values(cls):
+        values = super()._create_partner_default_values()
+        values['invoice_edi_format'] = 'facturx'
+        return values
+
+    # -------------------------------------------------------------------------
+    # EXPORT HELPERS
+    # -------------------------------------------------------------------------
+
+    @classmethod
+    def subfolders(cls):
+        _subfolder_format, subfolder_document, subfolder_country = super().subfolders()
+        return 'facturx', subfolder_document, subfolder_country

@@ -7,14 +7,14 @@
 # Junko Augias, 2025
 #
 # "Junko Augias (juau)" <juau@odoo.com>, 2025, 2026.
-# Weblate <noreply-mt-weblate@weblate.org>, 2025.
+# Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 # Ryoko Tsuda <ryoko@quartile.co>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-12-29 18:36+0000\n"
-"PO-Revision-Date: 2026-08-13 05:09+0000\n"
+"PO-Revision-Date: 2026-11-06 04:33+0000\n"
 "Last-Translator: \"Junko Augias (juau)\" <juau@odoo.com>\n"
 "Language-Team: Japanese <https://translate.odoo.com/projects/odoo-18/"
 "marketing_card/ja/>\n"
@@ -23,7 +23,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 2026.6.1\n"
+"X-Generator: Weblate 2026.8.1\n"
 
 #. module: marketing_card
 #. odoo-python
@@ -210,8 +210,7 @@ msgstr "カードキャンペーン"
 #. odoo-python
 #: code:addons/marketing_card/models/mailing_mailing.py:0
 msgid "Card Campaign Mailing should target model %(model_name)s"
-msgstr ""
-"カードキャンペーンメール配信はモデル%(model_name)sを対象にする必要があります"
+msgstr "カードキャンペーンメール配信はモデル%(model_name)sを対象にする必要があります"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__card_click_count
@@ -445,7 +444,7 @@ msgstr "チェックした場合は、新しいメッセージに注意が必要
 #: model:ir.model.fields,help:marketing_card.field_card_campaign__message_has_error
 #: model:ir.model.fields,help:marketing_card.field_card_campaign__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
-msgstr "チェックした場合は、一部のメッセージに配信エラーが発生されました。"
+msgstr "チェックされている場合、一部のメッセージで送信エラーが発生しています。"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_card__image
@@ -662,7 +661,7 @@ msgstr "エラー数"
 #. module: marketing_card
 #: model:ir.model.fields,help:marketing_card.field_card_campaign__message_needaction_counter
 msgid "Number of messages requiring action"
-msgstr "アクションを必要とするメッセージの数"
+msgstr "対応が必要なメッセージ数"
 
 #. module: marketing_card
 #: model:ir.model.fields,help:marketing_card.field_card_campaign__message_has_error_counter
@@ -730,7 +729,7 @@ msgstr "メインカラー"
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_template__primary_text_color
 msgid "Primary Text Color"
-msgstr "プライマリーテキストカラー"
+msgstr "メインーテキストカラー"
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.template_1
@@ -825,7 +824,7 @@ msgstr "サブカラー"
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_template__secondary_text_color
 msgid "Secondary Text Color"
-msgstr "セカンダリーテキストカラー"
+msgstr "サブーテキストカラー"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__content_section

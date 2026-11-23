@@ -1123,6 +1123,31 @@ class TestPoSBasicConfig(TestPoSCommon):
         self.env['pos.order'].sync_from_ui([self.create_ui_order_data([(self.product3, 1)])])
         self.assertEqual(get_top_product_ids(3), [self.product3.id, self.product2.id, self.product1.id])
 
+    def test_ticket_screen_order_data_includes_products(self):
+        """The ticket screen payload must include the orderlines' products
+        and the order's partner."""
+        self.open_new_session(0)
+        self.env['pos.order'].sync_from_ui([
+            self.create_ui_order_data([(self.product1, 1), (self.product2, 1)], customer=self.customer),
+        ])
+        order = self.pos_session.order_ids
+        # Archived products must be sent too.
+        self.product2.action_archive()
+
+        data = order.get_ticket_screen_order_data()
+        line_product_ids = {line['product_id'] for line in data['pos.order.line']}
+        sent_product_ids = {product['id'] for product in data.get('product.product', [])}
+        self.assertEqual(line_product_ids, {self.product1.id, self.product2.id})
+        self.assertTrue(
+            line_product_ids <= sent_product_ids,
+            "The products of the orderlines must be sent with the ticket screen data",
+        )
+        sent_partner_ids = {partner['id'] for partner in data.get('res.partner', [])}
+        self.assertIn(
+            self.customer.id, sent_partner_ids,
+            "The partner of the order must be sent with the ticket screen data",
+        )
+
     def test_closing_entry_by_product(self):
         # set the Group by Product at Closing Entry
         self.config.is_closing_entry_by_product = True
@@ -1302,3 +1327,34 @@ class TestPoSBasicConfig(TestPoSCommon):
         })
 
         self.assertEqual(refund_order.refunded_order_id, orders[0])
+
+    def test_cash_move_on_closed_session(self):
+        """ A cash move sent for a closed session (e.g. by a PoS that missed the closing)
+        must be registered on the open session of the same PoS, so that its expected cash
+        matches the counted cash. Without open session, it is kept on the closed session.
+        """
+        self.open_new_session(0)
+        closed_session = self.pos_session
+        order_data = self.create_ui_order_data([(self.product3, 10)])
+        amount_paid = order_data['amount_paid']
+        self.env['pos.order'].sync_from_ui([order_data])
+        closed_session.post_closing_cash_details(amount_paid)
+        closed_session.close_session_from_ui()
+        self.assertEqual(closed_session.state, 'closed')
+
+        # Stale PoS sends a cash-out for the closed session while a new one is open
+        open_session = self.open_new_session(amount_paid)
+        closed_session_lines = closed_session.statement_line_ids
+        closed_session.try_cash_in_out('out', 100, 'withdrawal', {'translatedType': 'out'})
+        self.assertEqual(closed_session.statement_line_ids, closed_session_lines)
+        self.assertEqual(open_session.statement_line_ids.amount, -100)
+
+        # Closing with the real drawer count gives no false cash difference
+        open_session.post_closing_cash_details(amount_paid - 100)
+        open_session.close_session_from_ui()
+        self.assertEqual(open_session.cash_register_difference, 0)
+
+        # No open session: the cash move is kept on the session it was sent for
+        open_session_lines = open_session.statement_line_ids
+        open_session.try_cash_in_out('out', 50, 'withdrawal', {'translatedType': 'out'})
+        self.assertEqual((open_session.statement_line_ids - open_session_lines).amount, -50)

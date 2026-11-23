@@ -11,6 +11,12 @@ class TestHrAttendanceOvertime(TransactionCase):
 
     @classmethod
     def setUpClass(cls):
+        def set_calendar_and_tz(employee, tz):
+            employee.resource_calendar_id = cls.env['resource.calendar'].create({
+                'name': f'Default Calendar ({tz})',
+                'tz': tz,
+            })
+
         super().setUpClass()
         cls.company = cls.env['res.company'].create({
             'name': 'SweatChipChop Inc.',
@@ -40,16 +46,19 @@ class TestHrAttendanceOvertime(TransactionCase):
             'company_id': cls.company.id,
             'tz': 'Asia/Tokyo',
         })
+        set_calendar_and_tz(cls.jpn_employee, 'Asia/Tokyo')
         cls.honolulu_employee = cls.env['hr.employee'].create({
             'name': 'Susan',
             'company_id': cls.company.id,
             'tz': 'Pacific/Honolulu',
         })
+        set_calendar_and_tz(cls.honolulu_employee, 'Pacific/Honolulu')
         cls.europe_employee = cls.env['hr.employee'].with_company(cls.company_1).create({
             'name': 'Schmitt',
             'company_id': cls.company_1.id,
             'tz': 'Europe/Brussels',
         })
+        set_calendar_and_tz(cls.europe_employee, 'Europe/Brussels')
         cls.calendar_flex_40h = cls.env['resource.calendar'].create({
             'name': 'Flexible 40 hours/week',
             'company_id': cls.company.id,
@@ -129,6 +138,20 @@ class TestHrAttendanceOvertime(TransactionCase):
         self.assertTrue(overtime, 'Overtime should be created')
         self.assertEqual(overtime.duration, 3, 'Should have 3 hours of overtime')
         self.assertEqual(self.employee.total_overtime, 3, 'Should still have 3 hours of overtime')
+
+    def test_overtime_with_microseconds(self):
+        attendance = self.env['hr.attendance'].create({
+            'employee_id': self.employee.id,
+            'check_in': datetime(2021, 1, 2, 8, 0),
+        })
+        attendance.write({'check_out': datetime(2021, 1, 2, 12, 0, 0, 1)})
+
+        overtime = self.env['hr.attendance.overtime'].search([
+            ('employee_id', '=', self.employee.id),
+            ('date', '=', date(2021, 1, 2)),
+        ])
+        self.assertEqual(len(overtime), 1, 'One local day should create one overtime record')
+        self.assertAlmostEqual(overtime.duration, 4, 2)
 
     def test_overtime_multiple(self):
         attendance = self.env['hr.attendance'].create({
@@ -793,6 +816,20 @@ class TestHrAttendanceOvertime(TransactionCase):
 
         attendance.action_refuse_overtime()
         self.assertEqual(attendance.validated_overtime_hours, 0)
+
+    def test_no_validation_refused_extra_hours(self):
+        """ Without validation, refused extra hours are not validated anymore, and approved again they are """
+        self.company.attendance_overtime_validation = "no_validation"
+        attendance = self.env['hr.attendance'].create({
+            'employee_id': self.employee.id,
+            'check_in': datetime(2023, 1, 2, 8, 0),
+            'check_out': datetime(2023, 1, 2, 19, 0),
+        })
+        self.assertAlmostEqual(attendance.validated_overtime_hours, 2, 2)
+        attendance.action_refuse_overtime()
+        self.assertEqual(attendance.validated_overtime_hours, 0)
+        attendance.action_approve_overtime()
+        self.assertAlmostEqual(attendance.validated_overtime_hours, 2, 2)
 
     def test_no_validation_extra_hours_change(self):
         """

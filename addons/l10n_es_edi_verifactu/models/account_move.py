@@ -102,6 +102,7 @@ class AccountMove(models.Model):
             # VAT & IGIC
             ('01', _("General regime operation")),
             ('02', _("Export")),
+            ('08', _("IPSI/IGIC")),
             ('11', _("Leasing of business premises")),
             # VAT only
             ('17_iva', _("Operation under one of the regimes provided for in Chapter XI of Title IX (OSS and IOSS).")),
@@ -248,6 +249,7 @@ class AccountMove(models.Model):
         }
 
     def l10n_es_edi_verifactu_button_cancel(self):
+        self.check_access('write')
         self._l10n_es_edi_verifactu_mark_for_next_batch(cancellation=True)
 
     def _l10n_es_edi_verifactu_check(self, cancellation=False):

@@ -6,14 +6,14 @@
 # Wil Odoo, 2024
 # Junko Augias, 2024
 #
-# "Junko Augias (juau)" <juau@odoo.com>, 2025.
+# "Junko Augias (juau)" <juau@odoo.com>, 2025, 2026.
 # Ryoko Tsuda <ryoko@quartile.co>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-12-29 18:37+0000\n"
-"PO-Revision-Date: 2026-07-30 04:09+0000\n"
+"PO-Revision-Date: 2026-10-20 10:22+0000\n"
 "Last-Translator: Ryoko Tsuda <ryoko@quartile.co>\n"
 "Language-Team: Japanese <https://translate.odoo.com/projects/odoo-18/"
 "hr_recruitment_survey/ja/>\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 2026.6.1\n"
+"X-Generator: Weblate 2026.8.1\n"
 
 #. module: hr_recruitment_survey
 #: model:mail.template,body_html:hr_recruitment_survey.mail_template_applicant_interview_invite
@@ -61,8 +61,8 @@ msgstr ""
 "         <t t-out=\"object.partner_id.name or 'applicant'\">[applicant "
 "name]</t>様<br/><br/>\n"
 "        <t>\n"
-"            現在、選考を進めさせて頂いております。以下の質問にお答え下さ"
-"い。\n"
+"            現在、選考を進めさせて頂いております。以下の質問にお答え下さい"
+"。\n"
 "        </t>\n"
 "        </p><div style=\"margin: 16px 0px 16px 0px;\">\n"
 "            <a t-att-href=\"(object.get_start_url())\" style=\"background-"
@@ -315,7 +315,7 @@ msgstr "インタビューを送信"
 #: model:ir.model,name:hr_recruitment_survey.model_survey_survey
 #: model:ir.model.fields,field_description:hr_recruitment_survey.field_hr_applicant__survey_id
 msgid "Survey"
-msgstr "調査"
+msgstr "アンケート"
 
 #. module: hr_recruitment_survey
 #: model:ir.model,name:hr_recruitment_survey.model_survey_invite

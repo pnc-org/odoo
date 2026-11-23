@@ -15,15 +15,16 @@
 # Lasse L, 2024
 # Anders Wallenquist <anders.wallenquist@vertel.se>, 2024
 # Martin Trigaux, 2024
-# Jakob Krabbe <jakob.krabbe@vertel.se>, 2024, 2025.
-# Claes-Johan Dahlin <user-89@users.noreply.translate.odoo.com>, 2025.
+# Jakob Krabbe <jakob.krabbe@vertel.se>, 2024, 2025, 2026.
+# Claes-Johan Dahlin <user-89@users.noreply.translate.odoo.com>, 2025, 2026.
+# Hanna Kharraziha <hakha@odoo.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-03 17:38+0000\n"
-"PO-Revision-Date: 2025-09-12 14:12+0000\n"
-"Last-Translator: Jakob Krabbe <jakob.krabbe@vertel.se>\n"
+"PO-Revision-Date: 2026-10-20 11:51+0000\n"
+"Last-Translator: Hanna Kharraziha <hakha@odoo.com>\n"
 "Language-Team: Swedish <https://translate.odoo.com/projects/odoo-18/"
 "pos_restaurant/sv/>\n"
 "Language: sv\n"
@@ -31,7 +32,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.12.2\n"
+"X-Generator: Weblate 2026.8.1\n"
 
 #. module: pos_restaurant
 #. odoo-javascript
@@ -216,7 +217,7 @@ msgstr "Utseende"
 #: model_terms:ir.ui.view,arch_db:pos_restaurant.view_restaurant_floor_form
 #: model_terms:ir.ui.view,arch_db:pos_restaurant.view_restaurant_floor_search
 msgid "Archived"
-msgstr "Arkiverad"
+msgstr "Arkiverade"
 
 #. module: pos_restaurant
 #. odoo-javascript
@@ -1317,8 +1318,7 @@ msgstr "Bordets höjd i pixlar"
 msgid ""
 "The table's horizontal position from the left side to the table's center, in "
 "pixels"
-msgstr ""
-"Bordets horisontella läge från vänster sida till bordets mitt, i pixlar"
+msgstr "Bordets horisontella läge från vänster sida till bordets mitt, i pixlar"
 
 #. module: pos_restaurant
 #: model:ir.model.fields,help:pos_restaurant.field_restaurant_table__position_v

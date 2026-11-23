@@ -11,16 +11,17 @@
 # Wil Odoo, 2025
 # J Ponte, 2025
 # Daniel Reis, 2025
-# Humberto Sousa <humberto.sousa@smartimprove.pt>, 2025.
-# Weblate <noreply-mt-weblate@weblate.org>, 2025.
+# Humberto Sousa <humberto.sousa@smartimprove.pt>, 2025, 2026.
+# Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 # "Pedro Silva (Exo)" <pedrocs@exo.pt>, 2026.
+# Cristina Paniagua Ramiro <crpan@odoo.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-20 18:37+0000\n"
-"PO-Revision-Date: 2026-01-31 09:02+0000\n"
-"Last-Translator: \"Pedro Silva (Exo)\" <pedrocs@exo.pt>\n"
+"POT-Creation-Date: 2026-10-24 17:37+0000\n"
+"PO-Revision-Date: 2026-10-20 10:28+0000\n"
+"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
 "Language-Team: Portuguese <https://translate.odoo.com/projects/odoo-18/hr/pt/"
 ">\n"
 "Language: pt\n"
@@ -29,7 +30,7 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : ((n != 0 && n % "
 "1000000 == 0) ? 1 : 2);\n"
-"X-Generator: Weblate 5.14.3\n"
+"X-Generator: Weblate 2026.8.1\n"
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_res_company__hr_presence_control_email_amount
@@ -1226,7 +1227,7 @@ msgstr "Canal de Discussão"
 #: model:ir.model.fields,field_description:hr.field_hr_job__display_name
 #: model:ir.model.fields,field_description:hr.field_hr_work_location__display_name
 msgid "Display Name"
-msgstr "Nome a exibir"
+msgstr "Nome de apresentação"
 
 #. module: hr
 #: model_terms:ir.ui.view,arch_db:hr.res_config_settings_view_form
@@ -3250,16 +3251,6 @@ msgid "Temporary"
 msgstr "Temporário"
 
 #. module: hr
-#. odoo-python
-#: code:addons/hr/models/hr_employee.py:0
-msgid ""
-"The Badge ID must be alphanumeric without any accents and no longer than 18 "
-"characters."
-msgstr ""
-"O ID do crachá deve ser alfanumérico, sem acentos, e não deve ter mais de 18 "
-"caracteres."
-
-#. module: hr
 #: model:ir.model.constraint,message:hr.constraint_hr_employee_barcode_uniq
 msgid ""
 "The Badge ID must be unique, this one is already assigned to another "
@@ -3267,6 +3258,14 @@ msgid ""
 msgstr ""
 "O ID do crachá deve ser único, este número já está vinculado a outro "
 "funcionário."
+
+#. module: hr
+#. odoo-python
+#: code:addons/hr/models/hr_employee.py:0
+msgid ""
+"The Badge ID must contain only printable ASCII characters, without spaces, "
+"and be no longer than 18 characters."
+msgstr ""
 
 #. module: hr
 #: model:ir.model.fields,help:hr.field_hr_employee__company_country_code
@@ -3945,3 +3944,10 @@ msgstr "restrito a funcionários"
 #: model:ir.model.fields,field_description:hr.field_hr_employee__work_permit_name
 msgid "work_permit_name"
 msgstr "work_permit_name"
+
+#~ msgid ""
+#~ "The Badge ID must be alphanumeric without any accents and no longer than "
+#~ "18 characters."
+#~ msgstr ""
+#~ "O ID do crachá deve ser alfanumérico, sem acentos, e não deve ter mais de "
+#~ "18 caracteres."

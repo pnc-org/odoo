@@ -191,6 +191,9 @@ class AccountMoveLine(models.Model):
     # === Tax fields === #
     tax_ids = fields.Many2many(
         comodel_name='account.tax',
+        relation='account_move_line_account_tax_rel',
+        column1='account_move_line_id',
+        column2='account_tax_id',
         string="Taxes",
         compute='_compute_tax_ids', store=True, readonly=False, precompute=True,
         context={'active_test': False},
@@ -370,7 +373,7 @@ class AccountMoveLine(models.Model):
     )
     discount = fields.Float(
         string='Discount (%)',
-        digits='Discount',
+        min_display_digits='Discount',
         default=0.0,
     )
     tax_calculation_rounding_method = fields.Selection(
@@ -923,21 +926,40 @@ class AccountMoveLine(models.Model):
             else:
                 line.discount_allocation_key = False
 
-    @api.depends('account_id', 'company_id', 'price_unit', 'quantity', 'currency_rate', 'move_id.line_ids.discount', 'move_id.line_ids.analytic_distribution')
+    @api.depends('account_id', 'company_id', 'currency_rate', 'move_id.line_ids.account_id', 'move_id.line_ids.discount', 'move_id.line_ids.analytic_distribution')
     def _compute_discount_allocation_needed(self):
-        line2discounted_amount = {
-            line: [
-                (line.account_id, amount_currency, line.company_currency_id.round(amount_currency / line.currency_rate)),
-                (discount_allocation_account, -amount_currency, -line.company_currency_id.round(amount_currency / line.currency_rate)),
-            ]
-            for line in self.move_id.line_ids
-            if line.display_type == 'product'
-            and (discount_allocation_account := line.move_id._get_discount_allocation_account())
-            and line.account_id != discount_allocation_account
-            and (amount_currency := line.currency_id.round(
-                line.move_id.direction_sign * line.quantity * line.price_unit * line.discount / 100
-            ))
-        }
+        def _get_discount_before_rounding(line):
+            base_line = line.move_id._prepare_product_base_line_for_taxes_computation(line)
+            base_line['discount'] = 0.0
+            self.env['account.tax']._add_tax_details_in_base_line(base_line, line.company_id)
+            price_subtotal = base_line['tax_details']['raw_total_excluded_currency']
+            return line.move_id.direction_sign * price_subtotal * line.discount / 100
+
+        # Round the cumulated discount per account, to avoid summing rounding errors.
+        line2discounted_amount = {}
+        cumulated_discounts = defaultdict(float)
+        for line in self.move_id.line_ids:
+            if not (
+                line.display_type == 'product'
+                and line.discount
+                and (discount_allocation_account := line.move_id._get_discount_allocation_account())
+                and line.account_id != discount_allocation_account
+            ):
+                continue
+            group_key = (line.move_id, line.account_id)
+            previous_amount_currency = line.currency_id.round(cumulated_discounts[group_key])
+            cumulated_discounts[group_key] += _get_discount_before_rounding(line)
+            cumulated_amount_currency = line.currency_id.round(cumulated_discounts[group_key])
+            amount_currency = cumulated_amount_currency - previous_amount_currency
+            amount = (
+                line.company_currency_id.round(cumulated_amount_currency / line.currency_rate)
+                - line.company_currency_id.round(previous_amount_currency / line.currency_rate)
+            )
+            if amount_currency or amount:
+                line2discounted_amount[line] = [
+                    (line.account_id, amount_currency, amount),
+                    (discount_allocation_account, -amount_currency, -amount),
+                ]
 
         distribution_totals = defaultdict(lambda: defaultdict(float))
         for line, discounted_amounts in line2discounted_amount.items():
@@ -1063,6 +1085,7 @@ class AccountMoveLine(models.Model):
                 grouping_key_counterpart = frozendict({
                     'move_id': move.id,
                     'account_id': grouping_key['account_id'],
+                    'analytic_distribution': grouping_key['analytic_distribution'],
                     'display_type': 'epd',
                 })
                 aggregated_base_lines = [
@@ -3346,6 +3369,14 @@ class AccountMoveLine(models.Model):
         """ Returns the analytic distribution set on the record which triggered the creation of this line. """
         return {}
 
+    def _should_use_related_analytic_distribution(self):
+        """ Whether the related analytic distribution (see _related_analytic_distribution)
+        should be folded into this line's own one, Modules can override this to skip it when
+        a better source already covers the same case (like dropshipping, where one stock move
+        is linked to both a sale and a purchase line, and we don't want to add both
+        distributions on top of each other) """
+        return True
+
     def _update_analytic_distribution(self):
         if self.env.context.get('skip_analytic_sync'):
             return
@@ -3612,7 +3643,7 @@ class AccountMoveLine(models.Model):
         Intended to be overriden in localization.
         """
         self.ensure_one()
-        return self.move_id.state == 'posted'
+        return self.move_id.state == 'posted' or self.move_id.payment_state == 'invoicing_legacy'
 
     # -------------------------------------------------------------------------
     # PUBLIC ACTIONS

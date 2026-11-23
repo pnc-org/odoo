@@ -12,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-19 17:37+0000\n"
-"PO-Revision-Date: 2026-06-23 09:06+0000\n"
-"Last-Translator: \"Nurul Aini Akrima Sabila (nuaas)\" <nuaas@odoo.com>\n"
+"POT-Creation-Date: 2026-11-13 17:37+0000\n"
+"PO-Revision-Date: 2026-11-14 10:33+0000\n"
+"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
 "Language-Team: Indonesian <https://translate.odoo.com/projects/odoo-18/"
 "hr_holidays/id/>\n"
 "Language: id\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 2026.6.1\n"
+"X-Generator: Weblate 2026.8.1\n"
 
 #. module: hr_holidays
 #. odoo-python
@@ -135,6 +135,8 @@ msgid ""
 "%(name)s does not have a valid allocation for the leave type %(leave_type)s "
 "to cover that request."
 msgstr ""
+"%(name)s tidak memiliki alokasi yang valid untuk tipe cuti %(leave_type)s "
+"untuk mencakup permintaan tersebut."
 
 #. module: hr_holidays
 #. odoo-python
@@ -476,7 +478,7 @@ msgstr "Karyawan Rencana Akrual"
 #: model:ir.ui.menu,name:hr_holidays.hr_holidays_accrual_menu_configuration
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_accrual_plan_view_tree
 msgid "Accrual Plans"
-msgstr "Rencana-Rencana Akrual"
+msgstr "Rencana Akrual"
 
 #. module: hr_holidays
 #: model:ir.actions.server,name:hr_holidays.hr_leave_allocation_cron_accrual_ir_actions_server
@@ -640,8 +642,8 @@ msgstr "Sepanjang hari"
 #. module: hr_holidays
 #. odoo-javascript
 #: code:addons/hr_holidays/static/src/dashboard/time_off_card.xml:0
-msgid "Allocated ("
-msgstr "Dialokasi ("
+msgid "Allocated"
+msgstr "Dialokasikan"
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave_allocation__duration_display
@@ -1865,7 +1867,7 @@ msgstr "Dari Tanggal"
 #: model_terms:ir.ui.view,arch_db:hr_holidays.view_hr_holidays_filter
 #: model_terms:ir.ui.view,arch_db:hr_holidays.view_hr_leave_allocation_filter
 msgid "Future Activities"
-msgstr "Kegiatan - Kegiatan Mendatang"
+msgstr "Aktivitas Mendatang"
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_generate_multi_wizard_view_form
@@ -2092,6 +2094,17 @@ msgstr ""
 "menyembunyikan tipe cuti tanpa menghapusnya."
 
 #. module: hr_holidays
+#: model:ir.model.fields,help:hr_holidays.field_hr_leave_type__create_calendar_meeting
+msgid ""
+"If this field is checked, every leave request of this type will have a "
+"corresponding entry in the calendar application. There will be no entry if "
+"this stays unchecked."
+msgstr ""
+"Jika field ini dicentang, setiap permintaan cuti tipe ini akan memiliki "
+"entri yang sesuai di aplikasi kalender. Tidak akan ada entri jika field ini "
+"tidak dicentang."
+
+#. module: hr_holidays
 #: model:ir.model.constraint,message:hr_holidays.constraint_hr_leave_duration_check
 msgid ""
 "If you want to change the number of days you should use the 'period' mode"
@@ -2205,7 +2218,7 @@ msgstr "Terakhir Diperbarui pada"
 #: model_terms:ir.ui.view,arch_db:hr_holidays.view_hr_holidays_filter
 #: model_terms:ir.ui.view,arch_db:hr_holidays.view_hr_leave_allocation_filter
 msgid "Late Activities"
-msgstr "Aktivitas terakhir"
+msgstr "Aktivitas Terlambat"
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave_report_calendar__leave_id
@@ -4803,6 +4816,9 @@ msgstr "validasi"
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_view_kanban
 msgid "validated"
 msgstr "divalidasi"
+
+#~ msgid "Allocated ("
+#~ msgstr "Dialokasi ("
 
 #~ msgid "There is no valid allocation to cover that request."
 #~ msgstr "Tidak ada alokasi yang valid untuk mencakup permintaan tersebut."

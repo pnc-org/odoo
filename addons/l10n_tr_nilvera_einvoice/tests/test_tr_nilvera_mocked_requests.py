@@ -121,8 +121,7 @@ def patch_nilvera_request(function):
             # If the test expects the mock as an argument, pass it
             if 'mocked_request' in function.__code__.co_varnames:
                 return function(*args, mocked_request, **kwargs)
-            else:
-                return function(*args, **kwargs)
+            return function(*args, **kwargs)
     return wrapper
 
 
@@ -143,6 +142,13 @@ class TestTRNilveraMockedRequests(TestUBLTRCommon):
             3989.33, self.env.ref('base.TRY'),
         )
         self.assertEqual(note, 'YALNIZ : ÜÇBINDOKUZYÜZSEKSENDOKUZ TRY OTUZÜÇ KURUS')
+
+    def test_amount_in_words_ignores_sign(self):
+        note_model = self.env["account.edi.xml.ubl.tr"]
+        try_currency = self.env.ref("base.TRY")
+        note = note_model._l10n_tr_get_amount_integer_partn_text_note(-158.40, try_currency)
+        self.assertEqual(note, note_model._l10n_tr_get_amount_integer_partn_text_note(158.40, try_currency))
+        self.assertNotIn("EKSI", note)
 
     @patch_nilvera_request
     def test_which_service_to_call(self):
@@ -237,6 +243,21 @@ class TestTRNilveraMockedRequests(TestUBLTRCommon):
             invoice.message_ids[0].preview,
             "The invoice status couldn't be retrieved from Nilvera."
         )
+
+    def test_cancel_succeeded_invoice(self):
+        _, invoice = self._generate_invoice_xml(self.einvoice_partner, include_invoice=True)
+        invoice.l10n_tr_nilvera_send_status = "succeed"
+
+        self.assertFalse(invoice.show_reset_to_draft_button)
+        invoice.with_context(l10n_tr_nilvera_force_cancel=True).button_cancel()
+        self.assertEqual(invoice.state, "cancel")
+        self.assertFalse(invoice.show_reset_to_draft_button)
+
+    def test_sent_invoice_cannot_be_reset_to_draft(self):
+        _, invoice = self._generate_invoice_xml(self.einvoice_partner, include_invoice=True)
+        invoice.l10n_tr_nilvera_send_status = "succeed"
+        with self.assertRaisesRegex(UserError, "reset to draft an entry that has been sent to Nilvera"):
+            invoice.button_draft()
 
     @patch_nilvera_request
     def test_fetching_einvoices(self, mocked_request):

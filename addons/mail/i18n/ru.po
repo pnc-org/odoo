@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-17 17:37+0000\n"
-"PO-Revision-Date: 2026-04-18 13:56+0000\n"
+"POT-Creation-Date: 2026-11-20 17:37+0000\n"
+"PO-Revision-Date: 2026-11-16 21:00+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
 "Language-Team: Russian <https://translate.odoo.com/projects/odoo-18/mail/ru/"
 ">\n"
@@ -26,7 +26,7 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
-"X-Generator: Weblate 5.16.2\n"
+"X-Generator: Weblate 2026.11.2\n"
 
 #. module: mail
 #. odoo-python
@@ -966,6 +966,9 @@ msgid ""
 "GIF API key (service shutdown on June 30, 2026), please replace it here with "
 "a Klipy GIF API key"
 msgstr ""
+"Добавьте ключ API Klipy GIF, чтобы включить поддержку GIF-файлов. Если вы "
+"использовали ключ API Tenor GIF (сервис будет закрыт 30 июня 2026 года), "
+"пожалуйста, замените его здесь на ключ API Klipy GIF"
 
 #. module: mail
 #: model:ir.model.fields,help:mail.field_res_config_settings__tenor_api_key
@@ -975,6 +978,10 @@ msgid ""
 "If you were using a Tenor GIF API key (service shutdown on June 30, 2026), "
 "please replace it here with a Klipy GIF API key"
 msgstr ""
+"Добавьте ключ API Klipy GIF, чтобы включить поддержку GIF-файлов. https://"
+"docs.klipy.com/getting-started\n"
+"Если вы использовали ключ API Tenor GIF (сервис будет закрыт 30 июня 2026 "
+"года), пожалуйста, замените его здесь на ключ API Klipy GIF"
 
 #. module: mail
 #. odoo-javascript
@@ -4006,6 +4013,13 @@ msgid ""
 "Template Source Snippet:\n"
 "%(template_src)s"
 msgstr ""
+"Ошибка обработки шаблона QWeb для %(template_label)s\n"
+"Целевая модель: %(model_name)s\n"
+"Языковой контекст: %(lang_context)s\n"
+"Ошибка: %(error_details)s\n"
+"\n"
+"Фрагмент исходного кода шаблона:\n"
+"%(template_src)s"
 
 #. module: mail
 #. odoo-python
@@ -4931,6 +4945,8 @@ msgid ""
 "If you were using a Tenor API key, please replace it with a Klipy API key in "
 "the General Settings."
 msgstr ""
+"Если вы использовали ключ API Tenor, пожалуйста, замените его на ключ API "
+"Klipy в разделе «Общие настройки»."
 
 #. module: mail
 #: model_terms:ir.ui.view,arch_db:mail.mail_resend_message_view_form
@@ -5505,12 +5521,12 @@ msgstr "С наилучшими пожеланиями"
 #. module: mail
 #: model:ir.model.fields,field_description:mail.field_res_config_settings__tenor_api_key
 msgid "Klipy API key"
-msgstr ""
+msgstr "Ключ API Klipy"
 
 #. module: mail
 #: model_terms:ir.ui.view,arch_db:mail.res_config_settings_view_form
 msgid "Klipy GIF API key"
-msgstr ""
+msgstr "Ключ API Klipy GIF"
 
 #. module: mail
 #: model_terms:ir.ui.view,arch_db:mail.res_config_settings_view_form
@@ -5543,6 +5559,11 @@ msgstr "В ЭФИРЕ"
 #: model:ir.model.fields,field_description:mail.field_mail_template__lang
 msgid "Language"
 msgstr "Язык"
+
+#. module: mail
+#: model:ir.model.fields,help:mail.field_mail_message_translation__target_lang
+msgid "Language code used as the target for the translation request."
+msgstr "Код языка, на который выполняется перевод."
 
 #. module: mail
 #: model:ir.model.fields,field_description:mail.field_fetchmail_server__date
@@ -6135,7 +6156,7 @@ msgstr "Отметить как выполненное"
 #. odoo-python
 #: code:addons/mail/models/mail_render_mixin.py:0
 msgid "Mass Mailing Template: '%(name)s' (ID: %(record_id)s)"
-msgstr ""
+msgstr "Шаблон массовой рассылки: '%(name)s' (ID: %(record_id)s)"
 
 #. module: mail
 #. odoo-javascript
@@ -7895,6 +7916,12 @@ msgid "Pop out Attachments"
 msgstr "Открыть вложения в новом окне"
 
 #. module: mail
+#. odoo-javascript
+#: code:addons/mail/static/src/core/common/attachment_view.js:0
+msgid "Pop out is not supported on mobile."
+msgstr "Открытие в отдельном окне не поддерживается на мобильных устройствах."
+
+#. module: mail
 #: model:ir.model.fields,field_description:mail.field_fetchmail_server__port
 msgid "Port"
 msgstr "Порт"
@@ -8825,7 +8852,7 @@ msgstr "Поиск серверов входящей почты"
 #. odoo-javascript
 #: code:addons/mail/static/src/discuss/gif_picker/common/gif_picker.xml:0
 msgid "Search Klipy"
-msgstr ""
+msgstr "Поиск в Klipy"
 
 #. module: mail
 #. odoo-javascript
@@ -9222,12 +9249,6 @@ msgid "Shortcut"
 msgstr "Горячая клавиша"
 
 #. module: mail
-#: model:ir.model.fields,help:mail.field_mail_message_translation__target_lang
-msgid "Shortened language code used as the target for the translation request."
-msgstr ""
-"Сокращенный код языка, используемый как целевой для запроса на перевод."
-
-#. module: mail
 #. odoo-javascript
 #: code:addons/mail/static/src/chatter/web/chatter_patch.js:0
 msgid "Show Followers"
@@ -9358,6 +9379,12 @@ msgstr "В избранном"
 #: model:ir.model.fields,field_description:mail.field_res_users__starred_message_ids
 msgid "Starred Message"
 msgstr "Сообщение в избранном"
+
+#. module: mail
+#. odoo-javascript
+#: code:addons/mail/static/src/discuss/core/web/channel_selector.xml:0
+msgid "Start"
+msgstr "Начало"
 
 #. module: mail
 #. odoo-javascript
@@ -10432,6 +10459,12 @@ msgid "Translation Failure"
 msgstr "Ошибка перевода"
 
 #. module: mail
+#. odoo-python
+#: code:addons/mail/controllers/google_translate.py:0
+msgid "Translation service unavailable"
+msgstr ""
+
+#. module: mail
 #: model:ir.model.fields,field_description:mail.field_mail_activity_plan_template__delay_from
 #: model:ir.model.fields,field_description:mail.field_mail_activity_type__triggered_next_type_id
 msgid "Trigger"
@@ -11484,7 +11517,7 @@ msgstr "Вы можете безопасно проигнорировать эт
 #. odoo-python
 #: code:addons/mail/models/mail_alias_domain.py:0
 msgid "You cannot assign an empty domain name."
-msgstr ""
+msgstr "Нельзя указывать пустое доменное имя."
 
 #. module: mail
 #. odoo-python
@@ -12306,7 +12339,12 @@ msgstr "«%(member_name)s» в «%(channel_name)s»"
 #. odoo-javascript
 #: code:addons/mail/static/src/core/web/activity.js:0
 msgid "“%s”"
-msgstr ""
+msgstr "«%s»"
+
+#~ msgid ""
+#~ "Shortened language code used as the target for the translation request."
+#~ msgstr ""
+#~ "Сокращенный код языка, используемый как целевой для запроса на перевод."
 
 #~ msgid "Search for a GIF"
 #~ msgstr "Найти GIF"

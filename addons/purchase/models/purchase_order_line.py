@@ -28,9 +28,16 @@ class PurchaseOrderLine(models.Model):
     discount = fields.Float(
         string="Discount (%)",
         compute='_compute_price_unit_and_date_planned_and_name',
-        digits='Discount',
+        min_display_digits='Discount',
         store=True, readonly=False)
-    taxes_id = fields.Many2many('account.tax', string='Taxes', context={'active_test': False})
+    taxes_id = fields.Many2many(
+        comodel_name='account.tax',
+        relation='account_tax_purchase_order_line_rel',
+        column1='purchase_order_line_id',
+        column2='account_tax_id',
+        string='Taxes',
+        context={'active_test': False},
+    )
     product_uom = fields.Many2one('uom.uom', string='Unit of Measure', domain="[('category_id', '=', product_uom_category_id)]", ondelete='restrict')
     product_uom_category_id = fields.Many2one(related='product_id.uom_id.category_id')
     product_id = fields.Many2one('product.product', string='Product', domain=[('purchase_ok', '=', True)], change_default=True, index='btree_not_null', ondelete='restrict')
@@ -567,9 +574,32 @@ class PurchaseOrderLine(models.Model):
         aml_currency = move and move.currency_id or self.currency_id
         date = move and move.date or fields.Date.today()
 
+        seller = self.env['product.supplierinfo']
+        if self.product_id:
+            seller = self.product_id.with_company(self.company_id)._select_seller(
+                partner_id=self.partner_id,
+                quantity=self.product_qty,
+                date=self.order_id.date_order and self.order_id.date_order.date() or fields.Date.context_today(self),
+                uom_id=self.product_uom,
+                params=self._get_select_sellers_params(),
+            )
+        product = self.product_id.with_context(
+            lang=get_lang(self.env, self.partner_id.lang).code,
+            partner_id=self.partner_id.id if seller else False,
+            seller_id=seller.id,
+            company_id=self.company_id.id,
+        )
+        standard_display_name = product.with_context(
+            partner_id=False, seller_id=False,
+        ).display_name
+        display_name = (
+            standard_display_name
+            if standard_display_name and standard_display_name in (self.name or '')
+            else product.display_name
+        )
         res = {
             'display_type': self.display_type or 'product',
-            'name': self.env['account.move.line']._get_journal_items_full_name(self.name, self.product_id.display_name),
+            'name': self.env['account.move.line']._get_journal_items_full_name(self.name, display_name),
             'product_id': self.product_id.id,
             'product_uom_id': self.product_uom.id,
             'quantity': -self.qty_to_invoice if move and move.move_type == 'in_refund' else self.qty_to_invoice,

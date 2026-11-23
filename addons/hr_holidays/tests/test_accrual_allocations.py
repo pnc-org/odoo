@@ -4453,6 +4453,8 @@ class TestAccrualAllocations(TestHrHolidaysCommon):
             allocation = self._create_form_test_accrual_allocation(
                 self.leave_type, '2024-01-01', self.employee_emp, self.accrual_plan_yearly_max_postponed_days_start)
             allocation.action_validate()
+            # The amount accrued by the onchange must be saved, otherwise the yearly cap is bypassed
+            self.assertEqual(allocation.yearly_accrued_amount, 21)
 
             # take 10 days in the past
             leave = self._take_leave(self.employee_emp, self.leave_type, '2024-12-09', '2024-12-20')
@@ -4808,13 +4810,14 @@ class TestAccrualAllocations(TestHrHolidaysCommon):
             'holiday_status_id': self.leave_type.id,
             'number_of_days': 10,
             'allocation_type': 'accrual',
+            'date_from': '2026-08-01',
         })
         accrual_allocation.action_validate()
         accrual_plan.level_ids = self.accrual_plan1_levels
         leave = self.env['hr.leave'].create({
             'employee_id': self.employee_emp.id,
             'holiday_status_id': self.leave_type.id,
-            'request_date_from': datetime.date.today() + relativedelta(days=2),
-            'request_date_to': datetime.date.today() + relativedelta(days=3),
+            'request_date_from': '2026-08-10',
+            'request_date_to': '2026-08-15',
         })
         self.assertTrue(leave.action_validate())

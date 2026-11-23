@@ -9,17 +9,17 @@
 # Pedro M. Baeza <pedro.baeza@tecnativa.com>, 2025
 # Wil Odoo, 2025
 # Larissa Manderfeld, 2025
-# "Larissa Manderfeld (lman)" <lman@odoo.com>, 2025.
-# Alexandra Morel <alex.morel@tecnativa.com>, 2025.
+# "Larissa Manderfeld (lman)" <lman@odoo.com>, 2025, 2026.
+# Alexandra Morel <alex.morel@tecnativa.com>, 2025, 2026.
 # "Noemi Pla Garcia (nopl)" <nopl@odoo.com>, 2025, 2026.
 # Weblate <noreply-mt-weblate@weblate.org>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-03 17:38+0000\n"
-"PO-Revision-Date: 2026-08-07 17:53+0000\n"
-"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
+"POT-Creation-Date: 2026-10-24 17:37+0000\n"
+"PO-Revision-Date: 2026-11-18 09:33+0000\n"
+"Last-Translator: \"Noemi Pla Garcia (nopl)\" <nopl@odoo.com>\n"
 "Language-Team: Spanish <https://translate.odoo.com/projects/odoo-18/"
 "point_of_sale/es/>\n"
 "Language: es\n"
@@ -28,7 +28,7 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=3; plural=(n == 1) ? 0 : ((n != 0 && n % 1000000 == "
 "0) ? 1 : 2);\n"
-"X-Generator: Weblate 2026.6.1\n"
+"X-Generator: Weblate 2026.11.2\n"
 
 #. module: point_of_sale
 #. odoo-python
@@ -67,7 +67,7 @@ msgstr "% de dto."
 #. odoo-python
 #: code:addons/point_of_sale/models/stock_warehouse.py:0
 msgid "%(name)s Picking POS"
-msgstr "Recogida del TPV %(name)s"
+msgstr "Preparación de pedidos del PdV %(name)s"
 
 #. module: point_of_sale
 #. odoo-python
@@ -611,7 +611,7 @@ msgstr "Actividades"
 #. module: point_of_sale
 #: model:ir.model.fields,field_description:point_of_sale.field_pos_session__activity_exception_decoration
 msgid "Activity Exception Decoration"
-msgstr "Decoración de Actividad de Excepción"
+msgstr "Indicador de excepción de actividad"
 
 #. module: point_of_sale
 #: model:ir.model.fields,field_description:point_of_sale.field_pos_session__activity_state
@@ -980,7 +980,7 @@ msgstr ""
 #. module: point_of_sale
 #: model:ir.model.fields.selection,name:point_of_sale.selection__res_company__point_of_sale_update_stock_quantities__closing
 msgid "At the session closing"
-msgstr "Al cierre de la sesión"
+msgstr "Al cerrar la sesión"
 
 #. module: point_of_sale
 #: model:ir.model.fields,help:point_of_sale.field_res_company__point_of_sale_update_stock_quantities
@@ -990,8 +990,8 @@ msgid ""
 "it's closed\n"
 " In real time: Each order sent to the server create its own picking"
 msgstr ""
-"Al cierre de la sesión: se crea un albarán de picking para la sesión entera "
-"cuando se cierra\n"
+"Al cerrar la sesión: se crea un albarán para toda la sesión cuando esta se "
+"cierra\n"
 " En tiempo real: cada pedido enviado al servidor crea su propio albarán"
 
 #. module: point_of_sale
@@ -1260,9 +1260,10 @@ msgid ""
 "products."
 msgstr ""
 "Aumente sus ventas con múltiples tipos de programas: cupones, promociones, "
-"tarjetas de regalo y fidelidad. Puede establecer condiciones específicas "
-"(productos, clientes, importe de compra mínimo, periodo). Las recompensas "
-"pueden ser descuentos (% o un importe) o productos gratis."
+"tarjetas regalo y programas de fidelización. Se pueden establecer "
+"condiciones específicas (productos, clientes, importe de compra mínimo, "
+"periodo). Las recompensas pueden ser descuentos (% o un importe) o productos "
+"gratis."
 
 #. module: point_of_sale
 #: model:ir.model.fields,field_description:point_of_sale.field_pos_payment__card_brand
@@ -2106,6 +2107,7 @@ msgstr "Conectando a la caja IoT"
 #. module: point_of_sale
 #. odoo-javascript
 #: code:addons/point_of_sale/static/src/app/errors/error_handlers.js:0
+#: code:addons/point_of_sale/static/src/app/store/opening_control_popup/opening_control_popup.js:0
 msgid "Connection Lost"
 msgstr "Conexión perdida"
 
@@ -2164,7 +2166,7 @@ msgstr "Información de contacto"
 #: model_terms:ir.ui.view,arch_db:point_of_sale.view_pos_config_kanban
 #: model_terms:ir.ui.view,arch_db:point_of_sale.view_pos_session_form
 msgid "Continue Selling"
-msgstr "Continuar venta"
+msgstr "Seguir vendiendo"
 
 #. module: point_of_sale
 #. odoo-javascript
@@ -2839,8 +2841,7 @@ msgstr ""
 #: code:addons/point_of_sale/models/digest.py:0
 msgid "Do not have access, skip this data for user's digest email"
 msgstr ""
-"No tiene acceso, saltar esta información para el correo electrónico de "
-"resumen del usuario"
+"Si no tiene acceso, omita esta información del correo de resumen del usuario"
 
 #. module: point_of_sale
 #. odoo-javascript
@@ -3019,7 +3020,7 @@ msgstr "Error"
 #. odoo-python
 #: code:addons/point_of_sale/models/pos_category.py:0
 msgid "Error! You cannot create recursive categories."
-msgstr "¡Error! No puede crear categorías recursivas."
+msgstr "¡Error! No se pueden crear categorías recursivas."
 
 #. module: point_of_sale
 #. odoo-javascript
@@ -3531,9 +3532,9 @@ msgid ""
 "based on the greatest product lead time. Otherwise, it will be based on the "
 "shortest."
 msgstr ""
-"Si entrega todos los productos a la vez, la orden de entrega se programará "
-"en función del mayor tiempo de entrega del producto. De lo contrario, se "
-"basará en el más corto."
+"Si entrega todos los productos a la vez, el albarán se programará teniendo "
+"en cuenta el plazo de entrega más largo. De lo contrario, se programará "
+"según el más corto."
 
 #. module: point_of_sale
 #: model:ir.model.fields,field_description:point_of_sale.field_pos_category__image_128
@@ -4115,7 +4116,7 @@ msgstr "Número(s) de serie/lote necesario(s)"
 #. module: point_of_sale
 #: model:ir.model.fields,field_description:point_of_sale.field_pos_order_line__pack_lot_ids
 msgid "Lot/serial Number"
-msgstr "Número de lote/de serie"
+msgstr "Número de serie/lote"
 
 #. module: point_of_sale
 #: model:pos.category,name:point_of_sale.pos_category_lower
@@ -4445,7 +4446,7 @@ msgstr "No"
 #. odoo-python
 #: code:addons/point_of_sale/models/pos_order.py:0
 msgid "No PoS configuration found"
-msgstr "No se ha encontrado ninguna configuración TPV"
+msgstr "No se ha encontrado ninguna configuración de punto de venta"
 
 #. module: point_of_sale
 #: model_terms:ir.ui.view,arch_db:point_of_sale.res_config_settings_view_form
@@ -4498,7 +4499,7 @@ msgstr "¡Todavía no hay información!"
 #. odoo-javascript
 #: code:addons/point_of_sale/static/src/app/store/pos_store.js:0
 msgid "No existing serial/lot number"
-msgstr "Sin número de serie/lote existente"
+msgstr "No existe ningún número de serie/lote"
 
 #. module: point_of_sale
 #. odoo-javascript
@@ -4694,6 +4695,14 @@ msgid "Ongoing"
 msgstr "En curso"
 
 #. module: point_of_sale
+#. odoo-python
+#: code:addons/point_of_sale/models/pos_config.py:0
+msgid "Only Point of Sale managers can modify a Point of Sale configuration."
+msgstr ""
+"Solo los responsables del punto de venta pueden modificar la configuración "
+"de un TPV."
+
+#. module: point_of_sale
 #. odoo-javascript
 #: code:addons/point_of_sale/static/src/app/models/pos_order_line.js:0
 msgid ""
@@ -4863,7 +4872,7 @@ msgstr "Tipo de operación"
 #. module: point_of_sale
 #: model_terms:ir.ui.view,arch_db:point_of_sale.res_config_settings_view_form
 msgid "Operation types show up in the Inventory dashboard."
-msgstr "Tipos de operación que se muestran en el tablero del inventario."
+msgstr "Los tipos de operación aparecen en el tablero de Inventario."
 
 #. module: point_of_sale
 #. odoo-javascript
@@ -4896,7 +4905,7 @@ msgstr "Número de pedidos"
 #: model_terms:ir.ui.view,arch_db:point_of_sale.view_pos_order_filter
 #: model_terms:ir.ui.view,arch_db:point_of_sale.view_report_pos_order_search
 msgid "Order Date"
-msgstr "Fecha de pedido"
+msgstr "Fecha del pedido"
 
 #. module: point_of_sale
 #: model:ir.model.fields,field_description:point_of_sale.field_pos_config__sequence_id
@@ -5364,18 +5373,18 @@ msgstr ""
 #: model:ir.model.fields,field_description:point_of_sale.field_pos_order__picking_ids
 #: model:ir.model.fields,field_description:point_of_sale.field_pos_session__picking_ids
 msgid "Picking"
-msgstr "Recogida"
+msgstr "Operación de inventario"
 
 #. module: point_of_sale
 #: model:ir.model.fields,field_description:point_of_sale.field_pos_order__picking_count
 #: model:ir.model.fields,field_description:point_of_sale.field_pos_session__picking_count
 msgid "Picking Count"
-msgstr "Número de recogidas"
+msgstr "Número de operaciones de inventario"
 
 #. module: point_of_sale
 #: model:ir.model,name:point_of_sale.model_stock_picking_type
 msgid "Picking Type"
-msgstr "Tipo de recogida"
+msgstr "Tipo de operación de inventario"
 
 #. module: point_of_sale
 #. odoo-python
@@ -5384,7 +5393,7 @@ msgstr "Tipo de recogida"
 #: model_terms:ir.ui.view,arch_db:point_of_sale.view_pos_pos_form
 #: model_terms:ir.ui.view,arch_db:point_of_sale.view_pos_session_form
 msgid "Pickings"
-msgstr "Recogidas"
+msgstr "Operaciones de inventario"
 
 #. module: point_of_sale
 #. odoo-javascript
@@ -5793,6 +5802,7 @@ msgid "Pos Order Count"
 msgstr "Nº de pedidos de TPV"
 
 #. module: point_of_sale
+#: model:ir.model.fields,field_description:point_of_sale.field_account_tax__pos_order_line_ids
 #: model:ir.model.fields,field_description:point_of_sale.field_pos_pack_operation_lot__pos_order_line_id
 msgid "Pos Order Line"
 msgstr "Línea de pedido de TPV"
@@ -5868,7 +5878,7 @@ msgstr "Publicado"
 #. odoo-javascript
 #: code:addons/point_of_sale/static/src/customer_display/customer_display.xml:0
 msgid "Powered by"
-msgstr "Con tecnología de"
+msgstr "Con la tecnología de"
 
 #. module: point_of_sale
 #. odoo-javascript
@@ -6867,7 +6877,7 @@ msgstr "Escanear vía Proxy"
 #: code:addons/point_of_sale/static/src/app/navbar/proxy_status/proxy_status.js:0
 #: model_terms:ir.ui.view,arch_db:point_of_sale.pos_config_view_form
 msgid "Scanner"
-msgstr "Escáner"
+msgstr "Lector"
 
 #. module: point_of_sale
 #. odoo-javascript
@@ -7357,7 +7367,9 @@ msgstr "Ruta específica"
 #. module: point_of_sale
 #: model:ir.model,name:point_of_sale.model_pos_pack_operation_lot
 msgid "Specify product lot/serial number in pos order line"
-msgstr "Especifique el número de serie/lote en la línea del pedido de TPV"
+msgstr ""
+"Especifique el número de lote o de serie del producto en la línea del pedido "
+"del PdV"
 
 #. module: point_of_sale
 #: model:ir.model.fields,field_description:point_of_sale.field_pos_config__route_id
@@ -7591,7 +7603,7 @@ msgstr "Visualización de impuestos"
 #. module: point_of_sale
 #: model:ir.model.fields,field_description:point_of_sale.field_pos_order_line__price_subtotal
 msgid "Tax Excl."
-msgstr "Impuestos no incluidos"
+msgstr "Impuestos excl."
 
 #. module: point_of_sale
 #: model:ir.model,name:point_of_sale.model_account_tax_group
@@ -7607,7 +7619,7 @@ msgstr "NIF: %(vatId)s"
 #. module: point_of_sale
 #: model:ir.model.fields,field_description:point_of_sale.field_pos_order_line__price_subtotal_incl
 msgid "Tax Incl."
-msgstr "Impuestos incluidos"
+msgstr "Impuestos incl."
 
 #. module: point_of_sale
 #: model:ir.model,name:point_of_sale.model_account_fiscal_position_tax
@@ -7780,6 +7792,14 @@ msgstr ""
 "(value)s'"
 
 #. module: point_of_sale
+#. odoo-python
+#: code:addons/point_of_sale/models/pos_order.py:0
+msgid ""
+"The combo choice '%s' is no longer available in this combo. Please reload "
+"your data."
+msgstr ""
+
+#. module: point_of_sale
 #. odoo-javascript
 #: code:addons/point_of_sale/static/src/app/models/utils/indexed_db.js:0
 msgid ""
@@ -7825,8 +7845,8 @@ msgid ""
 "The existing serial/lot numbers could not be retrieved. \n"
 "Continue without checking the validity of serial/lot numbers ?"
 msgstr ""
-"No fue posible obtener los números de serie y de lote existentes. \n"
-"¿Desea continuar sin verificar la validez de los números de serie o de lote?"
+"No se han podido obtener los números de serie o de lote existentes. \n"
+"¿Quieres continuar sin comprobar la validez de los números de serie/lote?"
 
 #. module: point_of_sale
 #. odoo-javascript
@@ -8011,6 +8031,14 @@ msgstr ""
 #: model:ir.model.fields,help:point_of_sale.field_res_config_settings__pos_iface_print_auto
 msgid "The receipt will automatically be printed at the end of each order."
 msgstr "El recibo se imprimirá automáticamente al final de cada pedido."
+
+#. module: point_of_sale
+#. odoo-javascript
+#: code:addons/point_of_sale/static/src/app/store/opening_control_popup/opening_control_popup.js:0
+msgid "The register cannot be opened while offline. Please try again."
+msgstr ""
+"La caja registradora no se puede abrir sin conexión. Por favor, inténtalo de "
+"nuevo."
 
 #. module: point_of_sale
 #. odoo-javascript
@@ -8249,8 +8277,8 @@ msgid ""
 "There is no serial/lot number for the selected product, and their creation "
 "is not allowed from the Point of Sale app."
 msgstr ""
-"No hay números de serie o lote para el producto seleccionado y no es posible "
-"crearlos desde la aplicación Punto de venta."
+"El producto seleccionado no tiene número de serie ni de lote, y no es "
+"posible crearlos desde la aplicación Punto de venta."
 
 #. module: point_of_sale
 #. odoo-javascript
@@ -8902,8 +8930,8 @@ msgid ""
 "Used to record product pickings. Products are consumed from its default "
 "source location."
 msgstr ""
-"Se utiliza para registrar la selección de productos. Los productos se "
-"consumen de su ubicación de origen por defecto."
+"Se utiliza para registrar los movimientos de productos. Los productos se "
+"consumen desde su ubicación de origen predeterminada."
 
 #. module: point_of_sale
 #: model:ir.model,name:point_of_sale.model_res_users
@@ -8994,7 +9022,7 @@ msgstr "Almacén"
 #. module: point_of_sale
 #: model:ir.model.fields,field_description:point_of_sale.field_res_config_settings__pos_warehouse_id
 msgid "Warehouse (PoS)"
-msgstr "Almacén (TPV)"
+msgstr "Almacén (PdV)"
 
 #. module: point_of_sale
 #. odoo-javascript
@@ -9217,8 +9245,8 @@ msgid ""
 "You cannot archive '%(picking_type)s' as it is used by POS configuration '%"
 "(config)s'."
 msgstr ""
-"No puede archivar '%(picking_type)s', ya que está siendo usado en la "
-"configuración de TPV '%(config)s'."
+"No puede archivar «%(picking_type)s», ya que se está usado en la "
+"configuración de punto de venta «%(config)s»."
 
 #. module: point_of_sale
 #. odoo-python
@@ -9288,6 +9316,14 @@ msgstr "No puede editar el pago de un pedido publicado."
 #: code:addons/point_of_sale/models/pos_order.py:0
 msgid "You cannot invoice orders belonging to different companies."
 msgstr "No puede facturar pedidos que pertenezcan a diferentes empresas."
+
+#. module: point_of_sale
+#. odoo-python
+#: code:addons/point_of_sale/models/account_fiscal_position_tax.py:0
+msgid ""
+"You cannot modify a fiscal position used in a POS order. You should archive "
+"it and create a new one."
+msgstr ""
 
 #. module: point_of_sale
 #. odoo-python

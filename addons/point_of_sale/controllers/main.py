@@ -90,10 +90,11 @@ class PosController(PortalAccount):
         form_values = {}
         if request.httprequest.method == 'POST':
             for field in ['pos_reference', 'date_order', 'ticket_code']:
-                if not kwargs.get(field):
+                value = (kwargs.get(field) or '').strip()
+                if not value:
                     errors[field] = " "
                 else:
-                    form_values[field] = kwargs.get(field)
+                    form_values[field] = value
 
             if errors:
                 errors['generic'] = _("Please fill all the required fields.")
@@ -102,7 +103,7 @@ class PosController(PortalAccount):
             else:
                 date_order = datetime(*[int(i) for i in form_values['date_order'].split('-')])
                 order = request.env['pos.order'].sudo().search([
-                    ('pos_reference', '=like', '%' + form_values['pos_reference'].strip().replace('%', r'\%').replace('_', r'\_')),
+                    ('pos_reference', '=like', '%' + form_values['pos_reference'].replace('%', r'\%').replace('_', r'\_')),
                     ('date_order', '>=', date_order - timedelta(days=1)),
                     ('date_order', '<', date_order + timedelta(days=2)),
                     ('ticket_code', '=', form_values['ticket_code']),
@@ -260,7 +261,8 @@ class PosController(PortalAccount):
         # If the user is connected, then we can update if needed its fields with the additional localized fields if any, then proceed.
         else:
             partner = pos_order.partner_id or (not request.env.user._is_public() and request.env.user.partner_id)
-            partner.write(partner_values)  # In this case, partner_values only contains the additional fields that can be updated.
+            if not request.env.user._is_public() and self._user_can_edit_partner(partner, request.env.user.partner_id):
+                partner.write(partner_values)  # In this case, partner_values only contains the additional fields that can be updated.
 
         pos_order.partner_id = partner
         # Get the required fields for the invoice and add them to the context as default values.

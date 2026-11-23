@@ -370,6 +370,7 @@ export class Composer extends Component {
         const props = {
             anchorRef: this.inputContainerRef.el,
             position: this.env.inChatter ? "bottom-fit" : "top-fit",
+            onClose: () => this.suggestion.dismiss(),
             onSelect: (ev, option) => {
                 this.suggestion.insert(option);
                 markEventHandled(ev, "composer.selectSuggestion");
@@ -678,12 +679,15 @@ export class Composer extends Component {
                 return;
             }
             this.state.active = false;
-            await cb(this.props.composer.text);
+            try {
+                await cb(this.props.composer.text);
+            } finally {
+                this.state.active = true;
+            }
             if (this.props.onPostCallback) {
                 this.props.onPostCallback();
             }
             this.clear();
-            this.state.active = true;
             el.focus();
         }
     }

@@ -25,6 +25,7 @@ class kioskAttendanceApp extends Component{
         kioskMode: { type: String },
         barcodeSource: { type: String },
         fromTrialMode: { type: Boolean },
+        lang: { type: String },
     };
     static components = {
         KioskBarcodeScanner,
@@ -65,6 +66,7 @@ class kioskAttendanceApp extends Component{
         onWillStart( async () => {
             this.isFreshDb = await rpc("/hr_attendance/is_fresh_db", { token: this.props.token });
         });
+        luxon.Settings.defaultLocale = this.props.lang;
     }
 
     async setBadgeID() {
@@ -147,25 +149,19 @@ class kioskAttendanceApp extends Component{
         if (!navigator.geolocation) {
             return rpc(route, {...params})
         }
-        return new Promise((resolve) => {
-            navigator.geolocation.getCurrentPosition(
-                async ({ coords: { latitude, longitude } }) => {
-                    const result = await rpc(route, {
-                        ...params,
-                        latitude,
-                        longitude,
-                    });
-                    resolve(result);
-                },
-                async (err) => {
-                    const result = await rpc(route, {
-                        ...params
-                    });
-                    resolve(result);
-                },
-                { enableHighAccuracy: true }
-            );
-        });
+        this.ui.block();
+        try {
+            const coords = await new Promise((resolve) => {
+                navigator.geolocation.getCurrentPosition(
+                    ({ coords: { latitude, longitude } }) => resolve({ latitude, longitude }),
+                    () => resolve({}),
+                    { enableHighAccuracy: true }
+                );
+            });
+            return await rpc(route, { ...params, ...coords });
+        } finally {
+            this.ui.unblock();
+        }
     }
 
     async onManualSelection(employeeId, enteredPin) {
@@ -240,6 +236,7 @@ export async function createPublicKioskAttendance(document, kiosk_backend_info) 
                 kioskMode: kiosk_backend_info.kiosk_mode,
                 barcodeSource: kiosk_backend_info.barcode_source,
                 fromTrialMode: kiosk_backend_info.from_trial_mode,
+                lang: kiosk_backend_info.lang,
             },
         dev: env.debug,
         translateFn: _t,

@@ -9,13 +9,14 @@ from odoo.tests.common import new_test_user
 from odoo.exceptions import ValidationError
 from odoo.addons.google_calendar.models.res_users import User
 from odoo.addons.google_calendar.tests.test_sync_common import TestSyncGoogle, patch_api
+from odoo.addons.mail.tests.common import MockEmail
 from odoo.addons.google_calendar.utils.google_calendar import GoogleEvent, GoogleCalendarService
 from odoo import Command, tools
 from unittest.mock import patch
 
 
 @patch.object(User, '_get_google_calendar_token', lambda user: 'dummy-token')
-class TestSyncGoogle2Odoo(TestSyncGoogle):
+class TestSyncGoogle2Odoo(TestSyncGoogle, MockEmail):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -1536,6 +1537,30 @@ class TestSyncGoogle2Odoo(TestSyncGoogle):
         self.assertGoogleAPINotCalled()
 
     @patch_api
+    def test_recurrence_without_rrule(self):
+        """ A 'recurrence' list containing only a stale EXDATE and no RRULE does not define an
+        actual recurring series (EXDATE only has meaning together with a RRULE, per RFC5545).
+        It must be synced as a single, non-recurring event instead of a broken recurrence. """
+        google_id = 'gcalendarid123'
+        values = {
+            'id': google_id,
+            'organizer': {'email': 'odoocalendarref@gmail.com', 'self': True},
+            'summary': 'Pricing new update',
+            'recurrence': ['EXDATE;TZID=Europe/Luxembourg:20260527T113000'],
+            'reminders': {'useDefault': True},
+            'start': {'dateTime': '2026-07-01T12:00:00+02:00', 'timeZone': 'Europe/Luxembourg'},
+            'end': {'dateTime': '2026-07-01T13:00:00+02:00', 'timeZone': 'Europe/Luxembourg'},
+        }
+        google_event = GoogleEvent([values])
+        self.assertFalse(google_event.is_recurrence(), "an EXDATE without a RRULE should not be treated as a recurrence")
+        self.env['calendar.event']._sync_google2odoo(google_event)
+        event = self.env['calendar.event'].search([('google_id', '=', google_id)])
+        self.assertTrue(event, "it should have created a single event")
+        self.assertFalse(event.recurrency)
+        self.assertFalse(self.env['calendar.recurrence'].search([('google_id', '=', google_id)]),
+                          "no recurrence should have been created")
+
+    @patch_api
     def test_recurrence_creation_with_attendee_answer(self):
         """ Create a recurrence with predefined attendee answers """
         google_id = "aaaaaaaaaaa"
@@ -2612,3 +2637,37 @@ class TestSyncGoogle2Odoo(TestSyncGoogle):
             "No event should be created on Oct 26 (the UTC boundary date)",
         )
         self.assertGoogleAPINotCalled()
+
+    @patch_api
+    def test_no_mail_to_attendees_on_google_sync(self):
+        """
+        Creating an event from Google must not send invitation emails from Odoo,
+        Google already notifies the attendees. This must hold even when the organizer
+        is an Odoo user whose Google access token is expired, since the organizer's
+        token validity is what usually prevents those emails from being sent.
+        """
+        now = datetime(2021, 2, 10, 12, 0)
+        self.organizer_user.sudo().res_users_settings_id.write({
+            'google_calendar_rtoken': 'organizer-rtoken',
+            'google_calendar_token': 'organizer-token',
+            'google_calendar_token_validity': now - timedelta(hours=2),
+        })
+        values = {
+            'id': 'no_mail_event',
+            'summary': 'Meeting',
+            'start': {'dateTime': '2021-02-15T08:00:00+00:00'},
+            'end': {'dateTime': '2021-02-15T10:00:00+00:00'},
+            'reminders': {'useDefault': True},
+            'organizer': {'email': self.organizer_user.email},
+            'attendees': [
+                {'email': email, 'responseStatus': 'needsAction'}
+                for email in [self.organizer_user.email, self.attendee_user.email, 'external@example.com']
+            ],
+            'updated': '2021-02-10T12:00:00Z',
+        }
+        with self.mock_datetime_and_now(now), self.mock_mail_gateway():
+            self.env['calendar.event']._sync_google2odoo(GoogleEvent([values]))
+        event = self.env['calendar.event'].search([('google_id', '=', 'no_mail_event')])
+        self.assertEqual(event.user_id, self.organizer_user)
+        self.assertEqual(len(event.attendee_ids), 3)
+        self.assertNotSentEmail()
